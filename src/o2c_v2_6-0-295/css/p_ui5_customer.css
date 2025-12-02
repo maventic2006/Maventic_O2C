@@ -1,0 +1,88 @@
+.contentClass{
+	background-color:#474fa6;
+}
+.list{
+	margin: left 0;
+	/*margin-right:10%;*/
+}
+.listItemMargin{
+	margin-bottom:20px;
+}
+.customerName{
+	margin-left: 4px;
+    color: white;
+	font-size:1.2rem;
+	margin-top:5px;
+}
+.statusIcon{
+	/* margin-right: 500px; */
+	margin-top:10px;
+	padding-left:4px;
+}
+.listItemHeader{
+	background:#3f5161;
+}
+.addressText{
+	padding-left: 50px;
+	padding-bottom:10px;
+}
+.addressTexSize{
+	font-weight: bold;
+	font-size:1rem;
+	padding-top:20px;
+}
+.rightBottomText{
+	font-weight: bold;
+	font-size:1rem;
+	padding-right: 100px;
+	padding-left: 100px;
+	
+}
+.rightHeader{
+	position: absolute;
+	left: 850px;
+    color: white;
+	margin-top:20px;
+}
+.responsiblePerson{
+    color: white;
+	font-size:1rem;
+	padding-left:5px;
+}
+.leftBottom{
+	/*background:green;*/
+	width:100%;
+}
+.rightBottom{
+	/*background:yellow;*/
+	border-left:1px black dotted;
+	width:100%;
+}
+.custId{
+	margin-left: 4px;
+    color: white;
+}
+.iconImg{
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+}
+.leftHeader{
+	margin-top: 3px;
+	padding-left: 8px;
+}
+.sticky{
+	/* background: #3f5161; */
+    /* padding-top: 6px; */
+    /* height: auto;
+    padding-bottom: 4px;
+    top: 4rem;
+    width: 40%; */
+	padding-left: 900px;
+}
+.download{
+    display: block;
+    margin-left: 1rem;
+    margin-right: 0;
+    width: fit-content;
+}

@@ -1,0 +1,10 @@
+cdn_app/
+closedmodules/
+bin/
+kloconfig/
+logs/
+**/entity_gen/
+**/query_gen/
+**/metadata/
+.history/
+.git/

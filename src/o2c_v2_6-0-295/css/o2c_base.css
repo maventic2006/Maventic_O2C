@@ -1,0 +1,1412 @@
+:root {
+    --primary-dark: #0a2a5a;
+    --primary-blue: #00a8f0;
+    --primary-blue-light: #00a8f01a;
+    --primary-blue-border: #0070f387;
+    --primary-blue-hover: #00a8f033;
+    --badge-approved: rgb(22 101 52 / 1);
+    --badge-pending: rgb(133 77 14 / 1);
+    --badge-rejected: rgb(154 52 18 / 1);
+    --badge-draft: rgb(31 41 55 / 1);
+    --badge-inactive: #c23232;
+    --badge-new: #007acc;
+    --badge-count: #00a8f033;
+    --badge-count-border: #00a8f04d;
+    --badge-count-color: #fffc;
+    --header-border-bottom: none;
+}
+
+/* Top Toolbar*/
+#pinnedToolbar.sapMIBar,
+.empListToolBar {
+    background-image: linear-gradient(to right, hsl(220, 85%, 12%), hsl(220, 85%, 15%)) !important;
+    border-bottom: var(--header-border-bottom) !important;
+}
+
+.empListToolBar *:not(.sapMTitle):not(.movable) {
+    order: 2;
+}
+
+/* Global font */
+body * {
+    font-family: 'Inter', sans-serif;
+}
+
+/* to separate buttons in the toolbar */
+.separator {
+    width: 1px;
+    height: 2rem;
+    background-color: #3f5161;
+    margin: 0 12px;
+    align-self: center;
+    position: relative;
+    bottom: 3px;
+}
+
+/* Set all the button icon and text color to white */
+.empListToolBar .sapMBtnBase.sapMBtn .sapUiIcon,
+.empListToolBar .sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner::after,
+.empListToolBar .reset-button>span>span::before,
+.sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner:hover .sapUiIcon,
+.sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner:hover::after,
+.bg-sky-blue>span>span,
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapUiFormCLContainer .sapMInputBase .sapMInputBaseContentWrapper .sapMInputBaseInner[aria-roledescription="Date Input"]:hover::placeholder,
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapMIBar .sapMBtn>span>span,
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button>span.sapMBtnAttention>span>bdi,
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button>span.sapMBtnDefault>span>bdi,
+.detailAvatarProfilePic>span::before,
+div.sapMCb>div:has(>input[checked="checked"])::before {
+    color: white !important;
+}
+
+/* Add bottom margin to toolbar buttons and search */
+.empListToolBar button,
+.empListToolBar .sapMSF {
+    margin-bottom: 12px !important;
+}
+
+/* styling of reset and filter button in toolbar*/
+.empListToolBar .reset-button>span,
+.empListToolBar .sapMBtn[aria-label="Filter"]>span {
+    border-color: hsla(212, 100%, 48%, 0.529);
+    background-color: #00a8f01a;
+    height: 2rem !important;
+    align-items: center;
+}
+
+.empListToolBar .sapMBtn.reset-button>span:hover {
+    background-color: #00a8f033 !important;
+    border-color: #00a8f080 !important;
+}
+
+/* Hover on outer button */
+/* .sapMMenuBtn.sapMMenuBtnRegular:hover, */
+.sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner:hover {
+    background-color: #00a8f033 !important;
+    border-color: #00a8f080;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Change icon color on hover (main icon) */
+/* .sapMMenuBtn.sapMMenuBtnRegular:hover .sapUiIcon,
+  .sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner:hover .sapUiIcon {
+    color: white !important;
+  } */
+
+/* Change dropdown arrow color on hover */
+/* .sapMMenuBtn.sapMMenuBtnRegular:hover .sapMBtnInner::after,
+  .sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner:hover::after {
+    color: white !important;
+  } */
+
+
+/* .bg-sky-blue {
+    margin-bottom: 12px !important;
+  } */
+
+.bg-sky-blue>span {
+    background-color: #00a8f0;
+    color: white;
+    border: none;
+    height: 2rem !important;
+    /* margin-bottom: 7px !important; */
+    /* display: flex; */
+    /* display: flex; */
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.bg-sky-blue.sapMBtn:hover>.sapMBtnHoverable {
+    background-color: #00a8f0e6;
+}
+
+/* .bg-sky-blue .sapUiIcon {
+    color: white !important;
+  } */
+
+/* .bg-sky-blue>span>span {
+    color: white;
+  } */
+
+/* Base pill-style badge look */
+.sapMObjStatus {
+    border-radius: 16px;
+    padding: 4px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    width: fit-content;
+    text-shadow: none !important;
+}
+
+.sapMObjStatus .sapMObjStatusText {
+    color: inherit !important;
+    /* inherit from parent .status-* class */
+    font-weight: 500;
+}
+
+.sapMObjStatus .sapUiIcon {
+    font-size: 0.75rem !important;
+    /* Reduce size */
+    font-weight: normal !important;
+    /* Avoid bold */
+    line-height: 1.5 !important;
+    vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+    /* Improve sharpness */
+    -moz-osx-font-smoothing: grayscale;
+    color: inherit;
+}
+
+/* APPROVED */
+.sapMObjStatus.status-approved {
+    background-color: #d1f8dc;
+    --tw-text-opacity: 1;
+    color: rgb(22 101 52 / var(--tw-text-opacity, 1))
+}
+
+.sapMObjStatus.status-approved .sapUiIcon {
+    --tw-text-opacity: 1;
+    color: rgb(22 101 52 / var(--tw-text-opacity, 1))
+}
+
+/* PENDING */
+.sapMObjStatus.status-pending {
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 249 195 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(133 77 14 / var(--tw-text-opacity, 1));
+}
+
+.sapMObjStatus.status-pending .sapUiIcon {
+    --tw-text-opacity: 1;
+    color: rgb(133 77 14 / var(--tw-text-opacity, 1));
+}
+
+/* REJECTED / BACK TO EDIT */
+.sapMObjStatus.status-rejected,
+.sapMObjStatus.status-backtoedit {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 237 213 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(154 52 18 / var(--tw-text-opacity, 1));
+}
+
+.sapMObjStatus.status-rejected .sapUiIcon,
+.sapMObjStatus.status-backtoedit .sapUiIcon {
+    --tw-text-opacity: 1;
+    color: rgb(154 52 18 / var(--tw-text-opacity, 1));
+}
+
+/* DRAFT */
+.sapMObjStatus.status-draft {
+    --tw-bg-opacity: 1;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+    --tw-text-opacity: 1;
+    color: rgb(31 41 55 / var(--tw-text-opacity, 1));
+}
+
+.sapMObjStatus.status-draft .sapUiIcon {
+    --tw-text-opacity: 1;
+    color: rgb(31 41 55 / var(--tw-text-opacity, 1));
+}
+
+/* INACTIVE / DELAYED */
+.sapMObjStatus.status-inactive,
+.sapMObjStatus.status-delayed {
+    background-color: #ffe1e1;
+    color: #c23232;
+}
+
+.sapMObjStatus.status-inactive .sapUiIcon,
+.sapMObjStatus.status-delayed .sapUiIcon {
+    color: #c23232;
+}
+
+/* NEW */
+.sapMObjStatus.status-new {
+    background-color: #e0f2ff;
+    color: #007acc;
+}
+
+.sapMObjStatus.status-new .sapUiIcon {
+    color: #007acc;
+}
+
+/*Control the initials of Avatar*/
+.customAvatarSmallText .sapFAvatarInitialsHolder {
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.customAvatarSmallText {
+    background-color: #0a2a5a;
+}
+
+.empListToolBar {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    min-height: 4rem !important;
+}
+
+/*Employee List header styling..*/
+.empGrid .sapUiTableColHdrTr .sapUiTableCell .sapMLabelTextWrapper::after {
+    font-family: "SAP-icons";
+    content: "\e170";
+    /* navigation-down-arrow */
+    font-size: 0.6rem;
+    vertical-align: middle;
+    /* or try baseline */
+    line-height: 1;
+    padding-left: 0.5rem;
+    position: relative;
+    top: -0.05rem;
+    /* fine-tune this value */
+}
+
+.empGrid .sapUiTableContentRow>td {
+    border-bottom: 0.5px solid #e0e8ef66;
+}
+
+.empGrid .sapUiTableColHdrTr .sapUiTableCell .sapMLabelTextWrapper {
+    font-weight: 600;
+    color: rgb(156 163 175);
+}
+
+.empGrid .sapUiTableColHdrTr .sapUiTableCell .sapMLabelTextWrapper>bdi {
+    font-weight: 600;
+    color: #0a2a5a !important;
+}
+
+/*Employee List Styling...*/
+.empGrid .sapUiTableContentRow .sapMLnk {
+    color: #0ea5e9;
+    /* sky-blue (from Tailwind default palette) */
+    font-weight: 600;
+    /* font-semibold */
+    font-size: 0.875rem;
+    /* text-sm */
+    line-height: 1.8;
+    white-space: nowrap;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    /* decoration-2 */
+    text-underline-offset: 2px;
+    /* underline-offset-2 */
+    transition: all 200ms;
+    /* transition-all + duration-200 */
+}
+
+.empGrid .sapUiTableContentRow .sapMLnk:hover {
+    color: #0ea5e9 !important;
+    /* hover:text-sky-blue/80 */
+    text-decoration: underline !important;
+    /* Add this */
+    text-decoration-thickness: 2px !important;
+    /* Optional: maintain thickness */
+    text-underline-offset: 4px !important;
+}
+
+.empGrid .sapUiTableContentRow>td>div>div>div>span:not(.sapFAvatar),
+.empGrid .sapUiTableContentRow>td>div>div>div>input:not(.sapFAvatar),
+.empGrid .sapUiTableContentRow>td>div>div>div:nth-child(2)>div>div>input,
+.empGrid .sapUiTableContentRow>td>div>span {
+    color: #4B5563 !important;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+/*Changing only the employee name color*/
+.empGrid .sapUiTableContentRow>td>div>div>div:nth-child(2)>span {
+    color: #0a2a5a !important;
+    font-weight: 500;
+    line-height: 1.5rem;
+    font-size: .875rem;
+}
+
+/*Increase the size of fuzzy search*/
+.empListToolBar .sapMSFF,
+.sapMSF,
+.sapMSFS {
+    height: 2rem !important;
+    /* margin-bottom: 5px; */
+}
+
+/* .empListToolBar .sapMSF{
+    margin-bottom: 12px !important;
+  } */
+
+.empListToolBar .sapMSFS {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.empListToolBar .sapMTitle {
+    color: white;
+    padding: 0.5rem;
+    text-shadow: none;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    font-family: 'Inter';
+    order: 0;
+}
+
+/*Increase the size of reset button*/
+.empListToolBar .sapMMenuBtn .sapMBtnBase .sapMBtnInner {
+    height: 2rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .empListToolBar .sapMBtn[aria-label="Filter"]{
+    margin-bottom: 12px !important;
+  } */
+/* .empListToolBar .sapMBtn[aria-label="Filter"]>span{
+    background-color: #00a8f01a;
+    border: 1px solid #0070f387;
+    height: 2rem;
+    align-items: center;
+    
+  } */
+
+/* .empListToolBar .sapMBtn[aria-label="Filter"]>span>span::before{
+    color: white;
+  } */
+
+.empListToolBar .sapMBtn[aria-label="Filter"]>span:hover {
+    background-color: #00a8f033;
+    border-color: #00a8f080
+}
+
+.empListToolBar .sapMBtn[aria-label="Filter"]>span .sapMBadgeIndicator.sapMBadgeAnimationAdd::before,
+.empListToolBar .sapMBtn[aria-label="Filter"]>span .sapMBadgeIndicator.sapMBadgeAnimationAdd::after {
+    background-color: orange;
+    border: none;
+    transition: none !important;
+    /* Disable CSS transitions */
+    animation: none !important;
+}
+
+/*----------------------------------Employee Search Styling-------------------------------*/
+
+.emp-search .sapUiFormCLContainer>div>* {
+    margin-bottom: 1rem;
+}
+
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapUiFormCLContainer .sapMLabel .sapMLabelTextWrapper {
+    display: block;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: #001f3f !important;
+    text-transform: none !important;
+}
+
+/*to make the input box bigger*/
+.emp-search .sapUiFormCLContainer .sapMInputBase {
+    height: 2.5rem;
+}
+
+.emp-search .sapUiFormCLContainer .sapMInputBase:not(.sapMInputBaseDisabled) .sapMInputBaseContentWrapper {
+    height: 2.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem !important;
+    align-items: center;
+}
+
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapUiFormCLContainer .sapMInputBase .sapMInputBaseContentWrapper .sapMInputBaseInner {
+    padding: 0.5rem 0.75rem;
+}
+
+/*For input property in form*/
+.emp-search .sapUiFormCLContainer .sapMInputBase.sapMInputBaseDisabled .sapMInputBaseContentWrapper .sapMInputBaseInner,
+.emp-search .sapUiFormCLContainer .sapMText {
+    color: #0A1F44 !important;
+    font-weight: 500 !important;
+    font-family: 'Inter';
+    font-size: 1rem;
+}
+
+.emp-search .sapUiFormCLContainer .sapMInputBase .sapMInputBaseContentWrapper .sapUiIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*to reduce the dropdown arrow icon size*/
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapUiFormCLContainer .sapMInputBase .sapMInputBaseContentWrapper .sapUiIcon:not([id*="confirmation_"])::before {
+    font-size: 0.8rem;
+}
+
+.pageAreaBar {}
+
+/* page area bar */
+.ToolBarHeight {
+    min-height: 1rem;
+    background-image: linear-gradient(to right, hsl(220, 85%, 12%), hsl(220, 85%, 15%)) !important;
+}
+
+/*to change the placeholder to white on hover*/
+/* .emp-search .sapMPanelExpanded .sapMPanelContent .sapUiFormCLContainer .sapMInputBase .sapMInputBaseContentWrapper .sapMInputBaseInner[aria-roledescription="Date Input"]:hover::placeholder {
+    color: white;
+  } */
+
+/*to increase the size of the adv search toolbar*/
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapMIBar {
+    height: 3rem !important;
+    background-image: linear-gradient(to right, hsl(220, 85%, 12%), hsl(220, 85%, 15%)) !important;
+}
+
+/*to style the buttons in the adv search toolbar*/
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapMIBar .sapMBtn>span {
+    border-radius: 0.375rem !important;
+    border: 1px solid #0070f387;
+    background-color: #00a8f01a;
+    color: white;
+    height: 2rem;
+    align-items: center;
+}
+
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapMIBar .sapMBtn {
+
+    margin-bottom: 6px;
+}
+
+/* Title Border none */
+.sapMIBar {
+    border: none;
+    /* margin-bottom: .5rem; */
+}
+
+/* .emp-search .sapMPanelExpanded .sapMPanelContent .sapMIBar .sapMBtn > span > span{
+    color: white;
+  } */
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapMIBar .sapMBtn>span:hover {
+    background-color: #00a8f033;
+    border-color: #00a8f080
+}
+
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapMIBar .sapMBtn[id*="search_button"]>span {
+    background-color: #00a8f0;
+}
+
+.emp-search .sapMPanelExpanded .sapMPanelContent .sapMIBar .sapMBtn[id*="search_button"]>span:hover {
+    background-color: #00a8f0e6;
+}
+
+/* -------------------------------------------------------------- Detail Style Classes */
+/* Detail Header background color */
+.objCard,
+.sapUxAPObjectPageLayout>header>div,
+.sapUxAPObjectPageLayout>header>header>section {
+    background-color: white !important;
+}
+
+/* Detail Header text color */
+/* .objCard>div>div:nth-child(2)>div>input,
+  .objCard>div>div:nth-child(3)>div:nth-child(3)>button>span,
+  .objCard>div>div>div>input { */
+/* Detail Header values color */
+.objCard>div>div>div>button>span,
+.objCard>div>div>div>input {
+    color: #0a2a5a !important;
+    font-weight: 600 !important;
+}
+
+/* Detail Header Labels color */
+.objCard>div>span {
+    color: #808080 !important;
+}
+
+/* Details isActive & Status Colors maintained */
+.objCard>div>div>span {
+    text-shadow: none !important;
+}
+
+/* Detail Header title (docid) color */
+.sapUxAPObjectPageLayout .sapMTitle>span {
+    color: #0a2a5a !important;
+    text-shadow: none !important;
+    font-weight: 600 !important;
+}
+
+/* Detail Section Toolbar Buttons */
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button>span>span,
+.approve-btn>span>span,
+.default-btn>span>span,
+.pending-btn>span>span,
+.pending-btn-click>span>span,
+.all-btn-click>span>span,
+.all-btn>span>span,
+.reject-btn>span>span,
+.complete-btn>span>span,
+.deactivate-btn>span>span,
+.delete-btn>span>span,
+.deactivate-btn-click>span>span,
+.pending-btn>span>span,
+.edit-btn>span>span,
+.deactivate-btn,
+.deactivate-btn-click {
+    display: flex !important;
+    justify-content: start !important;
+    align-items: center !important;
+    padding: 15px !important;
+}
+
+/* .sapUxAPObjectPageHeaderTitle  .sapFDynamicPageTitleActionsBar button[id*="pa_o2c_emp_detail_b_approve"]>span>span:nth-child(1) {
+    display: none !important;
+  } */
+
+.approve-btn>span {
+    background-color: #128b3e !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: none;
+    margin: 0rem 0rem 0rem .7rem;
+    max-width: fit-content;
+}
+
+.approve-btn:hover>span {
+    background-color: #117134 !important;
+    color: black;
+}
+
+.default-btn:hover>span {
+    background-color: transparent !important;
+    color: black;
+}
+
+
+.approve-btn>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.default-btn>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+
+.delete-btn>span {
+    background-color: rgb(220 38 38) !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: none;
+    margin: 0rem 0rem 0rem .7rem;
+    max-width: fit-content;
+}
+
+.delete-btn:hover>span {
+    background-color: rgb(220 38 38) !important;
+    color: black;
+}
+
+
+.delete-btn>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+
+
+.edit-btn>span {
+    background-color: rgb(37 99 235) !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: none;
+    margin: 0rem 0rem 0rem .7rem;
+    max-width: fit-content;
+}
+
+.edit-btn:hover>span {
+    background-color: rgb(30, 78, 181) !important;
+    color: black;
+}
+
+
+.edit-btn>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+
+.complete-btn:hover>span {
+    background-color: #117134 !important;
+    color: black;
+}
+
+.complete-btn>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.complete-btn>span {
+    background-color: #0a2a5a !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: none;
+    margin: 0rem 0rem 0rem .7rem;
+    max-width: fit-content;
+    /* transition: background-color 0.2s ease !important, border 0.2s ease !important; */
+}
+
+.pending-btn:hover>span {
+    background-color: rgb(202 138 4) !important;
+    color: black;
+}
+
+.pending-btn>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.pending-btn>span {
+    background-color: #0a2a5a !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: none;
+    margin: 0rem 0rem 0rem .7rem;
+    max-width: fit-content;
+    /* transition: background-color 0.2s ease !important, border 0.2s ease !important; */
+}
+
+/* deactivated button */
+.deactivate-btn:hover>span {
+    background-color: rgb(176, 32, 32) !important;
+    color: black;
+}
+
+.deactivate-btn>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.deactivate-btn>span {
+    background-color: #0a2a5a !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: none;
+    margin: .5rem 0rem 0rem 0rem;
+    max-width: fit-content;
+    /* transition: background-color 0.2s ease !important, border 0.2s ease !important; */
+}
+
+
+.all-btn:hover>span {
+    background-color: #084aae !important;
+    color: black;
+}
+
+.all-btn>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.all-btn>span {
+    background-color: #0a2a5a !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: none;
+    margin: 0rem 0rem 0rem .7rem;
+    max-width: fit-content;
+    /* transition: background-color 0.2s ease !important, border 0.2s ease !important; */
+}
+
+
+
+/* hdgsf */
+.pending-btn-click:hover>span {
+    background-color: rgb(202 138 4) !important;
+    color: black;
+}
+
+.pending-btn-click>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.pending-btn-click>span {
+    background-color: rgb(202 138 4) !important;
+    /* border: 1px solid rgb(202 138 4) !important; */
+    border-radius: .6rem !important;
+    margin: 0rem 0rem 0rem .7rem;
+    transition: background-color 0.2s ease !important;
+    max-width: fit-content;
+    /* transition: background-color 0.2s ease !important, border 0.2s ease !important; */
+}
+
+.deactivate-btn-click:hover>span {
+    background-color: rgb(176, 32, 32) !important;
+    color: black;
+}
+
+.deactivate-btn-click>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.deactivate-btn-click>span {
+    background-color: rgb(176, 32, 32) !important;
+    /* border: 1px solid rgb(202 138 4) !important; */
+    border-radius: .6rem !important;
+    margin: .5rem 0rem 0rem 0rem;
+    transition: background-color 0.2s ease !important;
+    max-width: fit-content;
+    /* transition: background-color 0.2s ease !important, border 0.2s ease !important; */
+}
+
+
+.all-btn-click:hover>span {
+    background-color: #084aae !important;
+    color: black;
+}
+
+.all-btn-click>span>span>bdi {
+    color: white;
+    font-weight: 500 !important;
+}
+
+.all-btn-click>span {
+    background-color: #084aae !important;
+    /* border: 2px solid rgb(220 38 38) !important; */
+    border-radius: .6rem !important;
+    margin: 0rem 0rem 0rem .7rem;
+    transition: background-color 0.2s ease !important;
+    max-width: fit-content;
+    /* transition: background-color 0.2s ease !important, border 0.2s ease !important; */
+}
+
+.reject-btn>span {
+    background-color: #0a2a5a !important;
+    border: 2px solid rgb(220 38 38) !important;
+    border-radius: .6rem !important;
+    margin: 0rem 0rem 0rem .7rem;
+    transition: background-color 0.2s ease !important;
+    max-width: fit-content;
+    /* transition: background-color 0.2s ease !important, border 0.2s ease !important; */
+}
+
+.reject-btn>span>span>bdi {
+    color: #ea580c !important;
+    font-weight: 500 !important;
+    transition: color 0.2s ease !important;
+}
+
+.reject-btn:hover>span {
+    background-color: rgb(220 38 38) !important;
+    border-color: rgb(220 38 38) !important;
+    border-radius: .5rem !important;
+}
+
+/* .reject-btn:hover>span.sapMBtnReject>span>bdi {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+} */
+/* Reject Button Hover */
+.reject-btn:hover>span>span>bdi {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
+
+
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button>span.sapMBtnAttention,
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button>span.sapMBtnDefault {
+    background-color: #0a2a5a !important;
+    border: 1px solid white !important;
+    border-radius: 0.375rem !important;
+}
+
+/* .sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button > span.sapMBtnAttention>span>bdi,
+  .sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button > span.sapMBtnDefault>span>bdi {
+    color: white !important;
+  } */
+
+/* button[id*="pa_o2c_emp_detail_b_cancel"]>span,
+  button[id*="pa_o2c_emp_detail_b_save"]>span {
+    background-color: #0a2a5a !important;
+    border: 1px solid white !important;
+    border-radius: 0.375rem !important;
+  }
+  
+  button[id*="pa_o2c_emp_detail_b_cancel"]>span>span>bdi,
+  button[id*="pa_o2c_emp_detail_b_save"]>span>span>bdi {
+    color: white !important;
+  } */
+
+.approve-btn>span,
+.default-btn>span,
+.deactivate-btn>span,
+.reject-btn>span,
+.complete-btn>span,
+.pending-btn>span,
+.pending-btn-click>span,
+.all-btn-click>span,
+.all-btn>span,
+.deactivate-btn>span,
+.edit-btn>span,
+.deactivate-btn-click>span,
+.delete-btn>span,
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button>span.sapMBtnAttention,
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button>span.sapMBtnDefault {
+    height: 2.25rem !important;
+}
+
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageTitleActionsBar button:not(:has(.sapMBtnTransparent)) {
+    margin-bottom: 0.8rem !important;
+}
+
+/* Detail Tabs Bg color and Alignment */
+.sapUxAPObjectPageHeaderTitle .sapUxAPObjectPageStickyAnchorBar>div {
+    background-color: #0a2a5a !important;
+    height: 2.8rem !important;
+}
+
+/* Detail Non-active Section Tabs Title color */
+.sapUxAPObjectPageHeaderTitle .sapUxAPObjectPageStickyAnchorBar>div span {
+    color: #ffffff !important;
+    padding-bottom: 4px !important;
+    font-weight: 600 !important;
+    height: 2.4rem !important;
+}
+
+/* Detail Tabs Alignment */
+.sapUxAPObjectPageHeaderTitle>div:nth-of-type(2)>div>div:nth-of-type(2)>div {
+    position: absolute !important;
+    top: 0.6rem !important;
+}
+
+/* Detail Non-active Section Tabs Title & Border Bottom color */
+.sapUxAPObjectPageHeaderTitle>div:nth-of-type(2)>div>div:nth-of-type(2)>div>button:not(.sapUxAPAnchorBarButtonSelected)>span>span>bdi:hover {
+    padding-bottom: 0.3rem !important;
+    box-shadow: 0 3px 0 0 rgba(209, 213, 219, 0.2) !important;
+    color: #d1d5db !important;
+}
+
+/* Detail Active Section Tab Title color */
+.sapUxAPObjectPageHeaderTitle>div:nth-of-type(2)>div>div:nth-of-type(2)>div>button.sapUxAPAnchorBarButtonSelected>span>span>bdi {
+    color: #0a2a5a !important;
+    padding-bottom: 5px !important;
+}
+
+/* Detail Tabs active section name border-bottom color */
+.sapUxAPObjectPageHeaderTitle>div:nth-of-type(2)>div>div:nth-of-type(2)>div>button.sapUxAPAnchorBarButtonSelected>span>span {
+    border-bottom-color: transparent !important;
+}
+
+/* Detail Tabs active section name border & bg design */
+.sapUxAPObjectPageHeaderTitle>div:nth-of-type(2)>div>div:nth-of-type(2)>div>button.sapUxAPAnchorBarButtonSelected>span {
+    background-color: white !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    transition: border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease !important;
+    border-top-left-radius: 9px !important;
+    border-top-right-radius: 9px !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Detail minimize-maximize & close button colors */
+.sapFDynamicPageTitleActionsBar button>span>span::before {
+    color: #0a2a5a !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
+
+/* Detail 1st section border color */
+.sapUxAPObjectPageHeaderTitle .sapFDynamicPageHeaderWithContent>div>div:nth-child(1),
+.objCard {
+    border: 1px solid #B8B8B8;
+    border-radius: 5px !important;
+    box-shadow: 0px 0px 3px #B8B8B8 !important;
+}
+
+/* Progress Indicator filled Bg color */
+.sapMPIBar.sapMPIBarInformation {
+    background-color: #0a2a5a !important;
+    border: none !important;
+}
+
+/* Progress Indicator remaining Bg color */
+.sapMPIBarRemaining {
+    background-color: #B8B8B8 !important;
+    border: none !important;
+}
+
+/* Detail Profile Pic Avatar */
+.detailAvatarProfilePic {
+    background-color: #0a2a5a !important;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-left: 10px;
+}
+
+
+
+/* .detailAvatarProfilePic>span::before {
+    color: white !important;
+  } */
+
+.detailSeparator {
+    width: 1px !important;
+    height: 1.5rem !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+    align-self: center !important;
+    background-color: #3f5161 !important;
+}
+
+/* Detail Section Form Label */
+.sapUiFormCLContainerCont>div>div:nth-child(1)>label>div>span,
+.sapUiFormCLContainerCont .sapUiFormElementLbl .sapMLabel {
+    color: #6B7280 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+}
+
+/* Detail Section Form Label ':' */
+.sapUiFormCLContainerCont>div>div:nth-child(1)>label>div>span::before {
+    display: none !important;
+}
+
+/* Detail Section Form Value */
+.sapUiFormCLContainerCont>div>div:nth-child(2)>div>div>input {
+    color: #0a2a5a !important;
+    font-weight: 500 !important;
+}
+
+
+/* Detail Section Bg for Date fields in EDIT Mode and VH Combobox Selected Item in List */
+div>div:nth-child(2)>div:not(.sapMInputBaseDisabled)>div:has(>input[aria-roledescription="Date Input"]:hover),
+ul.sapMListItems.sapMListUl>li:has(>div>div>div>span>span.sapMInputHighlight),
+div.sapUiTable>div>div>div.sapUiTableCCnt>div:nth-child(1)>div>table>tbody>tr>td>div>div:not(.sapMInputBaseDisabled)>div:has(>input[aria-roledescription="Date Input"]:hover) {
+    background-color: #00a8f0 !important;
+}
+
+/* Detail Section Form Date Input Fields */
+div>div:nth-child(2)>div:not(.sapMInputBaseDisabled)>div:has(>input[aria-roledescription="Date Input"]:hover)>input,
+div>div:nth-child(2)>div:not(.sapMInputBaseDisabled)>div:has(>input[aria-roledescription="Date Input"]:hover)>div>span,
+div.sapUiTable>div>div>div.sapUiTableCCnt>div:nth-child(1)>div>table>tbody>tr>td>div>div:not(.sapMInputBaseDisabled)>div:has(>input[aria-roledescription="Date Input"]:hover)>input,
+div.sapUiTable>div>div>div.sapUiTableCCnt>div:nth-child(1)>div>table>tbody>tr>td>div>div:not(.sapMInputBaseDisabled)>div:has(>input[aria-roledescription="Date Input"]:hover)>div>span {
+    color: white !important;
+    border-color: #00a8f0 !important;
+}
+
+/* Detail Section Normal Input Fields in EDIT Mode */
+div>div:nth-child(2)>div.sapMFocus.sapMInputFocused:not(.sapMInputBaseDisabled):not(:has(>input[aria-roledescription="Date Input"]))>div,
+div.sapUiTable>div>div>div.sapUiTableCCnt>div:nth-child(1)>div>table>tbody>tr>td>div>div.sapMFocus.sapMInputFocused:not(.sapMInputBaseDisabled):not(:has(>input[aria-roledescription="Date Input"]))>div {
+    box-shadow: 0 0 0 2px #00a8f0 !important;
+}
+
+/* Detail Section Normal Input Fields in EDIT Mode */
+div>div:nth-child(2)>div.sapMFocus.sapMInputFocused:not(.sapMInputBaseDisabled):not(:has(>input[aria-roledescription="Date Input"]))>div::before,
+div.sapUiTable>div>div>div.sapUiTableCCnt>div:nth-child(1)>div>table>tbody>tr>td>div>div.sapMFocus.sapMInputFocused:not(.sapMInputBaseDisabled):not(:has(>input[aria-roledescription="Date Input"]))>div::before {
+    border: none !important;
+}
+
+/* Detail Section Form Text in EDIT Mode */
+div>div:nth-child(2)>div:not(.sapMInputBaseDisabled)>div>input {
+    font-weight: 500 !important;
+    color: #0a2a5a !important;
+}
+
+/* Detail Section Grid Header Color */
+div.sapUiTable>div>div>div.sapUiTableColHdrCnt>div:nth-child(2)>table>tbody>tr>td>div>div>span>div>span>bdi {
+    /* font-weight: 600 !important; */
+    color: #6b7280;
+}
+
+/* Detail Section Grid Rows Color */
+div.sapUiTable>div>div>div.sapUiTableCCnt>div:nth-child(1)>div>table>tbody>tr>td>div>div>div>input,
+div.sapUiTable>div>div>div.sapUiTableCCnt>div:nth-child(1)>div>table>tbody>tr>td>div>span {
+    color: #0a2a5a;
+}
+
+/* Detail Section VH Combobox Selected Item in List */
+ul.sapMListItems.sapMListUl>li:has(>div>div>div>span>span.sapMInputHighlight)>div>div>div>span>span.sapMInputHighlight {
+    color: white !important;
+    font-weight: 500 !important;
+}
+
+/* Detail Section Selected Date BG in Calendar */
+div.sapUiCalItemSel {
+    background-color: #00a8f0 !important;
+    border-radius: 0.375rem !important;
+}
+
+/* Detail Section Checkbox Color */
+/* div.sapMCb>div:has(>input[checked="checked"])::before {
+    color: white !important;
+  } */
+
+/* Detail Section Checkbox Color */
+div.sapMCb>div.sapMCbBg:has(>input[checked="checked"]) {
+    background-color: #0a2a5a !important;
+    border: 2px solid #0a2a5a !important;
+    border-radius: 2px !important;
+}
+
+
+
+/* ----------------------------------------------------------------------------------- */
+
+/* for masset */
+
+.empListToolBar>span.sapMBarChildFirstChild {
+    color: #ffffff;
+    padding-left: .5rem;
+}
+
+.gridToolbar {
+    color: #ffffff;
+    padding: .75rem;
+    min-height: 60px !important;
+}
+
+.cardForm {
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 10px;
+    /* Top/Bottom: 20px, Left/Right: 12px (trimmed) */
+    margin: 10px 10px;
+    /* Trimmed space on sides */
+    transition: box-shadow 0.3s ease;
+}
+
+/* design of grid value */
+.cardGrid .sapMTitle {
+    font-weight: 600;
+    font-size: larger;
+
+
+}
+
+.cardGrid {
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* padding: 10px 10px; */
+    /* Top/Bottom: 20px, Left/Right: 12px (trimmed) */
+    margin: 10px 10px;
+    /* Trimmed space on sides */
+    transition: box-shadow 0.3s ease;
+}
+
+/* .card-style:hover 
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); */
+
+.cardForm .sapMTitle {
+    font-weight: 600;
+    font-size: larger;
+}
+
+/* its a card design of card screen type */
+.cardCard {
+    background-color: rgb(239 246 255);
+    margin: 1rem;
+    border-radius: .75rem;
+    padding: 1rem;
+
+}
+
+/* its a card design of card screen type with white color */
+.cardCard2 {
+    background-color: rgb(255 255 255);
+    border-radius: .75rem;
+}
+
+/* text color of the card item */
+
+.labelBase {
+    font-size: x-large;
+    font-weight: 700;
+
+}
+
+.cardLabelTextColor1 {
+    --tw-text-opacity: 1;
+    color: rgb(37 99 235 / var(--tw-text-opacity, 1));
+}
+
+.cardLabelTextColor2 {
+    --tw-text-opacity: 1;
+    color: rgb(5 150 105 / var(--tw-text-opacity, 1));
+    ;
+}
+
+.cardLabelTextColor3 {
+    --tw-text-opacity: 1;
+    color: rgb(147 51 234 / var(--tw-text-opacity, 1));
+}
+
+.cardLabelTextColor4 {
+    --tw-text-opacity: 1;
+    color: rgb(234 88 12 / var(--tw-text-opacity, 1));
+
+}
+
+.stickyBar {
+    position: sticky;
+    /* Sticks to top while scrolling */
+    top: 0;
+    z-index: 1000;
+    /* Ensure it stays above other content */
+}
+
+/* comment box  textarea*/
+.textArea.sapMFocus>div {
+    box-shadow: 0 0 0 2px #00a8f0 !important;
+
+}
+
+.textArea .sapMInputBaseContentWrapper {
+    /* background-color:hsl(210 17% 99%); */
+}
+
+/* Attachment button css */
+.attachment .sapUiFupGroup .sapMInputBaseContentWrapper,
+.attachment .sapUiFupGroup .sapMBtnInner {
+    height: 2rem;
+    align-items: center
+}
+
+
+
+/* input Box Background color */
+
+.cardForm.emp-search {
+    /* Requested styles */
+    --input-bg-requested: #00a8f01a;
+    --input-border-requested: #00a8f04d;
+    --input-color-requested: hsl(198, 100%, 47%);
+
+    /* Approved styles (chosen colors: green tones) */
+    --input-bg-approved: rgb(236 253 245);
+    --input-border-approved: rgb(110 231 183);
+    --input-color-approved: rgb(4 120 87);
+
+    /* Shared styles */
+    --input-font-size: 1.125rem;
+    --input-font-weight: 700;
+    --input-border-radius: 0.75rem;
+    --input-border-width: 2px;
+    --input-height: 4rem;
+    --input-padding-left: 15px;
+    --input-margin-bottom: 40px;
+}
+
+.cardForm.emp-search .inputBoxBackgroundColor.sapMInputBase {
+    margin-bottom: var(--input-margin-bottom);
+}
+
+.cardForm.emp-search .inputBoxBackgroundColor.sapMInputBase .sapMInputBaseContentWrapper {
+    border-radius: var(--input-border-radius) !important;
+    border-width: var(--input-border-width) !important;
+    height: var(--input-height);
+}
+
+.cardForm.emp-search .inputBoxBackgroundColor.sapMInputBase .sapMInputBaseContentWrapper .sapMInputBaseInner {
+    font-size: var(--input-font-size);
+    font-weight: var(--input-font-weight) !important;
+    padding-left: var(--input-padding-left);
+    line-height: 1.75rem;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Styles for ID containing "requested" */
+.cardForm.emp-search .inputBoxBackgroundColor.sapMInputBase[id*="requested"] .sapMInputBaseContentWrapper {
+    background-color: var(--input-bg-requested);
+    border-color: var(--input-border-requested) !important;
+}
+
+.cardForm.emp-search .inputBoxBackgroundColor.sapMInputBase[id*="requested"] .sapMInputBaseInner,
+.cardForm.emp-search .sapUiFormElementLbl .sapMLabel bdi[id*="requested"] {
+    color: var(--input-color-requested) !important;
+}
+
+/* Styles for ID containing "approved" */
+.cardForm.emp-search .inputBoxBackgroundColor.sapMInputBase[id*="approved"] .sapMInputBaseContentWrapper {
+    background-color: var(--input-bg-approved);
+    border-color: var(--input-border-approved) !important;
+}
+
+.cardForm.emp-search .inputBoxBackgroundColor.sapMInputBase[id*="approved"] .sapMInputBaseContentWrapper:hover {
+    background-color: var(--input-bg-approved);
+}
+
+.cardForm.emp-search .inputBoxBackgroundColor.sapMInputBase[id*="approved"] .sapMInputBaseInner,
+.cardForm.emp-search .sapUiFormElementLbl .sapMLabel bdi[id*="approved"] {
+    color: var(--input-color-approved) !important;
+}
+
+/* containing height and width of the grid table */
+.empGrid .sapUiTableContentRow>td>div>div>div {
+    height: 2.5rem;
+    border-radius: .75rem !important;
+
+}
+
+/* containing height and width of the grid table */
+.empGrid .sapUiTableContentRow>td>div>div:not(.sapMObjStatus) {
+    height: 2.5rem;
+}
+
+
+.empGrid .sapUiTableContentRow:hover {
+    background-color: #dddddd00;
+
+}
+
+/* css grid screen type css for attechment view maaset specific  */
+.cssGridCard {
+    background-color: #f9fbfd;
+    border: 1px solid #e1e7ef;
+    border-radius: 12px;
+    padding: 1rem;
+    /* margin:1rem; */
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* max-width: fit-content; */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* masset input box dropdown in grid section setting width and height masset specific */
+
+.kloinputCard>div {
+    height: 2.5rem;
+    width: 100%;
+}
+
+/* maintaining icon of the date picker inside grid table */
+.empGrid .sapUiTableContentRow>td>div>div>div .sapMInputBaseIconContainer>span {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+/* vardhan code start from here */
+.greyColor>div>input,
+.greyColor {
+    color: #757575 !important;
+}
+
+/* List Count Style */
+.sapMObjStatus.count-style {
+    background-color: var(--badge-count);
+    color: var(--badge-count-color);
+    border: 1px solid var(--badge-count-border);
+    order: 1 !important;
+}
+
+.submit-btn>span {
+    background-color: #128b3e !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: none;
+    /* margin: 0rem 0rem 0rem .7rem; */
+    max-width: fit-content;
+}
+
+.default-btn>span {
+    background-color: transparent !important;
+    border-radius: .6rem !important;
+    transition: background-color 0.2s ease !important;
+    border: 1px solid white;
+    margin: 0rem 0rem 0rem .7rem;
+    max-width: fit-content;
+}
+
+.empListToolBar .barCodeReader {
+    order: 1 !important;
+    padding: px;
+}
+
+.empListToolBar .barCodeReader .sapMBtnBase {
+    padding: 4px;
+}
+
+.empListToolBar .barCodeReader .sapMBtnBase .sapMBtnInner {
+    color: white;
+    background: transparent;
+}
+
+.sendButtonLink .sapMBtnInner {
+    border: 1px solid #e9d4d4;
+    color: black;
+    transition: all 0.2s ease;
+}
+
+.sendButtonLink .sapMBtnInner .sapUiIcon {
+    color: black;
+}
+
+.sendButtonLink .sapMBtnInner:hover {
+    background-color: hsl(208 100% 19%);
+    color: white !important;
+    border: none;
+}
+
+.sendButtonLink .sapMBtnInner:hover .sapUiIcon {
+    color: white !important;
+}
+
+.markNotFound .sapMBtnInner {
+    background-color: white;
+    border: 1px solid rgb(220 38 38);
+    color: rgb(220 38 38);
+    transition: all 0.2s ease;
+}
+
+.markNotFound .sapMBtnInner .sapUiIcon {
+    color: rgb(220 38 38);
+    transition: color 0.2s ease;
+}
+
+.markNotFound .sapMBtnInner:hover {
+    background-color: rgb(254, 242, 242);
+    color: hsl(0, 0%, 100%) !important;
+    border: 1px solid rgb(220 38 38);
+}
+
+.markNotFound .sapMBtnInner:hover .sapUiIcon {
+    color: white !important;
+}
+
+.boldTitle {
+    font-weight: bold !important;
+}
+
+.piSummaryHeader {
+    height: 60px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    align-items: center !important;
+    background: white !important;
+    border-bottom: 1px solid #e5e7eb;
+    /* subtle divider */
+}
+
+.piSummaryTitle {
+    font-weight: bold !important;
+    font-size: 18px !important;
+    color: #0f172a !important;
+}
+
+
+/* fu */

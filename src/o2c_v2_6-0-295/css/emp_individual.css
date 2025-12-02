@@ -1,0 +1,16 @@
+.adjustTblStyle {
+    position: static;
+}
+
+.sapMTableTHead {
+    /* background: fixed; */
+    /* display: flex
+; */
+    /* background-color: #f0f0f0; */
+    font-weight: bold;
+    /* padding: 8px 12px; */
+    /* border-bottom: 1px solid #ccc; */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}

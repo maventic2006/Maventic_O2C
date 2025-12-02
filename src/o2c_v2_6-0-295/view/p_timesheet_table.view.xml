@@ -1,0 +1,22 @@
+<mvc:View  controllerName="o2c_v2_6-0-1_OTC.controller.p_timesheet_table" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
+	 xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<!--, sorter: { path: 'text' }-->
+			<Page title="{i18n>title}" showHeader="false">
+				<content>
+				<!-- <div id="colorBox"></div> -->
+				<!-- <Button id="bprev" press="onBprev" icon="sap-icon://navigation-left-arrow"></Button>
+					<ComboBox id="myComboBox" selectedKey="month" selectionChange="onComboBoxChange">
+						<core:Item key="month" text="Month"/>
+						<core:Item key="week" text="Week"/>
+					</ComboBox>	
+				<Button id="bnext" press="onBnext" icon="sap-icon://navigation-right-arrow"></Button> -->
+				<Button text = "newButton" press = "onPress"></Button>
+                <Button text = "newButton" press = "onPress"></Button>
+                </content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover id="approvalPop" placement="Auto" showHeader="false">
+	<VBox>
+			<Table id="myTable" items="{mLocalModel>/approvalPopupData}" inset="false">
+                <!-- <headerToolbar>
+                    <Toolbar>
+                        <Title text="Date" />
+                    </Toolbar>
+                </headerToolbar> -->
+                <columns>
+                    <Column width="6rem">
+                        <Text text="Date" />
+                    </Column>
+                    <Column width="6rem">
+                        <Text text="Day" />
+                    </Column>
+                    <Column width="16rem">
+                        <Text text="Task Name" />
+                    </Column>
+                    <Column width="5rem">
+                        <Text text="Work Hour" />
+                    </Column>
+                    <Column>
+                        <Text text="Remark" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{mLocalModel>Date}" />
+                            <Text text="{mLocalModel>Day}" />
+                            <Text text="{mLocalModel>Task_Name}" />
+                            <Text text="{mLocalModel>Work_Hour}" />
+                            <Text text="{mLocalModel>Remark}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <Button text="Close" press="onClosePopover" type="Reject" class="popupCloseButton"/>
+	</VBox>		
+	</Popover>
+</core:FragmentDefinition>

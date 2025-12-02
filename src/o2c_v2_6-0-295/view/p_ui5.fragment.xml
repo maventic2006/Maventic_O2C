@@ -1,0 +1,532 @@
+
+<core:FragmentDefinition  xmlns:mvc="sap.ui.core.mvc"
+	 xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
+	 xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:tnt="sap.tnt">
+				<VBox>
+				<OverflowToolbar>
+							<ComboBox id="myComboBox" selectedKey="month" change="onComboBoxChange" editable = "false">
+								<core:Item key="month" text="Month"/>
+								<core:Item key="week" text="Week"/>
+							</ComboBox>
+							<ToolbarSpacer/>
+							
+							<Label text="Employee" visible="{mDataModel>/empComboboxVisivle}"></Label>
+							<ComboBox id="empComboBox" items="{mDataModel>/allEmployee}" selectedKey="{mDataModel>/employeeName} ( {mDataModel>/employeeId} )" change="onEmpComboBoxChange" visible="{mDataModel>/empComboboxVisivle}" class = "sapUiLargeMarginRight">
+								<core:Item key="{mDataModel>employee_id}" text="{mDataModel>full_name} ( {mDataModel>employee_id} )"/>
+							</ComboBox>
+							<!-- hieararchy combo boxes -->
+							<ComboBox id="hieararchyBox_1" placeholder="managers" items="{mDataModel>/hieararchyData_1}" selectedKey="{mDataModel>/employeeName} ( {mDataModel>/employeeId} )" change="hieararchyBoxChange_1" visible="false" class = "sapUiLargeMarginRight">
+								<core:Item key="{mDataModel>employee_id}" text="{mDataModel>full_name} ( {mDataModel>employee_id} )"/>
+							</ComboBox>
+							<ComboBox id="hieararchyBox_2" items="{mDataModel>/hieararchyData_2}" selectedKey="{mDataModel>/employeeName} ( {mDataModel>/employeeId} )" change="hieararchyBoxChange_2" visible="false" class = "sapUiLargeMarginRight">
+								<core:Item key="{mDataModel>employee_id}" text="{mDataModel>full_name} ( {mDataModel>employee_id} )"/>
+							</ComboBox>
+							<ComboBox id="hieararchyBox_3" items="{mDataModel>/hieararchyData_3}" selectedKey="{mDataModel>/employeeName} ( {mDataModel>/employeeId} )" change="onEmpComboBoxChange" visible="false" class = "sapUiLargeMarginRight">
+								<core:Item key="{mDataModel>employee_id}" text="{mDataModel>full_name} ( {mDataModel>employee_id} )"/>
+							</ComboBox>
+							<!-- hieararchy combo boxes -->
+
+							<ToolbarSpacer/>
+							<Label text = "This timesheet is for"></Label>
+							<Text class="monthAndYearLabel" text = "{mDataModel>/monthLabel} , {mDataModel>/yearLabel}"></Text>
+							<ToolbarSpacer/>
+							<ToolbarSpacer/>
+							<Button text="Save" press="onSave" id="saveBtn" type="Emphasized"></Button>
+							<Button text="Submit" press="onSubmit" id="subBtn" type="Emphasized"></Button>
+							<Button text="Submit test" press="onSubmitBeta" id="subBtn2" type="Emphasized" visible="{mDataModel>/submit_test_button}"></Button>
+							<Button text="Download" press="onDownload" type="Accept"></Button>
+							</OverflowToolbar>
+				<ScrollContainer horizontal="true" vertical="true" height="200px" width="100%" focusable="true">
+                    <Table id="Table" items="{mDataModel>/task1}" width="auto" inset="false" class="sapFDynamicPageAlignContent noCellSpacing hideF4Box">
+						<!-- <headerToolbar>
+							<OverflowToolbar>
+							<ComboBox id="myComboBox" selectedKey="month" change="onComboBoxChange" editable = "false">
+								<core:Item key="month" text="Month"/>
+								<core:Item key="week" text="Week"/>
+							</ComboBox>
+
+							<ToolbarSpacer/>
+							
+							<Label text="Employee" visible="{mDataModel>/empComboboxVisivle}"></Label>
+							<ComboBox id="empComboBox" items="{mDataModel>/allEmployee}" selectedKey="{mDataModel>/employeeName} ( {mDataModel>/employeeId} )" change="onEmpComboBoxChange" visible="{mDataModel>/empComboboxVisivle}" class = "sapUiLargeMarginRight">
+								<core:Item key="{mDataModel>employee_id}" text="{mDataModel>full_name} ( {mDataModel>employee_id} )"/>
+							</ComboBox>
+
+							<ToolbarSpacer/>
+							<ToolbarSpacer/>
+							<Button text="Save" press="onSave" id="saveBtn" type="Emphasized"></Button>
+							<Button text="Submit" press="onSubmit" id="subBtn" type="Emphasized"></Button>
+							<Button text="Download" press="onDownload" type="Accept"></Button>
+							</OverflowToolbar>
+						</headerToolbar> -->
+						<columns>
+							<Column id="c1" width = "6rem">
+								<Text text="Description"/>
+							</Column>
+							<Column  width = "3rem">
+								<Text text="TH"/>
+							</Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/0/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/0/colDate}"/>
+							</Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/1/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/1/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/2/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/2/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/3/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/3/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/4/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/4/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/5/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/5/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/6/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/6/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/7/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/7/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/8/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/8/colDate}"/>
+							</Column >
+							<Column width="3rem"  visible="{= ${mDataModel>/temp/9/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/9/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/10/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/10/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/11/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/11/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/12/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/12/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/13/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/13/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/14/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/14/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/15/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/15/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/16/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/16/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/17/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/17/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/18/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/18/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/19/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/19/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/20/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/20/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/21/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/21/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/22/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/22/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/23/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/23/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/24/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/24/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/25/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/25/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/26/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/26/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/27/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/27/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/28/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/28/colDate}"/>
+							</Column >
+							<Column width="3rem" visible="{= ${mDataModel>/temp/29/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/29/colDate}"/>
+							</Column >
+							<Column width="3rem" id="c31" visible="{= ${mDataModel>/temp/30/colVisible} === true ? true : false}">
+								<Text text="{mDataModel>/temp/30/colDate}" width="2rem" />
+							</Column>
+						</columns>
+						
+						<items>
+							<ColumnListItem >
+							 <cells>
+							
+								<Link text = "{mDataModel>taskName}" press="taskLinkPress"></Link>
+								<Text text = "{mDataModel>TH}" ></Text>
+								<Input type="Number" submit="openDescriptionBox" data:column="0" value="{mDataModel>taskDetail/0/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}"  valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}"  valueHelpRequest="openDescriptionBox" editable="{= ${mDataModel>taskDetail/0/editable} === false  ? false : true}">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/0/colorCode}" writeToDom="true" />
+						</customData>
+						</Input>
+<Input type="Number"  submit="openDescriptionBox" data:column="1" value="{mDataModel>taskDetail/1/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/1/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox" >
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/1/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="2" value="{mDataModel>taskDetail/2/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/2/editable} === false  ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/2/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="3" value="{mDataModel>taskDetail/3/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}"  valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/3/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/3/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="4" value="{mDataModel>taskDetail/4/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/4/editable} === false  ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/4/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="5" value="{mDataModel>taskDetail/5/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/5/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/5/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="6" value="{mDataModel>taskDetail/6/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/6/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/6/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="7" value="{mDataModel>taskDetail/7/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/7/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/7/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="8" value="{mDataModel>taskDetail/8/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/8/editable} === false  ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/8/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="9" value="{mDataModel>taskDetail/9/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/9/editable} === false  ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/9/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="10" value="{mDataModel>taskDetail/10/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/10/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/10/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="11" value="{mDataModel>taskDetail/11/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/11/editable} === false  ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/11/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="12" value="{mDataModel>taskDetail/12/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/12/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/12/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="13" value="{mDataModel>taskDetail/13/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/13/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/13/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="14" value="{mDataModel>taskDetail/14/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/14/editable} === false  ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/14/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="15" value="{mDataModel>taskDetail/15/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/15/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/15/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="16" value="{mDataModel>taskDetail/16/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/16/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/16/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="17" value="{mDataModel>taskDetail/17/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/17/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/17/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="18" value="{mDataModel>taskDetail/18/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/18/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/18/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="19" value="{mDataModel>taskDetail/19/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/19/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/19/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="20" value="{mDataModel>taskDetail/20/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/20/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/20/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="21" value="{mDataModel>taskDetail/21/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/21/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/21/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="22" value="{mDataModel>taskDetail/22/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/22/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/22/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="23" value="{mDataModel>taskDetail/23/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/23/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/23/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="24" value="{mDataModel>taskDetail/24/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/24/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/24/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="25" value="{mDataModel>taskDetail/25/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/25/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/25/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="26" value="{mDataModel>taskDetail/26/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/26/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/26/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="27" value="{mDataModel>taskDetail/27/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/27/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/27/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="28" value="{mDataModel>taskDetail/28/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/28/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/28/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number" submit="openDescriptionBox" data:column="29" value="{mDataModel>taskDetail/29/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/29/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/29/colorCode}" writeToDom="true" />
+						</customData></Input>
+<Input type="Number"  submit="openDescriptionBox" data:column="30" value="{mDataModel>taskDetail/30/workHour}" change="onHourChange" showValueHelp="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" valueHelpOnly="{= ${mDataModel>/submitStatus} === 'Approved' || ${mDataModel>/submitStatus} === 'Submitted' || ${mDataModel>/readOnly} === true ? true : false}" editable="{= ${mDataModel>taskDetail/30/editable} === false ? false : true}"  valueHelpRequest="openDescriptionBox">
+								<customData>
+							<core:CustomData key="bgColor" value="{mDataModel>taskDetail/30/colorCode}" writeToDom="true" />
+						</customData></Input>
+
+							 </cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			
+			<Table id="totalTable" items="{mDataModel>/newTaskForTotalTable}" width="auto" inset="false" class="sapFDynamicPageAlignContent noCellSpacing">
+						<columns>
+							<Column width="9rem"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/0/colVisible} === true ? true : false}" ></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/1/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/2/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/3/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/4/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/5/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/6/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/7/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/8/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/9/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/10/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/11/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/12/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/13/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/14/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/15/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/16/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/17/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/18/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/19/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/20/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/21/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/22/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/23/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/24/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/25/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/26/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/27/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/28/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/29/colVisible} === true ? true : false}"></Column>
+							<Column width="3rem" visible="{= ${mDataModel>/temp/30/colVisible} === true ? true : false}"></Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem >
+								<cells>
+									<Text text="{mDataModel>taskName} = {mDataModel>/totalWorkHour/value}" />
+									<Input data:column="0" value="{mDataModel>work/0/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/0/colorCode} !== 'undefined' ? ${mDataModel>work/0/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input data:column="1" value="{mDataModel>work/1/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/1/colorCode} !== 'undefined' ? ${mDataModel>work/1/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input data:column="2" value="{mDataModel>work/2/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/2/colorCode} !== 'undefined' ? ${mDataModel>work/2/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input data:column="3" value="{mDataModel>work/3/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/3/colorCode} !== 'undefined' ? ${mDataModel>work/3/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input data:column="4" value="{mDataModel>work/4/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/4/colorCode} !== 'undefined' ? ${mDataModel>work/4/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input data:column="5" value="{mDataModel>work/5/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/5/colorCode} !== 'undefined' ? ${mDataModel>work/5/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="6" value="{mDataModel>work/6/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/6/colorCode} !== 'undefined' ? ${mDataModel>work/6/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="7" value="{mDataModel>work/7/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/7/colorCode} !== 'undefined' ? ${mDataModel>work/7/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="8" value="{mDataModel>work/8/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/8/colorCode} !== 'undefined' ? ${mDataModel>work/8/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="9" value="{mDataModel>work/9/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/9/colorCode} !== 'undefined' ? ${mDataModel>work/9/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input data:column="10" value="{mDataModel>work/10/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/10/colorCode} !== 'undefined' ? ${mDataModel>work/10/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input data:column="11" value="{mDataModel>work/11/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/11/colorCode} !== 'undefined' ? ${mDataModel>work/11/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="12" value="{mDataModel>work/12/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/12/colorCode} !== 'undefined' ? ${mDataModel>work/12/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="13" value="{mDataModel>work/13/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/13/colorCode} !== 'undefined' ? ${mDataModel>work/13/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="14" value="{mDataModel>work/14/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/14/colorCode} !== 'undefined' ? ${mDataModel>work/14/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="15" value="{mDataModel>work/15/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/15/colorCode} !== 'undefined' ? ${mDataModel>work/15/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="16" value="{mDataModel>work/16/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/16/colorCode} !== 'undefined' ? ${mDataModel>work/16/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="17" value="{mDataModel>work/17/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/17/colorCode} !== 'undefined' ? ${mDataModel>work/17/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="18" value="{mDataModel>work/18/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/18/colorCode} !== 'undefined' ? ${mDataModel>work/18/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="19" value="{mDataModel>work/19/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/19/colorCode} !== 'undefined' ? ${mDataModel>work/19/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="20" value="{mDataModel>work/20/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/20/colorCode} !== 'undefined' ? ${mDataModel>work/20/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="21" value="{mDataModel>work/21/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/21/colorCode} !== 'undefined' ? ${mDataModel>work/21/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="22" value="{mDataModel>work/22/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/22/colorCode} !== 'undefined' ? ${mDataModel>work/22/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="23" value="{mDataModel>work/23/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/23/colorCode} !== 'undefined' ? ${mDataModel>work/23/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="24" value="{mDataModel>work/24/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/24/colorCode} !== 'undefined' ? ${mDataModel>work/24/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="25" value="{mDataModel>work/25/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/25/colorCode} !== 'undefined' ? ${mDataModel>work/25/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="26" value="{mDataModel>work/26/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/26/colorCode} !== 'undefined' ? ${mDataModel>work/26/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="27" value="{mDataModel>work/27/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/27/colorCode} !== 'undefined' ? ${mDataModel>work/27/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="28" value="{mDataModel>work/28/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/28/colorCode} !== 'undefined' ? ${mDataModel>work/28/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input  data:column="29" value="{mDataModel>work/29/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/29/colorCode} !== 'undefined' ? ${mDataModel>work/29/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									<Input data:column="30" value="{mDataModel>work/30/workHour}" editable="false">
+									<customData>
+									<core:CustomData key="bgColor" value="{= typeof ${mDataModel>work/30/colorCode} !== 'undefined' ? ${mDataModel>work/30/colorCode} : '' }" writeToDom="true"/>
+									</customData></Input>
+									
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</ScrollContainer>
+					
+					<HBox width="100%">
+						<l:VerticalLayout class="calendar" width="100%">
+							<u:Calendar id="calendar" select="handleCalendarSelect" startDateChange="monthChange" class="sapUiSmallMarginBottom "/>
+						</l:VerticalLayout>
+
+						<!-- Holiday calendar -->
+						<List id="holidayList" class="holidayListClass" headerText="Holidays" width="200px" items="{mDataModel>/holidayDateNameDataForMonth}">
+							<CustomListItem class="customListItem">
+							<VBox>
+								<Text text="{mDataModel>holidayName}" class="holidayName"/>
+								<Text text="{mDataModel>holidayDate}" class="holidayDate" />
+							</VBox>
+							</CustomListItem>
+						</List>
+						
+				
+						<VBox width="100%" class="overAllStatusBox">	
+						<!-- <Label text="Over all status : {= ${mDataModel>/submitStatus} === '' ? 'Not Submitted' : ${mDataModel>/submitStatus}}" class="sapUiTinyMarginTop overAllStatusText"></Label> -->
+						<!-- <Label text="Approver Remark : {= ${mDataModel>/submitStatus} === '' ? 'No Remark' : ${mDataModel>/approverRemark}}" class="sapUiTinyMarginTop overAllStatusText"></Label> -->
+						<VBox>
+						<Label text="Over all status :" class="sapUiTinyMarginTop overAllStatusText"/>
+						<Input width="100%" value="{= ${mDataModel>/submitStatus} === '' ? 'Not Submitted' : ${mDataModel>/submitStatus}}" editable="false"/>
+						<Label text="Approver :" class="sapUiTinyMarginTop overAllStatusText"/>
+						<Input width="100%" value="{mDataModel>/approver}" editable="false"/>
+						<Label text="Approver Remark :" class="sapUiTinyMarginTop overAllStatusText"/>
+						<Input width="100%" value="{= ${mDataModel>/submitStatus} === '' ? 'No Remark' : ${mDataModel>/approverRemark}}" editable="false"/>
+						<!-- <Label text="Pending With :" class="sapUiTinyMarginTop overAllStatusText"/>
+						<Input width="100%" value="{mDataModel>/pendingWith}" editable="false"/> -->
+						</VBox>
+						</VBox>
+
+						<VBox class="colorLegend" width="100%">
+						<HBox>
+						<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="4" class="TodayIncicator sapUiTinyMarginBottom sapUiSmallMarginTop"/>
+						<Text text="Today" class="sapUiTinyMarginBegin TodayIncicatorText sapUiTinyMarginBottom sapUiSmallMarginTop"/>
+						</HBox>
+						<HBox>
+						<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="1" class="HolidayIncicator sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						<Text text="Holiday" class="sapUiTinyMarginBegin HolidayIncicatorText sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						</HBox>
+						<HBox>
+						<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="2" class="WeekendIncicator sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						<Text text="Weekend" class="sapUiTinyMarginBegin WeekendIncicatorText sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						</HBox>
+						<HBox>
+						<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="4" class="AppliedIncicator sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						<Text text="Applied Leave" class="sapUiTinyMarginBegin AppliedIncicatorText sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						</HBox>
+						<HBox>
+						<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="3" class="FulldayIncicator sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						<Text text="Full Day Leave" class="sapUiTinyMarginBegin FulldayIncicatorText sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						</HBox>
+						<HBox>
+						<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="4" class="HalfdayIncicator sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						<Text text="Half Day Leave" class="sapUiTinyMarginBegin HalfdayIncicatorText sapUiTinyMarginBottom sapUiTinyMarginTop"/>
+						</HBox>
+						</VBox>
+					</HBox>
+
+		</VBox>
+</core:FragmentDefinition>

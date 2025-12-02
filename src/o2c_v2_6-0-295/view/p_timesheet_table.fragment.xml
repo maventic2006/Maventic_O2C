@@ -1,0 +1,23 @@
+<!-- <mvc:View  controllerName="o2c_base_1_OTC.controller.p_timesheet_table" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified"
+	 xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<Page title="{i18n>title}" showHeader="false">
+				<content>
+				<Button text = "newButton" press = "onPress"></Button>
+                <Button text = "newButton" press = "onPress"></Button>
+                </content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View> -->
+
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<!-- <Popover id="timesheetTable" placement="Auto" showHeader="false"> -->
+	<VBox>
+			<Label text="Name"></Label>
+			<Button text = "Button" press = "onPress"></Button>
+	</VBox>		
+	<!-- </Popover> -->
+</core:FragmentDefinition>

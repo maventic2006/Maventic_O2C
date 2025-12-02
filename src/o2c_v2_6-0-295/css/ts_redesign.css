@@ -1,0 +1,54 @@
+.cellBorderStyle>td {
+    border-bottom: 1.5px solid #808080 !important;
+    background: rgba(128, 128, 128, 0.3)
+}
+
+.cellBorderFullLeave>td {
+    border-bottom: 1.5px solid #3E7B27 !important;
+    background: rgba(62,123,39,0.2)
+}
+
+.cellBorderHalfLeave>td {
+    border-bottom: 1.5px solid #52f45c !important;
+    background: rgba(82,244,92,0.2)
+}
+
+.cellBorderAppliedLeave>td {
+    /* border: 4px solid #e9906b !important; */
+    border-bottom: 1.5px solid #e9906b !important;
+    background: rgba(233, 144, 107, 0.2)
+}
+
+.cellBorderHoliday>td {
+    border-bottom: 1.5px solid #f1ae2e !important;
+    background: rgba(241,174,46,0.2) !important
+}
+
+.cellBorderTravel>td {
+    border-bottom: 1.5px solid #cfd742 !important;
+    background: rgba(207, 215, 66, 0.2) !important
+}
+
+.hoverEffect:hover{
+    color: #ff000078 !important;
+    cursor: pointer; 
+}
+
+.fixedCard {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background: #3f5161;
+}
+
+.fixedCard>div {
+    margin:0
+}
+
+.remarkColor{
+    color: white
+}
+
+/* .cellBorderLeftStyle{
+    border-left: 4px solid #4670da !important;
+} */

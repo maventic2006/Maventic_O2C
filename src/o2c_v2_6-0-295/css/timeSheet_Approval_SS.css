@@ -1,0 +1,112 @@
+/* .WeekEnd {
+    opacity: 1;
+    background-color: #fcfcfc;
+} */
+
+.WeekEnd {
+    /* background: #87CEEB; */
+    border: 2px solid #87CEEB;
+}
+
+/* .sapMInputBaseInner {
+    background: white;
+} */
+
+.FullDayLeave {
+    border: 2px solid #066613;
+}
+
+.HalfDayLeave {
+    border: 2px solid #0af034;
+}
+
+.Holiday {
+    border: 2px solid #9e050a;
+}
+
+.Others {
+    opacity: 1;
+}
+
+.AcceptButton span.sapMBtnInner.sapMBtnEmphasized {
+    background-image: none;   
+    background-color: #216a21;
+    border-color: #418ac7;
+    color: #fff;
+    text-shadow: 0 0 0.125rem rgba(0,0,0,0.5);
+    /* margin-bottom: 100px; */
+}
+
+.RejectButton span.sapMBtnInner.sapMBtnEmphasized {
+    background-image: none;   
+    background-color: #a00;
+    border-color: #418ac7;
+    color: #fff;
+    text-shadow: 0 0 0.125rem rgba(0,0,0,0.5);
+    /* margin-bottom: 100px; */
+}
+
+/* sapMObjStatusText */
+
+.WeekendIncicator {
+    background-color: #87CEEB !important;
+    border-radius: 0.1rem;  
+}
+
+.HolidayIncicator {
+    background-color: #9e050a !important;
+    border-radius: 0.1rem;   
+}
+
+.FulldayIncicator {
+    background-color: #066613 !important;
+    border-radius: 0.1rem;   
+}
+
+.HalfdayIncicator {
+    background-color: #0af034 !important;
+    border-radius: 0.1rem;  
+}
+
+.WeekendIncicatorText {   
+    min-width: 4rem !important;
+}
+
+.HolidayIncicatorText { 
+    min-width: 3rem !important;
+}
+
+.FulldayIncicatorText {
+    min-width: 6rem !important;
+}
+
+.HalfdayIncicatorText {
+    min-width: 6rem !important;
+}
+
+[data-bgColor="Holiday"] *{
+    background: #9e050a;
+    opacity: 1;
+  }
+  [data-bgColor="Weekend"] *{
+    background: #87CEEB;
+    opacity: 1;
+  }
+  [data-bgColor="HalfDay"] *{
+    background: #0af034;
+    opacity: 1;
+  }
+  [data-bgColor="FullDay"] *{
+    background: #066613;
+    opacity: 1;
+  }
+  .popupCloseButton{
+    margin-left: 50%;
+  }
+  /* [data-bgColor="Applied"] *{
+    background: #0407cc;
+    opacity: 1;
+  }*/
+  /* [data-bgColor="FullDayLeave"] *{
+    opacity: 1;
+  }  */

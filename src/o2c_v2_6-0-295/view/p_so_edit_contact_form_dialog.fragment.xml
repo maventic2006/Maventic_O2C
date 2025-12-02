@@ -1,0 +1,118 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core">
+
+    <Dialog title="Add New Contact">
+        <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+            <Label design="Bold" text="Title">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Select required="true" selectedKey="{/title}">
+                <items>
+                    <core:Item key="Mr" text="Mr" />
+                    <core:Item key="Mrs" text="Mrs" />
+                </items>
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Select>
+
+            <Label design="Bold" text="Name">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input
+                valueState="{/VS_contact_name}"
+                valueStateText="{/VST_contact_name}"
+                required="true"
+                maxLength="50"
+                liveChange="fnInputBoxResetValueState"
+                value="{/contact_name}">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+
+            <Label design="Bold" text="Country">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+
+            <ComboBox
+                valueState="{/VS_country_code}"
+                valueStateText="{/VST_country_code}"
+                change="fnComboBoxResetValueState"
+                selectedKey="{/country_code}"
+                showSecondaryValues="true"
+                items="{mPageData>/countryList}">
+                <core:ListItem key="{mPageData>country_code}"
+                    text="{mPageData>country_name}"
+                    additionalText="{mPageData>country_code}" />
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </ComboBox>
+
+            <Label design="Bold" text="Email Id">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input
+                valueState="{/VS_email_id}"
+                valueStateText="{/VST_email_id}"
+                required="true"
+                maxLength="40"
+                liveChange="fnInputBoxResetValueState"
+                type="Email"
+                value="{/email_id}">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+            <Label design="Bold" text="Contact Number">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input
+                valueState="{/VS_contact_number}"
+                valueStateText="{/VST_contact_number}"
+                required="true"
+                maxLength="10" liveChange="onContactNumberChange"
+                value="{/contact_number}">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+            <Label design="Bold" text="LinkedIn URL">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input
+                valueState="{/VS_linkedin_link}"
+                valueStateText="{/VST_linkedin_link}"
+                type="Url"
+                liveChange="fnInputBoxResetValueState"
+                value="{/linkedin_link}">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+        </f:SimpleForm>
+        <buttons>
+            <Button text="Cancel" press="onPopupDialogCloseBtnPress" />
+            <Button text="{= ${/contact_id} === '' ? 'Create':'Update'}"
+                press="onContactSaveButtonPress" type="Accept" />
+        </buttons>
+    </Dialog>
+
+
+</core:FragmentDefinition>

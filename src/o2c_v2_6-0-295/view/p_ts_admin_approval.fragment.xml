@@ -1,0 +1,474 @@
+<core:FragmentDefinition controllerName="o2c_base_1_OTC.controller.p_ts_admin_approval" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified" xmlns:form="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt" height="100%"
+	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<VBox>
+				<Toolbar >
+					<form:SimpleForm
+						layout="ResponsiveGridLayout"
+						editable="true"
+						title=""
+						adjustLabelSpan="false"
+						labelSpanXL="1"
+						labelSpanL="1"
+						labelSpanM="1"
+						labelSpanS="5" class="classGreyLineBottom" width="75%">
+						<HBox>	
+						<Label text="Profit Center" equired = "true"/>
+						<ComboBox
+							id="profit_center"
+							width="250px"
+							items="{
+								path: 'mLocalModel>/profitCenters'
+							}"
+							change="onProfitCenterSelection"
+							equired = "true">
+							<core:Item key="{mLocalModel>profit_center}" text="{mLocalModel>name} ({mLocalModel>profit_center})" />
+						</ComboBox>
+						<Label text="Manager" equired = "true"/>
+						<!-- editable="{= ${mLocalModel>/profitCenterSelect} === true ? true : false}" -->
+						<ComboBox
+							id="combo1"
+							width="250px"
+							items="{
+								path: 'mLocalModel>/managerList'
+							}"
+							change="onManagerSelection"
+							editable="{= ${mLocalModel>/profitCenterSelect} === true ? true : false}"
+							equired = "true">
+							<core:Item key="{mLocalModel>employee_id}" text="{mLocalModel>full_name}" />
+						</ComboBox>
+						<Label text="Month" equired = "true"/>
+						<DatePicker
+							id="monthYearPicker"
+							displayFormat="MM/yyyy"
+							placeholder="MM/yyyy"
+							change="monthChange"
+							editable="{= ${mLocalModel>/managerSelect} === true ? true : false}"
+							required = "true"
+						/>
+					</HBox>	
+					</form:SimpleForm>
+					<ToolbarSpacer/>
+					<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="1" class="HolidayIncicator"/>
+					<Text text="Holiday" class="sapUiTinyMarginEnd HolidayIncicatorText"/>
+					<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="2" class="WeekendIncicator"/>
+					<Text text="Weekend" class="sapUiTinyMarginEnd WeekendIncicatorText"/>
+					<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="3" class="FulldayIncicator"/>
+					<Text text="Full Day Leave" class="sapUiTinyMarginEnd FulldayIncicatorText"/>
+					<tnt:InfoLabel text="" renderMode="Narrow" colorScheme="4" class="HalfdayIncicator"/>
+					<Text text="Half Day Leave" class="sapUiTinyMarginEnd HalfdayIncicatorText"/>
+					
+					</Toolbar>			
+					<Table  inset="false" width="100%" mode="MultiSelect"
+						items="{mLocalModel>/TimeSheetList}" id="TimeSheetID" >
+						<columns>
+							<Column id="column0">
+								<header>
+									<Label text="Maven ID" id="label0" />
+								</header>
+							</Column>
+							<Column id="column1">
+								<header>
+									<Label text="Maven Name" id="label1" />
+								</header>
+							</Column>
+							<!-- change -->
+							<Column id="column6">
+								<header>
+									<Label text="Month" id="label6" />
+								</header>
+							</Column>
+							<Column id="column2">
+								<header>
+									<Label text="Submitted On" id="label2" />
+								</header>
+							</Column>
+							<Column id="column3">
+								<header>
+									<Label text="Modified On" id="label3" />
+								</header>
+							</Column>
+							<Column id="column4">
+								<header>
+									<Label text="Modified by" id="label4" />
+								</header>
+							</Column>
+							<Column id="column5">
+								<header>
+									<Label text="Status" id="label5"/>
+								</header>
+							</Column>
+							<Column width="3rem"></Column>
+							<Column minScreenWidth="2000px" demandPopin="true" visible="true"></Column>
+						</columns>
+						<items>
+							<ColumnListItem id="item0">
+								<cells>
+									<Text text="{mLocalModel>employee_id}" />
+									<Text text="{mLocalModel>employee_name}" />
+									<Text text="{mLocalModel>month}"/>
+									<Text text="{mLocalModel>submitted_on}" />
+									<Text text="{mLocalModel>s_modified_on}" />
+									<Text text="{mLocalModel>s_modified_by}" />
+									<Text text="{mLocalModel>over_all_status}" />
+									<core:Icon src="{mLocalModel>Icon}" press="onRowShiftAction"></core:Icon> 
+                                <ScrollContainer
+                                    height="100%"
+                                    width="100%"
+                                    vertical="true"
+                                    focusable="true">
+									<Table items="{path:'mLocalModel>TaskList', templateShareable:false}" visible="{mLocalModel>Visibility}"
+                                        >
+										<headerToolbar>
+											<OverflowToolbar>
+											</OverflowToolbar>
+										</headerToolbar>
+										<columns>
+											<Column width = "8rem">
+												<header>
+													<Label text="Task Description" />
+												</header>
+											</Column>
+											<Column width = "8rem">
+												<header>
+													<Label text="Project ID" />
+												</header>
+											</Column>			
+											<Column  width = "8rem">
+												<header>
+													<Label text="Project Name" />
+												</header>
+											</Column>			
+											<Column  width = "8rem">
+												<header>
+													<Label text="Project PDs" />
+												</header>
+											</Column>			
+											<Column width = "8rem">
+												<header>
+													<Label text="Consumed PDs" />
+												</header>
+											</Column>			
+											<Column width = "8rem">
+												<header>
+													<Label text="UnApproved PDs" />
+												</header>
+											</Column>			
+											<Column width = "8rem">
+												<header>
+													<Label text="Balance PDs" />
+												</header>
+											</Column>			
+											<Column width = "8rem">
+												<header>
+													<Label text="Project Manager" />
+												</header>
+											</Column>				
+											<Column width = "3rem" visible="{mLocalModel>1}">
+												<header>
+													<Label text="1" />
+												</header>
+											</Column>				
+											<Column width = "3rem" visible="{mLocalModel>2}">
+												<header>
+													<Label text="2" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>3}">
+												<header>
+													<Label text="3" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>4}">
+												<header>
+													<Label text="4" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>5}">
+												<header>
+													<Label text="5" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>6}">
+												<header>
+													<Label text="6" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>7}">
+												<header>
+													<Label text="7" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>8}">
+												<header>
+													<Label text="8" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>9}">
+												<header>
+													<Label text="9" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>10}">
+												<header>
+													<Label text="10" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>11}">
+												<header>
+													<Label text="11" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>12}" >
+												<header>
+													<Label text="12"/>
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>13}">
+												<header>
+													<Label text="13" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>14}">
+												<header>
+													<Label text="14" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>15}">
+												<header>
+													<Label text="15" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>16}">
+												<header>
+													<Label text="16" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>17}">
+												<header>
+													<Label text="17" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>18}">
+												<header>
+													<Label text="18" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>19}">
+												<header>
+													<Label text="19" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>20}">
+												<header>
+													<Label text="20" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>21}">
+												<header>
+													<Label text="21" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>22}">
+												<header>
+													<Label text="22" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>23}">
+												<header>
+													<Label text="23" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>24}">
+												<header>
+													<Label text="24" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>25}">
+												<header>
+													<Label text="25" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>26}">
+												<header>
+													<Label text="26" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>27}">
+												<header>
+													<Label text="27" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>28}">
+												<header>
+													<Label text="28" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>29}">
+												<header>
+													<Label text="29" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>30}">
+												<header>
+													<Label text="30" />
+												</header>
+											</Column>					
+											<Column width = "3rem" visible="{mLocalModel>31}">
+												<header>
+													<Label text="31" />
+												</header>
+											</Column>										
+										</columns>
+										<ColumnListItem>
+											<cells>
+												<Text text="{mLocalModel>Task_name}" />
+												<Text text="{mLocalModel>Project_ID}" />
+												<Text text="{mLocalModel>Project_name}" />
+												<Text text="{mLocalModel>Project_PDs}" />
+												<Text text="{mLocalModel>Consumed_PDs}" />
+												<Text text="{mLocalModel>unapproved_PDs}" />
+												<Text text="{mLocalModel>Balance_PDs}" />
+												<Text text="{mLocalModel>Assigned_by}" />
+												<Input value="{mLocalModel>1/Work_hour}" enabled="true" submit="onOpenRemark" data:column="1" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>1/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>2/Work_hour}" enabled="true" submit="onOpenRemark" data:column="2" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>2/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>3/Work_hour}" enabled="true" submit="onOpenRemark" data:column="3" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>3/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>4/Work_hour}" enabled="true" submit="onOpenRemark" data:column="4" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>4/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>5/Work_hour}" enabled="true" submit="onOpenRemark" data:column="5" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>5/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>6/Work_hour}" enabled="true" submit="onOpenRemark" data:column="6" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>6/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>7/Work_hour}" enabled="true" submit="onOpenRemark" data:column="7" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>7/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>8/Work_hour}" enabled="true" submit="onOpenRemark" data:column="8" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>8/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>9/Work_hour}" enabled="true" submit="onOpenRemark" data:column="9" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>9/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>10/Work_hour}" enabled="true" submit="onOpenRemark" data:column="10" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>10/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>11/Work_hour}" enabled="true" submit="onOpenRemark" data:column="11" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>11/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>12/Work_hour}" enabled="true" submit="onOpenRemark" data:column="12" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>12/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>13/Work_hour}" enabled="true" submit="onOpenRemark" data:column="13" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>13/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>14/Work_hour}" enabled="true" submit="onOpenRemark" data:column="14" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>14/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>15/Work_hour}" enabled="true" submit="onOpenRemark" data:column="15" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>15/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>16/Work_hour}" enabled="true" submit="onOpenRemark" data:column="16" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>16/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>17/Work_hour}" enabled="true" submit="onOpenRemark" data:column="17" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>17/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>18/Work_hour}" enabled="true" submit="onOpenRemark" data:column="18" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>18/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>19/Work_hour}" enabled="true" submit="onOpenRemark" data:column="19" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>19/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>20/Work_hour}" enabled="true" submit="onOpenRemark" data:column="20" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>20/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>21/Work_hour}" enabled="true" submit="onOpenRemark" data:column="21" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>21/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>22/Work_hour}" enabled="true" submit="onOpenRemark" data:column="22" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>22/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>23/Work_hour}" enabled="true" submit="onOpenRemark" data:column="23" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>23/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>24/Work_hour}" enabled="true" submit="onOpenRemark" data:column="24" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>24/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>25/Work_hour}" enabled="true" submit="onOpenRemark" data:column="25" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>25/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>26/Work_hour}" enabled="true" submit="onOpenRemark" data:column="26" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>26/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>27/Work_hour}" enabled="true" submit="onOpenRemark" data:column="27" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>27/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>28/Work_hour}" enabled="true" submit="onOpenRemark" data:column="28" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>28/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>29/Work_hour}" enabled="true" submit="onOpenRemark" data:column="29" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>29/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>30/Work_hour}" enabled="true" submit="onOpenRemark" data:column="30" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>30/colorCode}" writeToDom="true"/>
+												</customData></Input>
+												<Input value="{mLocalModel>31/Work_hour}" enabled="true" submit="onOpenRemark" data:column="31" showValueHelp="true" valueHelpOnly="true"  valueHelpRequest="onOpenRemark">
+												<customData>
+												<core:CustomData key="bgColor" value="{mLocalModel>31/colorCode}" writeToDom="true"/>
+												</customData></Input>
+											</cells>
+										</ColumnListItem>
+									</Table>
+	                            </ScrollContainer>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<Toolbar >
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://thumb-up" type="Emphasized" text="Approve" press="onAccept" class="AcceptButton"/>
+						<Button icon="sap-icon://thumb-down" type="Emphasized" text="Reject" press="onReject" class="RejectButton"/>	
+						<ToolbarSpacer/>
+					</Toolbar>
+					
+	</VBox>
+</core:FragmentDefinition>

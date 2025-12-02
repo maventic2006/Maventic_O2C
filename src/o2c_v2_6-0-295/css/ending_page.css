@@ -1,0 +1,18 @@
+.customBackground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgb(78, 121, 167), rgb(225, 87, 89));
+    height: 85vh;
+    border: 5px solid white;
+    border-radius: 20px;
+    padding: 50px;
+}
+
+.customText {
+    color: white;
+    font-size: 60px;
+    font-family: 'Arial, sans-serif';
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}

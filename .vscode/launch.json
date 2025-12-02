@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [{
+            "name": "Launch klofs",
+            "program": "${workspaceFolder}/klofs.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js",
+                "${workspaceFolder}/node_modules/klo_base/**/*.js"
+            ]
+        },
+        {
+            "name": "Launch klarion Application",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/nodemon/bin/nodemon.js",
+            "args": [
+                "${workspaceRoot}/index.js"
+            ],
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "serverReadyAction": {
+                "pattern": "listening on port ([0-9]+)",
+                "uriFormat": "http://localhost:%s/Klarion/u/MAS_DEV/fs/index.html",
+                "action": "openExternally"
+            }
+        },
+        {
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        }
+    ]
+}

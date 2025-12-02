@@ -1,0 +1,256 @@
+/* === Table Styling === */
+.myPageArea .sapUiTable {
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+	font-family: "Segoe UI", sans-serif;
+}
+
+/* Column Cells */
+.myPageArea .sapUiTableCell {
+	border-right: 1px solid #e0e0e0;
+}
+
+/* Row Hover */
+.myPageArea .sapUiTableTr:hover {
+	background-color: #f0f4f8 !important;
+}
+
+/* Designation Text */
+.myPageArea .lightDesignation {
+	font-size: 0.75rem;
+	color: #6c757d;
+	margin-top: 2px;
+}
+
+/* Expected Label */
+.myPageArea .expectedLabel {
+	font-size: 0.7rem;
+	color: #888;
+	margin-top: 0.2rem;
+}
+
+/* Compact ComboBox */
+.myPageArea .compactDropdown .sapMComboBox {
+	width: 4em;
+}
+
+/* Button Styling */
+.myPageArea .roundedButton {
+	border-radius: 8px !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	/*margin-right: 0.5rem; */
+}
+
+/* Table Top Padding */
+.myPageArea .tableWrapper {
+	padding: 1rem;
+}
+/* Column headers */
+.myPageArea .sapUiTableColHdrCnt {
+	background: #f5f7fa !important;
+	border-bottom: 2px solid #dbe3ec;
+	font-weight: bold;
+	padding: 0.3rem 0.5rem;
+	font-size: 0.8rem;
+	/* font-size: 0.95rem; */
+}
+
+/* Add spacing between label and search field */
+.myPageArea .sapMLabel + .sapMSF {
+	margin-top: 2px;
+}
+
+/* Skill column cells */
+.myPageArea .sapMText {
+	font-size: 0.95rem;
+	color: #2b3f5c;
+}
+
+/* Expected rating label */
+.myPageArea .expectedLabel {
+	font-size: 0.8rem;
+	color: #6b7280;
+	margin-top: 0.25rem;
+}
+
+/* Designation style */
+.myPageArea .lightDesignation {
+	font-size: 0.8rem;
+	color: #8d99ae;
+}
+
+/* ComboBox inside cells */
+/* .myPageArea .sapMComboBox {
+	background-color: #eef2f7;
+	border-radius: 6px;
+	font-weight: 600;
+	padding: 0.1rem 0.3rem;
+	height: 1.8rem;
+	font-size: 0.75rem;
+} */
+
+/* Rating stars */
+.myPageArea .sapMRI {
+	/* margin-top: 0.3rem; */
+	margin-top: 0.2rem;
+}
+.myPageArea .sapMRI .sapMRIIcon {
+	color: #f4b400; /* yellow */
+}
+
+/* Table hover effect */
+.myPageArea .sapUiTableRowHdr:hover,
+.sapUiTableRow:hover {
+	background-color: #f0f4ff !important;
+}
+
+/* Header alignment and spacing */
+.myPageArea .sapMFlexItem {
+	text-align: center;
+}
+
+/* Buttons (Submit / Save) */
+.myPageArea.sapMBtn {
+	font-weight: 600;
+	padding: 0.4rem 1.2rem;
+	border-radius: 8px;
+}
+
+.myPageArea .sapMBtnAccept {
+	background-color: #2ecc71 !important;
+	color: white !important;
+}
+
+.myPageArea .sapMBtnAccept:hover {
+	background-color: #27ae60 !important;
+}
+
+.myPageArea .sapMBtnDefault {
+	background-color: #3498db !important;
+	color: white !important;
+}
+
+.myPageArea .sapMBtnDefault:hover {
+	background-color: #2980b9 !important;
+}
+
+.myPageArea div[data-dynamicstyleclass="matchRating"],
+.matchRating {
+	background-color: #e0f7fa !important; /* teal */
+}
+
+.myPageArea div[data-dynamicstyleclass="lowRating"],
+.lowRating {
+	background-color: #ffebee !important; /* red tint */
+}
+
+.myPageArea div[data-dynamicstyleclass="highRating"],
+.highRating {
+	background-color: #e8f5e9 !important; /* green tint */
+}
+
+.myPageArea .expectedLabel {
+	font-size: 0.75rem;
+	color: #555;
+	margin-top: 4px;
+}
+.myPageArea .lightDesignation {
+	font-size: 0.75rem;
+	color: #888;
+	margin-top: 0.2rem;
+}
+
+.myPageArea .expectedLabel {
+	font-size: 0.8rem;
+	color: #555;
+	margin-top: 0.3rem;
+}
+.myPageArea .sapMVBox {
+	background: #ddd;
+	padding: 0.3rem;
+	border-radius: 8px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+	margin: 0.1rem;
+	transition: box-shadow 0.2s ease;
+	will-change: box-shadow;
+}
+
+.myPageArea .sapMVBox:hover {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.myPageArea .matchRating {
+	background-color: #e0f7e9; /* soft green */
+}
+
+.myPageArea .lowRating {
+	background-color: #ffe0e0; /* soft red */
+}
+
+.myPageArea .highRating {
+	background-color: #fff8e1; /* soft yellow */
+}
+
+.myPageArea .sapUiTable,
+.myPageArea .sapUiTableCell {
+	font-family: "Segoe UI", sans-serif;
+	font-size: 0.9rem;
+	border: none;
+}
+
+.myPageArea .sapUiTableCell {
+	/* padding: 0.5rem; */
+	vertical-align: middle;
+	padding: 0.3rem 0.5rem;
+	font-size: 0.8rem;
+}
+/* Remove card feel from column header */
+.myPageArea .noCardHeader {
+	background: transparent !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.myPageArea .noCardLabel {
+	/* font-size: 0.9rem; */
+	color: #212121;
+	font-size: 0.75rem;
+	font-weight: 600;
+	line-height: 1rem;
+	margin: 0;
+}
+
+.myPageArea .noCardSubLabel {
+	/* font-size: 0.75rem; */
+	color: #757575;
+	font-size: 0.7rem;
+	line-height: 0.9rem;
+	/* color: #666; */
+	margin: 0;
+}
+
+/* .myPageArea .ratingRow {
+	gap: 0.4rem;
+}
+
+.myPageArea .ratingRow .sapMRI {
+	margin: 0;
+}
+
+.myPageArea .ratingRow .sapMComboBox {
+	height: 1.8rem;
+	font-size: 0.75rem;
+	padding: 0.1rem 0.3rem;
+}
+.myPageArea .ratingRow .sapMRIIcon {
+	font-size: 1rem; /* default is larger */
+
+.myPageArea .myPageArea div[data-dynamicstyleclass="noRating"] {
+	background-color: #f8f1f8 !important;
+	/* opacity: 0.6; */
+}
+.myPageArea .section2Background {
+	background-color: white !important;
+}

@@ -1,0 +1,117 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "removeComments": true,
+    "module": "amd",
+    "target": "ES5",
+    "outDir": "cdn_app",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "typeRoots": [
+      "C:\\Procify_Global_nodemodules/node_modules/@sapui5/ts-types",
+      "./closedmodules",
+      "C:/Procify_Global_nodemodules/node_modules/@types",
+      "C:/Procify_Global_nodemodules/node_modules/@typed-mxgraph/typed-mxgraph"
+    ],
+    "types": [
+      "jquery",
+      "C:\\Procify_Global_nodemodules/node_modules/@sapui5/ts-types",
+      "node",
+      "C:/Procify_Global_nodemodules/node_modules/@typed-mxgraph/typed-mxgraph"
+    ],
+    "lib": [
+      "ES2015",
+      "ES5",
+      "es6",
+      "dom"
+    ],
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "./closedmodules/*"
+      ],
+      "bol_editor/*": [
+        "./closedmodules/bol_editor_7-0-114/*"
+      ],
+      "o2c_v2/*": [
+        "./src/o2c_v2_6-0-295/*"
+      ],
+      "mf/*": [
+        "./closedmodules/mf_7-0-9/*"
+      ],
+      "mticket/*": [
+        "./closedmodules/mticket_6-0-1/*"
+      ],
+      "l2d_core/*": [
+        "./closedmodules/l2d_core_1/*"
+      ],
+      "l2d_mobile/*": [
+        "./closedmodules/l2d_mobile_1/*"
+      ],
+      "klotouch_editor/*": [
+        "./closedmodules/klotouch_editor_7-0-94/*"
+      ],
+      "procify_core/*": [
+        "./closedmodules/procify_core_6-0-4/*"
+      ],
+      "devtools_klotouch/*": [
+        "./closedmodules/devtools_klotouch_6-0-13/*"
+      ],
+      "homepage_editor/*": [
+        "./closedmodules/homepage_editor_6-0-16/*"
+      ],
+      "cockpit/*": [
+        "./closedmodules/cockpit_6-0-138/*"
+      ],
+      "wf_apps/*": [
+        "./closedmodules/wf_apps_7-0-1/*"
+      ],
+      "kloTouch/*": [
+        "./closedmodules/kloTouch_7-2-254/*"
+      ],
+      "core_fw/*": [
+        "./closedmodules/core_fw_7-2-254/*"
+      ],
+      "shared/*": [
+        "./closedmodules/shared_6-0/*"
+      ],
+      "kloBo/*": [
+        "./closedmodules/kloBo_7-2-254/*"
+      ],
+      "kloBolServer/*": [
+        "./closedmodules/kloBolServer_7-2-254/*"
+      ],
+      "o2c_v2_base/*": [
+        "./closedmodules/procify_core_6-0-4/*"
+      ],
+      "o2c_v2_base/entity/*": [
+        "./closedmodules/procify_core_6-0-4/entity/*",
+        "./closedmodules/procify_core_6-0-4/entity_gen/*"
+      ],
+      "o2c_v2_base/query/*": [
+        "./closedmodules/procify_core_6-0-4/query/*",
+        "./closedmodules/procify_core_6-0-4/query_gen/*"
+      ]
+    },
+    "composite": true
+  },
+  "references": [
+    {
+      "path": "./closedmodules"
+    }
+  ],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "cdn_app/",
+    "closedmodules/",
+    "node_modules/",
+    "build/",
+    "gulpfile.js"
+  ]
+}

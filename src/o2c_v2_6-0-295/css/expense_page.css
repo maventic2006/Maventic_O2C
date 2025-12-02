@@ -1,0 +1,15 @@
+.scrollBarHide{
+    overflow-x:hidden !important;
+}
+.receiptPending>td{
+    border-bottom: 1.5px solid #fdff6ba1 !important;
+    background: rgba(175, 186, 27, 0.2)
+}
+.receiptApproval>td{
+    border-bottom: 1.5px solid #3d7b2767 !important;
+    background: rgba(62,123,39,0.2)
+}
+.receiptRejecting>td{
+    border-bottom: 1.5px solid 	 #faa1a150 !important;
+    background: rgba(176, 62, 62, 0.2)
+}

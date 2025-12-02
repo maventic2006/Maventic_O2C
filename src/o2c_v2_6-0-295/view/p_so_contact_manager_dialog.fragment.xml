@@ -1,0 +1,53 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core">
+
+    <Dialog title="Manage Contact">
+        <Table items="{mPageData>/contactPersonList}">
+            <columns>
+                <Column width="2rem">
+                    <Text text="Id" />
+                </Column>
+                <Column width="4rem">
+                    <Text text="Name" />
+                </Column>
+                <Column width="4rem">
+                    <Text text="Mobile" />
+                </Column>
+                <Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Tablet"
+                    width="4rem">
+                    <Text text="Email" />
+                </Column>
+                <Column width="1rem">
+                    <Text text="" />
+                </Column>
+            </columns>
+            <ColumnListItem>
+                <cells>
+                    <Input editable="false" value="{mPageData>contact_id}" />
+                </cells>
+                <cells>
+                    <Input editable="false" value="{mPageData>contact_name}" />
+                </cells>
+                <cells>
+                    <Input editable="false" value="{mPageData>contact_number}" />
+                </cells>
+                <cells>
+                    <Input editable="false" value="{mPageData>email_id}" />
+                </cells>
+                <cells>
+                    <Button  press="onContactEditRowBtnPress"  text="Edit"></Button>
+                </cells>
+            </ColumnListItem>
+        </Table>
+
+        <buttons>
+            <Button text="Close" press="onPopupDialogCloseBtnPress" />
+            <Button text="Create Contact" type="Emphasized" press="onContactCreateBtnPress" />
+        </buttons>
+    </Dialog>
+
+
+</core:FragmentDefinition>

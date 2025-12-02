@@ -1,0 +1,24 @@
+<!-- <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog id="taskDialog" showHeader="false">
+		<Input value="{mDataModel>/workRemark}" change="onInputChange"></Input>
+		<HBox alignContent="Center" justifyContent="Center">
+			<Button press="onTaskDialogClose" text="Ok" class="sapUiTinyTop"></Button>
+		</HBox>
+	</Dialog>
+</core:FragmentDefinition> -->
+<!-- contentHeight="100px" -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover id="pop" placement="Auto" showHeader="false">
+			<VBox alignContent="Center" justifyContent="Center">
+			<!-- && (${mDataModel>/readOnly} === false) -->
+				<Input id="remarkPopup" value="{mDataModel>/workRemark}" placeholder="remark" change="onInputChange" valueState="None" editable="{= (${mDataModel>/submitStatus} === '' || ${mDataModel>/submitStatus} === 'Rejected') ? true : false}"></Input>
+				<!-- <Input value="{mDataModel>/workRemark}" change="onInputChange" valueState="None" editable="{= (() => {
+                    const submitStatus = ${mDataModel>/submitStatus};
+                    const anotherProperty = ${mDataModel>/anotherProperty};
+                    return (submitStatus === '' || submitStatus === 'Rejected') && (anotherProperty === 'someValue');
+                })()}"></Input> -->
+				<HBox><Text text="Last modified by : "></Text><Label text = "{mDataModel>/modifiedBy}"></Label></HBox>
+				<HBox><Text text="Last modified on : "></Text><Label text = "{mDataModel>/modifiedOn}"></Label></HBox>
+			</VBox>
+	</Popover>
+</core:FragmentDefinition>

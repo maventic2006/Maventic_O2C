@@ -1,0 +1,220 @@
+.updateRemark {
+  border : 0.1rem solid #efff09;
+  /* border-radius: 0.1rem; */
+  width: 150% !important;
+    height: 100% !important;
+    opacity: 1;
+}
+.redBackground {
+	border : 0.1rem solid #9e050a;
+  /* border-radius: 0.1rem; */
+  width: 150% !important;
+    height: 100% !important;
+    opacity: 1;
+  }
+  
+  .greenBackground {
+	border : 0.1rem solid #066613;
+  width: 150% !important;
+    height: 100% !important;
+    opacity: 1;
+  }
+  
+  .blueBackground {
+	border : 0.1rem solid #0af034;
+  width: 150% !important;
+    height: 100% !important;
+    opacity: 1;
+  }
+  .appliedBackground {
+    border : 0.1rem solid #0407cc;
+    width: 150% !important;
+    height: 100% !important;
+    opacity: 1;
+    }
+
+  .skyBackground {
+	border : 0.1rem solid skyblue;
+  width: 150% !important;
+    height: 100% !important;
+    opacity: 1;
+  }
+  .others{
+    opacity: 1;
+    border: none;
+  }
+  .deleteColor{
+    border: none;
+  }
+  .legend{
+    background-color: red;
+  }
+  .b1{
+    background-color: red;
+    color: red;
+  }
+  .holidayLegendItem {
+    color: red;
+  }
+  .fullDayLeaveLegendItem {
+    color: green;
+  }
+  
+  .halfDayLeaveLegendItem {
+    color: lightgreen;
+  }
+  
+  .weekendLegendItem {
+    color: skyblue;
+  }
+  .prevButton{
+    margin-left: 200px;
+  }
+ 
+
+  /* ************************
+   */
+   .TodayIncicator {
+    background-color: purple !important;
+    border-radius: 0.1rem;  
+}
+   
+   .WeekendIncicator {
+    background-color: #87CEEB !important;
+    border-radius: 0.1rem;  
+}
+
+.HolidayIncicator {
+    background-color: #9e050a !important;
+    border-radius: 0.1rem;   
+}
+
+.AppliedIncicator {
+  background-color: #0407cc !important;
+  border-radius: 0.1rem;   
+}
+
+.FulldayIncicator {
+    background-color: #066613 !important;
+    border-radius: 0.1rem;   
+}
+
+.HalfdayIncicator {
+    background-color: #0af034 !important;
+    border-radius: 0.1rem;  
+}
+
+.TodayIncicatorText {   
+  min-width: 4rem !important;
+}
+
+.WeekendIncicatorText {   
+    min-width: 4rem !important;
+}
+
+.AppliedIncicatorText {   
+  min-width: 4rem !important;
+}
+
+.HolidayIncicatorText { 
+    min-width: 3rem !important;
+}
+
+.FulldayIncicatorText {
+    min-width: 6rem !important;
+}
+
+.HalfdayIncicatorText {
+    min-width: 6rem !important;
+}
+
+.colorLegend{
+  margin-left: 15%;
+  position: relative;
+}
+.calendar{
+  width: 100%;
+}
+.overAllStatus{
+  margin-left: 17%;
+}
+
+[data-bgColor="Holiday"] *{
+  background: #9e050a;
+  opacity: 1;
+}
+[data-bgColor="Weekend"] *{
+  background: #87CEEB;
+  opacity: 1;
+}
+[data-bgColor="Half_Leave"] *{
+  background: #0af034;
+  opacity: 1;
+}
+[data-bgColor="Full_Leave"] *{
+  background: #066613;
+  opacity: 1;
+}
+[data-bgColor="Applied"] *{
+  background: #0407cc;
+  opacity: 1;
+}
+[data-bgColor="NonEditable"] *{
+  background: #e7e6e6;
+  opacity: 1;
+}
+[data-bgColor=""] *{
+  opacity: 1;
+  background: none;
+}
+
+.noCellSpacing .sapMTableBdrOuter,
+.noCellSpacing .sapMTableBdrInner {
+  border-collapse: collapse;
+}
+
+.noCellSpacing .sapMListTblRow,
+.noCellSpacing .sapMListTblCell {
+  padding: 0;
+  margin: 0;
+}
+
+.customListItem {
+  /* background-color: rgb(187, 198, 202); */
+  border: 1px solid #000000;
+  padding: 0.5rem;
+  height: 3rem;
+}
+.overAllStatusText{
+  
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 1rem;
+  /* padding: 0.5rem;
+  background-color: rgb(187, 198, 202); */
+}
+.overAllStatusBox{
+  /* border: 1px solid #000000; */
+  /* height: 110%; */
+  margin-left: 15%;
+  margin-top: 1%;
+}
+.holidayListClass{
+  font-size: 1rem;
+  margin-left: 45%;
+}
+.holidayName{
+  color: #9e050a;
+  font: 1em sans-serif;
+}
+.hideF4Box .sapMInputBaseIconContainer {
+	display:none;
+}
+.highlighted-row {
+  background-color: yellow; /* or any color you prefer */
+}
+.monthAndYearLabel{
+  font: bold;
+  size: 2rem;
+  /* margin-left: 200px; */
+}

@@ -1,0 +1,32 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified">
+
+    <Dialog title="AI Assist">
+        <VBox class="sapUiSmallMargin">
+
+            <!-- FileUploader with Label -->
+            <Label text="PO Doc" />
+            <unified:FileUploader
+                name="uploadFile"
+                placeholder="Choose a file for upload"
+                width="100%"
+                value="{mPageData>poDocFile}" />
+            <!-- DatePicker with Label -->
+            <Label text="Start Date" />
+            <DatePicker
+                value="{mPageData>/project_start_date}"
+                width="100%" />
+        </VBox>
+
+        <buttons>
+            <Button text="Close" press="onPopupDialogCloseBtnPress" />
+            <Button text="Upload" type="Emphasized" press="onPoDocUploadPress" />
+        </buttons>
+    </Dialog>
+
+
+</core:FragmentDefinition>

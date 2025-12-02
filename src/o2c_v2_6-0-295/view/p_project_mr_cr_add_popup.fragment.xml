@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core">
+
+    <Dialog title="Add MR And CR">
+
+        <VBox class="sapUiSmallMargin">
+            <Label text="PDs"></Label>
+            <Input valueState="{/VS_pDs}"
+                valueStateText="{/VST_pDs}"
+                value="{/pDs}"
+                liveChange="fnInputBoxResetValueState">
+            </Input>
+
+            <Label text="Reason" class="sapUiTinyMarginTop"> </Label>
+            <TextArea
+                rows="5"
+                maxLength="200"
+                valueState="{/VS_reason}"
+                valueStateText="{/VST_reason}"
+                value="{/reason}"
+                liveChange="fnInputBoxResetValueState"
+                width="100%">
+            </TextArea>
+        </VBox>
+
+        <buttons>
+            <Button text="Close" press="onMrCRPopupCloseBtnPress" />
+            <Button text="Submit" type="Emphasized" press="onMrCRPopupSaveBtnPress" />
+        </buttons>
+
+    </Dialog>
+
+
+</core:FragmentDefinition>

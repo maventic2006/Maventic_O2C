@@ -1,0 +1,2137 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:unified="sap.ui.unified">
+    <uxap:ObjectPageLayout height="88vh" id="ObjPageID"
+        showAnchorBarPopover="false"
+        upperCaseAnchorBar="false"
+        showTitleInHeaderContent="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:actions>
+                    <Button text="Information Is Correct" iconFirst="true" icon="sap-icon://accept"
+                        type="Accept" press="onPressInformationAccept"
+                        visible="false" />
+                    <Button text="AI Assist" type="Accept" press="onPressAIAssistButton"
+                        visible="false" />
+                    <Button text="Submit " type="Emphasized" press="fnSubmitData"
+                        visible="{= ${mPageData>/submitButtonEnabled} &amp;&amp; ${mPageData>/isAiAssistEnabled} === false}" />
+                    <Button text="Save As Draft" press="fnSaveAsDraftData"
+                        visible="{= ${mPageData>/saveDraftButtonEnabled} &amp;&amp; ${mPageData>/isAiAssistEnabled} === false}" />
+                    <Button text="Cancel" press="onPressCancelBtn"
+                        visible="{= ${mPageData>/CancelButtonEnabled}}" />
+                    <Button text="Approve " press="onPressApproveBtn"
+                        visible="{= ${mPageData>/ApproveButtonEnabled}}" />
+                    <Button text="Back To Edit" press="onPressBackToEditBtn"
+                        visible="{= ${mPageData>/Back2EditButtonEnabled}}" />
+                    <Button text="Call Back" press="onPressCallBackBtn"
+                        visible="{= ${mPageData>/CallBackButtonEnabled}}" />
+                    <Button text="Edit" press="onPressEditBtn"
+                        visible="{= ${mPageData>/editButtonEnabled}}" />
+                    <Button type="Reject" icon="sap-icon://delete" press="fndiscardSO"
+                        visible="{= ${mPageData>/deleteButtonEnabled}}" />
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <uxap:sections>
+            <uxap:ObjectPageSection showTitle="false" title="Header Details"
+                visible="{= ${mPageData>/tabsVisibility/tab1} === true}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <Title class="sapUiSmallMarginBottom" titleStyle="H4"
+                                text="Header Details" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Company">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/company}" required="true" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Business Area">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    valueState="{mPageData>/VS_businessAreaSelected}"
+                                    valueStateText="{mPageData>/VST_businessAreaSelected}"
+                                    required="true"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    selectedKey="{mPageData>/businessAreaSelected}"
+                                    showSecondaryValues="true"
+                                    items="{mPageData>/businessAreaList}"
+                                    change="onBusinessAreaChange">
+                                    <core:ListItem
+                                        enabled="{mPageData>isEnabled}"
+                                        key="{mPageData>business_code}"
+                                        text="{mPageData>business_name}"
+                                        additionalText="{mPageData>business_code}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+
+                                <Label design="Bold" text="Order Type">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Select
+                                    change="onOrderTypeSelectionChange"
+                                    editable="{mPageData>/isEditOrderType}"
+                                    selectedKey="{mPageData>/orderTypeSelected}"
+                                    items="{mPageData>/orderTypesList}"
+                                    required="true">
+                                    <items>
+                                        <core:Item
+                                            enabled="{mPageData>isEnabled}"
+                                            key="{mPageData>key}"
+                                            text="{mPageData>text}" />
+                                    </items>
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Select>
+
+
+                                <Label design="Bold" text="SO No">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/soNumber}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Created On">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <DatePicker value="{mPageData>/createdOnMMddYYYY}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </DatePicker>
+
+                                <Label design="Bold" text="Created By">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/createdById} | {mPageData>/createdByName}"
+                                    editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="SO status">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/soStatus}"
+                                    editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                            </f:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Project Details"
+                visible="{= ${mPageData>/tabsVisibility/tab2}}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <Title class="sapUiSmallMarginBottom" titleStyle="H4"
+                                text="Project Details" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Project Name">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input
+                                    valueState="{mPageData>/VS_project_name}"
+                                    valueStateText="{mPageData>/VST_project_name}"
+                                    required="true"
+                                    liveChange="fnInputBoxResetValueState"
+                                    maxLength="100"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    value="{mPageData>/project_name}">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Office Calendar">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    id="combobox"
+                                    valueState="{mPageData>/VS_office_calendar}"
+                                    valueStateText="{mPageData>/VST_office_calendar}"
+                                    required="true"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    selectedKey="{mPageData>/office_calendar}"
+                                    showSecondaryValues="true"
+                                    change="fnComboBoxResetValueState"
+                                    items="{mPageData>/officeCalenderList}">
+                                    <core:ListItem key="{mPageData>office_calendar_id}"
+                                        text="{mPageData>office_name}"
+                                        additionalText="{mPageData>office_calendar_id}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+
+                                <Label design="Bold" text="Duration in weeks">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input
+                                    valueState="{mPageData>/VS_durationInWeeks}"
+                                    valueStateText="{mPageData>/VST_durationInWeeks}"
+                                    required="true"
+                                    liveChange="fnInputBoxResetValueState"
+                                    type="Number"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    value="{mPageData>/durationInWeeks}"
+                                    change="fnEstimateProjDate($event ,'DURATION')">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Project Start Date">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <DatePicker
+                                    valueState="{mPageData>/VS_project_start_date}"
+                                    valueStateText="{mPageData>/VST_project_start_date}"
+                                    required="true"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    value="{mPageData>/project_start_date}"
+                                    change="fnEstimateProjDate($event ,'START_DATE')">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </DatePicker>
+
+                                <Label design="Bold" text="Project End Date">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <DatePicker
+                                    valueState="{mPageData>/VS_project_end_date}"
+                                    valueStateText="{mPageData>/VST_project_end_date}"
+                                    required="true"
+                                    editable="{= ${mPageData>/isEditBasicDetails}}"
+                                    value="{mPageData>/project_end_date}"
+                                    change="fnEstimateProjDate($event ,'END_DATE')">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </DatePicker>
+
+                                <Label design="Bold" text="Budgeted PDs">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input
+                                    editable="false"
+                                    value="{mPageData>/poSumOfpDs}">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Total PDs">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input
+                                    visible="{= ${mPageData>/orderTypeSelected} === 'NBS' || ${mPageData>/orderTypeSelected} === 'ISP' || ${mPageData>/orderTypeSelected} === 'PSL' || ${mPageData>/orderTypeSelected} === 'ETR'}"
+                                    editable="{mPageData>/isNewPoAddRow}"
+                                    valueState="{mPageData>/VS_poSumOfpDs}"
+                                    valueStateText="{mPageData>/VST_poSumOfpDs}"
+                                    required="true"
+                                    liveChange="fnInputBoxResetValueState"
+                                    change="onNonBillablePDValueChange"
+                                    value="{mPageData>/poSumOfpDs}"
+                                    type="Number">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+                                <Label design="Bold" text="External Number">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input
+                                    valueState="{mPageData>/VS_external_number}"
+                                    valueStateText="{mPageData>/VST_external_number}"
+                                    value="{mPageData>/external_number}"
+                                    editable="{mPageData>/isEditBasicDetails}">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+                                <Label design="Bold" text="Product Type">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    valueState="{mPageData>/VS_productType}"
+                                    valueStateText="{mPageData>/VST_productType}"
+                                    required="false"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    selectedKey="{mPageData>/productType}"
+                                    showSecondaryValues="true"
+                                    items="{mPageData>/productTypeList}"
+                                    change="onProductTypeChange">
+                                    <core:ListItem
+                                        key="{mPageData>product_id}"
+                                        text="{mPageData>product_description}"
+                                        additionalText="{mPageData>so_no}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+                            </f:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                visible="{= ${mPageData>/tabsVisibility/tab3} &amp;&amp; (${mPageData>/orderTypeSelected} === 'SO' || ${mPageData>/orderTypeSelected} === 'PS')}"
+                showTitle="false" title="Customer Details">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <Title class="sapUiSmallMarginBottom" titleStyle="H4"
+                                text="Customer Details" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Customer">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    valueState="{mPageData>/VS_bill_to_customer}"
+                                    valueStateText="{mPageData>/VST_bill_to_customer}"
+                                    required="true"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    selectedKey="{mPageData>/bill_to_customer}"
+                                    showSecondaryValues="true"
+                                    items="{mPageData>/customerList}"
+                                    change="onCustomerChange">
+                                    <core:ListItem key="{mPageData>cust_id}"
+                                        text="{mPageData>cust_name}"
+                                        additionalText="{mPageData>cust_id}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+
+                                <Label design="Bold" text="Bill to address">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input
+                                    valueState="{mPageData>/VS_bill_to_address}"
+                                    valueStateText="{mPageData>/VST_bill_to_address}"
+                                    required="true"
+                                    value="{mPageData>/bill_to_addressName}"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    valueHelpOnly="true"
+                                    valueHelpRequest="onCustomerAddressVh"
+                                    showValueHelp="true">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="GSTIN">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/gstin}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+                                <Label design="Bold" text="Currency">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    valueState="{mPageData>/VS_currency}"
+                                    valueStateText="{mPageData>/VST_currency}"
+                                    required="true"
+                                    change="onCurrencyChange"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    selectedKey="{mPageData>/currency}"
+                                    showSecondaryValues="true"
+                                    items="{mPageData>/currencyList}">
+                                    <core:ListItem key="{mPageData>currency_id}"
+                                        text="{mPageData>currency_name}"
+                                        additionalText="{mPageData>currency_id}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+
+                                <Label design="Bold" text="Currency Exchange Rate">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/currExchangeRate}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Parent SO">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    valueState="{mPageData>/VS_parent_po}"
+                                    valueStateText="{mPageData>/VST_parent_po}"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    selectedKey="{mPageData>/parent_po}"
+                                    showSecondaryValues="true"
+                                    change="fnComboBoxResetValueState"
+                                    items="{mPageData>/parentSoList}">
+                                    <core:ListItem key="{mPageData>so}"
+                                        text="{mPageData>project_name}"
+                                        additionalText="{mPageData>so}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+                            </f:SimpleForm>
+
+                            <FlexBox>
+                                <FlexBox width="90%">
+                                    <Title titleStyle="H5" text="Customer Contact" />
+                                </FlexBox>
+                                <Button
+                                    enabled="{= ${mPageData>/bill_to_customer} !== '' &amp;&amp; ${mPageData>/isEditBasicDetails}}"
+                                    text="Manage Contact"
+                                    press="onContactManagerBtnPress"></Button>
+                                <Button
+                                    enabled="{= ${mPageData>/bill_to_customer} !== '' &amp;&amp; ${mPageData>/isEditBasicDetails}}"
+                                    text="Add Contact Info"
+                                    press="onAddContactRowButtonPress"
+                                    class="sapUiSmallMarginLeft"></Button>
+                            </FlexBox>
+
+                            <Table items="{mPageData>/customerContactTable}">
+                                <columns>
+                                    <Column width="3rem"></Column>
+                                    <Column>
+                                        <Text text="Name" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Role" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Mobile" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="eMail" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Billing Responsible" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <Button
+                                            enabled="{mPageData>/isEditBasicDetails}"
+                                            icon="sap-icon://delete"
+                                            press="onContactTblRowDeletePress"></Button>
+                                        <ComboBox
+                                            editable="{mPageData>/isEditBasicDetails}"
+                                            valueState="{mPageData>VS_contact_id}"
+                                            valueStateText="{mPageData>VST_contact_id}"
+                                            required="true"
+                                            value="{mPageData>contact_name}"
+                                            selectedKey="{mPageData>contact_id}"
+                                            showSecondaryValues="true"
+                                            change="onContactNameChange"
+                                            items="{mPageData>/contactPersonList}">
+                                            <core:ListItem key="{mPageData>contact_id}"
+                                                text="{mPageData>contact_name}"
+                                                additionalText="{mPageData>contact_id}" />
+                                        </ComboBox>
+                                        <Input
+                                            valueState="{mPageData>VS_contact_role}"
+                                            valueStateText="{mPageData>VST_contact_role}"
+                                            required="true"
+                                            liveChange="fnInputBoxResetValueState"
+                                            maxLength="30"
+                                            editable="{mPageData>/isEditBasicDetails}"
+                                            value="{mPageData>contact_role}">
+                                        </Input>
+                                        <Input value="{mPageData>contact_number}" editable="false"> </Input>
+                                        <Input value="{mPageData>email_id}" editable="false"> </Input>
+                                        <CheckBox
+                                            valueState="{mPageData>VS_billingResponsible}"
+                                            select="onBillingResponsibleCheckBox"
+                                            editable="{mPageData>/isEditBasicDetails}"
+                                            selected="{mPageData>billingResponsible}"></CheckBox>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                visible="{= ${mPageData>/tabsVisibility/tab4} &amp;&amp; (${mPageData>/orderTypeSelected} === 'SO' || ${mPageData>/orderTypeSelected} === 'PS')}"
+                showTitle="false" title="Sales Team">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <Title titleStyle="H4" text="Sales Team" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Pre Sales By">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    valueState="{mPageData>/VS_preSalesBySelected}"
+                                    valueStateText="{mPageData>/VST_preSalesBySelected}"
+                                    required="true"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    selectedKey="{mPageData>/preSalesBySelected}"
+                                    showSecondaryValues="true"
+                                    change="fnComboBoxResetValueState"
+                                    items="{mPageData>/preSalesAndResponsibleList}">
+                                    <core:ListItem key="{mPageData>emp_id}"
+                                        text="{mPageData>emp_name}"
+                                        additionalText="{mPageData>emp_id}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+
+                                <Label design="Bold" text="Sales Responsible">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    valueState="{mPageData>/VS_salesResponsibleSelected}"
+                                    valueStateText="{mPageData>/VST_salesResponsibleSelected}"
+                                    required="true"
+                                    editable="{mPageData>/isEditBasicDetails}"
+                                    selectedKey="{mPageData>/salesResponsibleSelected}"
+                                    change="onSalesResponsibleChange"
+                                    showSecondaryValues="true"
+                                    items="{mPageData>/preSalesAndResponsibleList}">
+                                    <core:ListItem key="{mPageData>emp_id}"
+                                        text="{mPageData>emp_name}"
+                                        additionalText="{mPageData>emp_id}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+                            </f:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                visible="{= ${mPageData>/tabsVisibility/tab5} &amp;&amp; ${mPageData>/orderTypeFinancialImpact} === 'C' &amp;&amp; ${mPageData>/external_number} !== ''}"
+                showTitle="false" title="Expense">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <FlexBox>
+                                <FlexBox width="100%">
+                                    <Title titleStyle="H4" text="Expense" />
+                                </FlexBox>
+                            </FlexBox>
+
+                            <Table
+                                items="{mPageData>/tableExpense}"
+                                growing="true"
+                                growingThreshold="10"
+                                growingScrollToLoad="false">
+                                <columns>
+                                    <Column>
+                                        <Text text="Expense Description" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Expense Status" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Description" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Employee For" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Created By" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Total Amount" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Submission Date" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Request ID" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <Input editable="false"
+                                            value="{mPageData>expense_descriptition}"> </Input>
+                                        <Input editable="false" value="{mPageData>expense_status}"> </Input>
+                                        <Input editable="false" value="{mPageData>descript}"> </Input>
+                                        <Input editable="false" value="{mPageData>employee_for}"> </Input>
+                                        <Input editable="false" value="{mPageData>created_by}"> </Input>
+                                        <Input editable="false" value="{mPageData>total_amount}"> </Input>
+                                        <Input editable="false" value="{mPageData>submission_date}"> </Input>
+                                        <Input editable="false" value="{mPageData>request_id}"> </Input>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                visible="{=  ${mPageData>/tabsVisibility/tab6} &amp;&amp; (${mPageData>/orderTypeFinancialImpact} === 'P' || (${mPageData>/orderTypeFinancialImpact} === 'C' &amp;&amp; ${mPageData>/external_number} !== ''))}"
+                showTitle="false" title="Onsite Rules">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <Title class="sapUiSmallMarginBottom" titleStyle="H4"
+                                text="Onsite Rules" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Onsite Required">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <RadioButtonGroup>
+                                    <RadioButton
+                                        enabled="{mPageData>/isEditTravelTable}"
+                                        text="Yes"
+                                        selected="{mPageData>/onSiteRadioButton/yes}" />
+                                    <RadioButton
+                                        select="onOnsiteRuleNoSelect"
+                                        enabled="{mPageData>/isEditTravelTable}"
+                                        text="No"
+                                        selected="{mPageData>/onSiteRadioButton/no}" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </RadioButtonGroup>
+
+                                <Label design="Bold" text="Reimbursement Rules">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <ComboBox
+                                    valueState="{mPageData>/VS_reimbursement_rules}"
+                                    valueStateText="{mPageData>/VST_reimbursement_rules}"
+                                    required="true"
+                                    selectedKey="{mPageData>/reimbursement_rules}"
+                                    showSecondaryValues="true"
+                                    change="fnComboBoxResetValueState"
+                                    editable="{= ${mPageData>/onSiteRadioButton/yes} &amp;&amp; ${mPageData>/isEditTravelTable}}">
+                                    <core:ListItem key="ACT"
+                                        text="On Actual Bill To Client"
+                                        additionalText="ACT" />
+                                    <core:ListItem key="CIP"
+                                        enabled="{= ${mPageData>/orderTypeSelected} !== 'ISP'}"
+                                        text="Client Included In Project"
+                                        additionalText="CIP" />
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </ComboBox>
+                                <Label design="Bold" text="Reimbursement Remark">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input
+                                    valueState="{mPageData>/VS_reimbursement_remark}"
+                                    valueStateText="{mPageData>/VST_reimbursement_remark}"
+                                    required="true"
+                                    liveChange="fnInputBoxResetValueState"
+                                    value="{mPageData>/reimbursement_remark}"
+                                    editable="{= ${mPageData>/onSiteRadioButton/yes} &amp;&amp; ${mPageData>/isEditTravelTable}}">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                            </f:SimpleForm>
+
+                            <FlexBox>
+                                <FlexBox width="90%">
+                                    <Title titleStyle="H5" text="Travel" />
+                                </FlexBox>
+                                <Button
+                                    enabled="{= ${mPageData>/onSiteRadioButton/yes} &amp;&amp; ${mPageData>/isEditTravelTable}}"
+                                    text="Add Travel"
+                                    press="onAddOSTravelButtonPress"
+                                    class="sapUiSmallMarginLeft"></Button>
+                            </FlexBox>
+
+                            <Table items="{mPageData>/tableTravel}">
+                                <columns>
+                                    <Column width="3rem"></Column>
+                                    <Column>
+                                        <Text text="Travel Type" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="To (City)" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Currency" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Bill to Customer Per-Diem " />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Pay to Employee Per-Diem" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <Button
+                                            enabled="{mPageData>/isEditTravelTable}"
+                                            icon="sap-icon://delete"
+                                            press="onTravelTblRowDeletePress"></Button>
+                                        <ComboBox
+                                            valueState="{mPageData>VS_travelTypeSelected}"
+                                            valueStateText="{mPageData>VST_travelTypeSelected}"
+                                            editable="{mPageData>/isEditTravelTable}"
+                                            selectedKey="{mPageData>travelTypeSelected}"
+                                            showSecondaryValues="false"
+                                            items="{mPageData>/travelTypesDropDown}"
+                                            change="onTravelTypeDDChange">
+                                            <core:ListItem key="{mPageData>travel_type}"
+                                                text="{mPageData>travel_type}" />
+                                        </ComboBox>
+                                        <ComboBox
+                                            valueState="{mPageData>VS_toCitySelected}"
+                                            valueStateText="{mPageData>VST_toCitySelected}"
+                                            editable="{mPageData>/isEditTravelTable}"
+                                            selectedKey="{mPageData>toCitySelected}"
+                                            showSecondaryValues="false"
+                                            items="{mPageData>toCityDropdown}"
+                                            change="onToCityDDChange">
+                                            <core:ListItem key="{mPageData>travelling_location}"
+                                                text="{mPageData>travelling_location}" />
+                                        </ComboBox>
+                                        <ComboBox
+                                            editable="false"
+                                            selectedKey="{mPageData>currency}"
+                                            showSecondaryValues="true"
+                                            items="{mPageData>/currencyList}">
+                                            <core:ListItem
+                                                key="{mPageData>currency_id}"
+                                                text="{mPageData>currency_name}"
+                                                additionalText="{mPageData>currency_id}" />
+                                        </ComboBox>
+                                        <Input
+                                            value="{mPageData>standardReimburse}"
+                                            editable="{mPageData>/isEditPerDiemRate}"> </Input>
+                                        <Input
+                                            valueState="{mPageData>VS_applicableReimburse}"
+                                            valueStateText="{mPageData>VST_applicableReimburse}"
+                                            value="{mPageData>applicableReimburse}"
+                                            liveChange="fnInputBoxResetValueState"
+                                            change="onChangeApplicableReimburse"
+                                            editable="{mPageData>/isEditTravelTable}">
+                                        </Input>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection
+                visible="{= ${mPageData>/tabsVisibility/tab7} &amp;&amp; (${mPageData>/orderTypeSelected} === 'SO' || ${mPageData>/orderTypeSelected} === 'PS')}"
+                showTitle="false" title="PO Details">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <FlexBox>
+                                <FlexBox width="90%">
+                                    <Title titleStyle="H5" text="PO Details" />
+                                </FlexBox>
+
+                                <Button enabled="{mPageData>/isNewPoAddRow}" text="Add PO"
+                                    press="onAddPoBtnPress"
+                                    class="sapUiSmallMarginLeft"></Button>
+                            </FlexBox>
+
+                            <ScrollContainer>
+
+                                <Table width="1800px" class="noPadding"
+                                    items="{mPageData>/poHeaderTable}">
+                                    <columns>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column>
+                                            <Text text="Doc Type" />
+                                        </Column>
+                                        <Column width="13rem">
+                                            <Text text="Attached Copy" />
+                                        </Column>
+                                        <Column width="13rem">
+                                            <Text text="Proposal Copy" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="PO Number" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="CR Number" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="PO Date" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Gross Value(Without Tax)" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="CR Rate" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Budgeted PD" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Project PD" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Tax Checked" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Remark" />
+                                        </Column>
+                                        <Column demandPopin="true" minScreenWidth="5000px"
+                                            popinDisplay="Inline">
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <customData>
+                                                <core:CustomData key="bgColor" value="red"
+                                                    writeToDom="true" />
+                                            </customData>
+                                            <cells>
+                                                <Button
+                                                    icon="{=${mPageData>isThisTableExpanded} ? 'sap-icon://navigation-up-arrow' : 'sap-icon://navigation-down-arrow'}"
+                                                    press="onExpandCollapseHeaderTable"></Button>
+                                                <Button
+                                                    enabled="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                    icon="sap-icon://delete"
+                                                    press="onPOTableRowLI_1DeletePress"></Button>
+                                                <Button
+                                                    enabled="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                    icon="sap-icon://add"
+                                                    press="onLineItemCreateBtnPress"></Button>
+                                                <HBox>
+                                                    <core:Icon
+                                                        visible="{= ${mPageData>approval_status} !== 'Approved'}"
+                                                        src="sap-icon://lateness"
+                                                        color="#ad9209">
+                                                    </core:Icon>
+                                                    <core:Icon
+                                                        visible="{= ${mPageData>approval_status} === 'Approved'}"
+                                                        src="sap-icon://accept"
+                                                        color="#0cab41">
+                                                    </core:Icon>
+                                                </HBox>
+                                                <Select
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowProvisionalEditable}}"
+                                                    selectedKey="{mPageData>DocType}"
+                                                    change="onDocTypeChange">
+                                                    <items>
+                                                        <core:Item key="AM" text="Provisional PO" />
+                                                        <core:Item key="POA" text="PO Attachment" />
+                                                        <core:Item key="CR" text="CR" />
+                                                        <core:Item key="OTH" text="Others" />
+                                                    </items>
+                                                </Select>
+                                                <HBox>
+                                                    <unified:FileUploader
+                                                        valueState="{mPageData>VS_AttachCopyName}"
+                                                        valueStateText="{mPageData>VST_AttachCopyName}"
+                                                        enabled="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowProvisionalEditable}}"
+                                                        value="{mPageData>AttachCopyName}"
+                                                        change="onAttachCopyUpload"
+                                                        buttonOnly="false"
+                                                        iconOnly="true"
+                                                        icon="sap-icon://upload"> </unified:FileUploader>
+                                                    <Button
+                                                        enabled="{= ${mPageData>AttachedCopyDownloaded} !== '' &amp;&amp;  ${mPageData>AttachedCopy} === '' }"
+                                                        icon="sap-icon://download"
+                                                        press="onDownloadAttachCopy"></Button>
+                                                </HBox>
+                                                <HBox>
+                                                    <unified:FileUploader
+                                                        valueState="{mPageData>VS_ProposalCopyName}"
+                                                        valueStateText="{mPageData>VST_ProposalCopyName}"
+                                                        enabled="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                        value="{mPageData>ProposalCopyName}"
+                                                        change="onProposalCopyUpload"
+                                                        buttonOnly="false"
+                                                        iconOnly="true"
+                                                        icon="sap-icon://upload"> </unified:FileUploader>
+                                                    <Button
+                                                        enabled="{= ${mPageData>ProposalCopyDownloaded} !== '' &amp;&amp;  ${mPageData>ProposalCopy} === '' }"
+                                                        icon="sap-icon://download"
+                                                        press="onDownloadProposalCopy"></Button>
+
+                                                </HBox>
+                                                <Input
+                                                    valueState="{mPageData>VS_PONumber}"
+                                                    valueStateText="{mPageData>VST_PONumber}"
+                                                    required="true"
+                                                    change="onPONumberChange"
+                                                    liveChange="fnInputBoxResetValueState"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowProvisionalEditable}}"
+                                                    value="{mPageData>PONumber}" />
+                                                <Input
+                                                    valueState="{mPageData>VS_CRNumber}"
+                                                    valueStateText="{mPageData>VST_CRNumber}"
+                                                    required="false"
+                                                    change="onCRNumberChange"
+                                                    liveChange="fnInputBoxResetValueState"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowProvisionalEditable}}"
+                                                    value="{mPageData>CRNumber}" />
+                                                <DatePicker
+                                                    valueState="{mPageData>VS_PODate}"
+                                                    valueStateText="{mPageData>VST_PODate}"
+                                                    required="true"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowProvisionalEditable}}"
+                                                    change="onPoDateChange"
+                                                    value="{mPageData>PODate}"></DatePicker>
+                                                <Input
+                                                    valueState="{mPageData>VS_GrossValue}"
+                                                    valueStateText="{mPageData>VST_GrossValue}"
+                                                    required="true"
+                                                    liveChange="fnInputBoxResetValueState"
+                                                    change="onPoHeaderGrossValueChanged"
+                                                    type="Number"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                    value="{mPageData>GrossValue}" />
+                                                <Input
+                                                    valueState="{mPageData>VS_CRRate}"
+                                                    valueStateText="{mPageData>VST_CRRate}"
+                                                    required="true"
+                                                    liveChange="fnInputBoxResetValueState"
+                                                    change="onPoHeaderCRRateValueChanged"
+                                                    type="Number"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                    value="{mPageData>CRRate}" />
+                                                <Input
+                                                    valueState="{mPageData>VS_BudgetedPD}"
+                                                    valueStateText="{mPageData>VST_BudgetedPD}"
+                                                    required="true"
+                                                    liveChange="fnInputBoxResetValueState"
+                                                    change="onPoHeaderPDsValueChanged"
+                                                    type="Number"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                    value="{mPageData>BudgetedPD}" />
+                                                <Input
+                                                    valueState="{mPageData>VS_projectPD}"
+                                                    valueStateText="{mPageData>VST_projectPD}"
+                                                    required="true"
+                                                    liveChange="fnInputBoxResetValueState"
+                                                    change="onPoHeaderProjectPDsChanged"
+                                                    type="Number"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                    value="{mPageData>projectPD}" />
+                                                <CheckBox
+                                                    valueState="{mPageData>VS_TaxChecked}"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                    selected="{mPageData>TaxChecked}"
+                                                    select="onSelectTaxChecked"></CheckBox>
+                                                <Input
+                                                    valueState="{mPageData>VS_Remark}"
+                                                    valueStateText="{mPageData>VST_Remark}"
+                                                    required="true"
+                                                    liveChange="fnInputBoxResetValueState"
+                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                    value="{mPageData>Remark}" />
+
+                                                <Table
+                                                    visible="{mPageData>isThisTableExpanded}"
+                                                    items="{mPageData>aPoLineItemTable}">
+                                                    <columns>
+                                                        <Column width="3rem">
+                                                        </Column>
+                                                        <Column width="3rem">
+                                                        </Column>
+                                                        <Column width="3rem">
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Item Category" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Quantity" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Rate" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Unit" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Gross Value" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Invoice Type" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Invoice Cycle" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Start Date" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="End Date" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Subscription" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Minimum Billing Rate" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Per Unit Price" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Details" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Balance Amount" />
+                                                        </Column>
+                                                        <Column demandPopin="true"
+                                                            minScreenWidth="5000px"
+                                                            popinDisplay="Inline">
+                                                        </Column>
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem>
+                                                            <customData>
+                                                                <core:CustomData key="bgColor"
+                                                                    value="yellow"
+                                                                    writeToDom="true" />
+                                                            </customData>
+                                                            <cells>
+                                                                <Button
+                                                                    icon="{=${mPageData>isThisTableExpanded} ? 'sap-icon://navigation-up-arrow' :'sap-icon://navigation-down-arrow'}"
+                                                                    press="onExpandCollapseHeaderTable"></Button>
+                                                                <Button
+                                                                    enabled="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    icon="sap-icon://delete"
+                                                                    press="onPOTableRowLI_2DeletePress"></Button>
+                                                                <Button
+                                                                    enabled="{= (${mPageData>aLastLineItemTableIdentity} !== 'TABLE_SCHEDULE_BASED' ||  ${mPageData>isLastLineTableManualEntry} === true) &amp;&amp; ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    icon="sap-icon://add"
+                                                                    tooltip="{= ${mPageData>isLastLineTableManualEntry} === false ? 'Add Milestone Automatically' :'Add Milestone Manually'}"
+                                                                    press="fnAddLastLineItemTable">
+                                                                </Button>
+                                                                <Select
+                                                                    valueState="{mPageData>VS_ddSelectedItemCategory}"
+                                                                    valueStateText="{mPageData>VST_ddSelectedItemCategory}"
+                                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    items="{mPageData>/ddPOItemCategories}"
+                                                                    selectedKey="{mPageData>ddSelectedItemCategory}"
+                                                                    change="onSoLineItemSelectionChange1"
+                                                                    forceSelection="false">
+                                                                    <items>
+                                                                        <core:Item
+                                                                            enabled="{mPageData>isEnabled}"
+                                                                            key="{mPageData>key}"
+                                                                            text="{mPageData>value}" />
+                                                                    </items>
+                                                                </Select>
+                                                                <Input
+                                                                    valueState="{mPageData>VS_Quantity}"
+                                                                    valueStateText="{mPageData>VST_Quantity}"
+                                                                    required="true"
+                                                                    liveChange="fnInputBoxResetValueState"
+                                                                    type="Number"
+                                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    change="onQtyRateChange"
+                                                                    value="{mPageData>Quantity}" />
+
+                                                                <Input
+                                                                    valueState="{mPageData>VS_Rate}"
+                                                                    valueStateText="{mPageData>VST_Rate}"
+                                                                    required="true"
+                                                                    liveChange="fnInputBoxResetValueState"
+                                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    change="onQtyRateChange"
+                                                                    value="{mPageData>Rate}" />
+                                                                <Select
+                                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    selectedKey="{mPageData>Unit}">
+                                                                    <items>
+                                                                        <core:Item
+                                                                            key="AU"
+                                                                            text="Activity Unit" />
+                                                                        <core:Item
+                                                                            enabled="{= ${mPageData>ddSelectedItemCategory} !== 'API' }"
+                                                                            key="Day"
+                                                                            text="Days" />
+                                                                        <core:Item
+                                                                            enabled="{= ${mPageData>ddSelectedItemCategory} !== 'API' }"
+                                                                            key="HR"
+                                                                            text="Hours" />
+                                                                        <core:Item
+                                                                            enabled="{= ${mPageData>ddSelectedItemCategory} !== 'API' }"
+                                                                            key="MON"
+                                                                            text="Months" />
+                                                                    </items>
+                                                                </Select>
+
+                                                                <Input
+                                                                    valueState="{mPageData>VS_GrossValue}"
+                                                                    valueStateText="{mPageData>VST_GrossValue}"
+                                                                    required="true"
+                                                                    liveChange="fnInputBoxResetValueState"
+                                                                    type="Number"
+                                                                    editable="false"
+                                                                    value="{mPageData>GrossValue}" />
+
+                                                                <Select
+                                                                    valueState="{mPageData>VS_ddSelectedInvoiceType}"
+                                                                    valueStateText="{mPageData>VST_ddSelectedInvoiceType}"
+                                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    items="{mPageData>ddInvoiceTypes}"
+                                                                    selectedKey="{mPageData>ddSelectedInvoiceType}"
+                                                                    change="onSoLineItemSelectionChange2"
+                                                                    forceSelection="false">
+                                                                    <items>
+                                                                        <core:Item
+                                                                            key="{mPageData>key}"
+                                                                            text="{mPageData>value}"
+                                                                            enabled="{= ${mPageData>key} === 'TNM' ? false : true }" />
+                                                                    </items>
+                                                                </Select>
+                                                                <Select
+                                                                    valueState="{mPageData>VS_ddSelectedInvoiceCycle}"
+                                                                    valueStateText="{mPageData>VST_ddSelectedInvoiceCycle}"
+                                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    items="{mPageData>ddInvoiceCycle}"
+                                                                    selectedKey="{mPageData>ddSelectedInvoiceCycle}"
+                                                                    change="onSoLineItemSelectionChange3"
+                                                                    forceSelection="false">
+                                                                    <items>
+                                                                        <core:Item
+                                                                            key="{mPageData>key}"
+                                                                            text="{mPageData>value}" />
+                                                                    </items>
+                                                                </Select>
+                                                                <DatePicker
+                                                                    valueState="{mPageData>VS_StartDate}"
+                                                                    valueStateText="{mPageData>VST_StartDate}"
+                                                                    required="true"
+                                                                    change="onStartDateChangeTableLItem_2"
+                                                                    editable="{= ${mPageData>isStartDateEditable} &amp;&amp; ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    value="{mPageData>StartDate}" />
+                                                                <DatePicker
+                                                                    valueState="{mPageData>VS_EndDate}"
+                                                                    valueStateText="{mPageData>VST_EndDate}"
+                                                                    required="true"
+                                                                    change="onEndDateChangeTableLItem_2"
+                                                                    editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    value="{mPageData>EndDate}" />
+                                                                <HBox>
+                                                                    <Input
+                                                                        valueState="Error"
+                                                                        valueStateText="Please Select Product Type"
+                                                                        visible="{= ${mPageData>/productType} === '' &amp;&amp;  (${mPageData>ddSelectedItemCategory} === 'AMC' || ${mPageData>ddSelectedItemCategory} === 'API' || ${mPageData>ddSelectedItemCategory} === 'USRSUBSCR')}"></Input>
+                                                                    <MultiComboBox
+                                                                        valueState="{mPageData>VS_ddSelectedPOSubscription}"
+                                                                        valueStateText="{mPageData>VST_ddSelectedPOSubscription}"
+                                                                        change="fnMultiComboBoxResetValueState"
+                                                                        selectionFinish="onSubscriptionSelectionFinish"
+                                                                        visible="{= (${mPageData>ddSelectedItemCategory} === 'API' || ${mPageData>ddSelectedItemCategory} === 'USRSUBSCR') &amp;&amp; ${mPageData>/productType} !== ''}"
+                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                        selectedKeys="{mPageData>ddSelectedPOSubscription}"
+                                                                        items="{mPageData>/ddPOSubscriptionMapping}">
+                                                                        <items>
+                                                                            <core:Item
+                                                                                enabled="{= ${mPageData>product} === ${mPageData>/productType} &amp;&amp; ${mPageData>type} === 'API'}"
+                                                                                key="{mPageData>id}"
+                                                                                text="{mPageData>api_name}" />
+                                                                        </items>
+                                                                    </MultiComboBox>
+                                                                    <MultiComboBox
+                                                                        valueState="{mPageData>VS_ddSelectedPOSubscription}"
+                                                                        valueStateText="{mPageData>VST_ddSelectedPOSubscription}"
+                                                                        change="fnMultiComboBoxResetValueState"
+                                                                        selectionFinish="onSubscriptionSelectionFinish"
+                                                                        visible="{= ${mPageData>ddSelectedItemCategory} === 'AMC'  &amp;&amp; ${mPageData>/productType} !== ''}"
+                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                        selectedKeys="{mPageData>ddSelectedPOSubscription}"
+                                                                        items="{mPageData>/ddPOSubscriptionMapping}">
+                                                                        <items>
+                                                                            <core:Item
+                                                                                enabled="{= ${mPageData>product} === ${mPageData>/productType} &amp;&amp; ${mPageData>type} === 'AMC'}"
+                                                                                key="{mPageData>id}"
+                                                                                text="{mPageData>api_name}" />
+                                                                        </items>
+                                                                    </MultiComboBox>
+                                                                </HBox>
+                                                                <Input
+                                                                    valueState="{mPageData>VS_MinimumBillingRate}"
+                                                                    valueStateText="{mPageData>VST_MinimumBillingRate}"
+                                                                    required="true"
+                                                                    liveChange="fnInputBoxResetValueState"
+                                                                    type="Number"
+                                                                    editable="{= ${mPageData>MinimumBillingRateEnabled} &amp;&amp; ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    value="{mPageData>MinimumBillingRate}" />
+                                                                <Input
+                                                                    valueState="{mPageData>VS_PerAPIPrice}"
+                                                                    valueStateText="{mPageData>VST_PerAPIPrice}"
+                                                                    visible="{mPageData>unitSubscriptionEnabled}"
+                                                                    liveChange="fnInputBoxResetValueState"
+                                                                    type="Number"
+                                                                    editable="{= ${mPageData>unitSubscriptionEnabled} &amp;&amp; ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    value="{mPageData>PerAPIPrice}" />
+                                                                <Button
+                                                                    press="onViewDetailsButtonPress"
+                                                                    text="View details"
+                                                                    visible="{= ${mPageData>unitSubscriptionEnabled} &amp;&amp; ${mPageData>rowID} !== ''}"
+                                                                ></Button>
+                                                                <Input
+                                                                    valueState="{mPageData>VS_BalanceAmount}"
+                                                                    valueStateText="{mPageData>VST_BalanceAmount}"
+                                                                    required="true"
+                                                                    liveChange="fnInputBoxResetValueState"
+                                                                    type="Number"
+                                                                    editable="{= ${mPageData>BalanceAmountEditable} &amp;&amp; ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                    value="{mPageData>BalanceAmount}" />
+                                                                <FlexBox
+                                                                    visible="{mPageData>isThisTableExpanded}">
+                                                                    <Table
+                                                                        visible="{= ${mPageData>aLastLineItemTableIdentity} === 'TABLE_MILESTONE_BASED'}"
+                                                                        items="{mPageData>aLastLineItemTable}">
+                                                                        <columns>
+                                                                            <Column width="3rem">
+                                                                            </Column>
+                                                                            <Column width="3rem">
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Milestone Description" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Percentage" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Amount" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Milestone Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Status" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Number" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="SignUp Doc" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Remark" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Description" />
+                                                                            </Column>
+                                                                        </columns>
+                                                                        <items>
+                                                                            <ColumnListItem>
+                                                                                <customData>
+                                                                                    <core:CustomData
+                                                                                        key="bgColor"
+                                                                                        value="green"
+                                                                                        writeToDom="true" />
+                                                                                </customData>
+                                                                                <cells>
+                                                                                    <Text></Text>
+                                                                                    <Button
+                                                                                        enabled="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        icon="sap-icon://delete"
+                                                                                        press="onPOTableRowLI_3DeletePress($event ,'d_o2c_so_milestone')"></Button>
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_description}"
+                                                                                        valueStateText="{mPageData>VST_description}"
+                                                                                        required="true"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        maxLength="40"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>description}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_percentage}"
+                                                                                        valueStateText="{mPageData>VST_percentage}"
+                                                                                        required="true"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        change="onMileStoneTablePercentChange"
+                                                                                        type="Number"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable} &amp;&amp; ${mPageData>status} !== 'Invoiced' &amp;&amp; ${mPageData>status} !== 'Paid'}"
+                                                                                        value="{mPageData>percentageDisplay}"
+                                                                                        tooltip="{mPageData>percentage}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_amount}"
+                                                                                        valueStateText="{mPageData>VST_amount}"
+                                                                                        required="true"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        change="onMileStoneTableAmountChange"
+                                                                                        type="Number"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable} &amp;&amp; ${mPageData>status} !== 'Invoiced' &amp;&amp; ${mPageData>status} !== 'Paid'}"
+                                                                                        value="{mPageData>amount}" />
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_date}"
+                                                                                        valueStateText="{mPageData>VST_date}"
+                                                                                        required="true"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>date}" />
+                                                                                    <Select
+                                                                                        forceSelection="false"
+                                                                                        editable="{mPageData>/isEditInvoiceStatus}"
+                                                                                        selectedKey="{mPageData>status}">
+                                                                                        <items>
+                                                                                            <core:Item
+                                                                                                key="NotRequired"
+                                                                                                text="Invoice Not Reqired" />
+                                                                                            <core:Item
+                                                                                                key="InvCan"
+                                                                                                text="Invoice Cancelled" />
+                                                                                            <core:Item
+                                                                                                key="Invoiced"
+                                                                                                text="Invoiced" />
+                                                                                            <core:Item
+                                                                                                key="OnHold"
+                                                                                                text="On Hold" />
+                                                                                            <core:Item
+                                                                                                key="Pending"
+                                                                                                text="Pending" />
+                                                                                            <core:Item
+                                                                                                key="Paid"
+                                                                                                text="Payment Received" />
+                                                                                            <core:Item
+                                                                                                key="InvReq"
+                                                                                                text="Ready" />
+                                                                                        </items>
+                                                                                    </Select>
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_invoice_date}"
+                                                                                        valueStateText="{mPageData>VST_invoice_date}"
+                                                                                        required="false"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit}}"
+                                                                                        value="{mPageData>invoice_date}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_invoice_number}"
+                                                                                        valueStateText="{mPageData>VST_invoice_number}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit}}"
+                                                                                        value="{mPageData>invoice_number}" />
+                                                                                    <Link
+                                                                                        enabled="{= ${mPageData>signupDocDownloaded} !== '' }"
+                                                                                        text="{mPageData>attachSignUpDocFileName}"
+                                                                                        press="onDownloadSignupDoc" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_remark}"
+                                                                                        valueStateText="{mPageData>VST_remark}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable} &amp;&amp; ${mPageData>status} !== 'Invoiced' &amp;&amp; ${mPageData>status} !== 'Paid'}"
+                                                                                        value="{mPageData>remark}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_invoice_description}"
+                                                                                        valueStateText="{mPageData>VST_invoice_description}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable} &amp;&amp; ${mPageData>status} !== 'Invoiced' &amp;&amp; ${mPageData>status} !== 'Paid'}"
+                                                                                        value="{mPageData>invoice_description}" />
+                                                                                </cells>
+                                                                            </ColumnListItem>
+                                                                        </items>
+                                                                    </Table>
+                                                                    <Table
+                                                                        visible="{= ${mPageData>aLastLineItemTableIdentity} === 'TABLE_SCHEDULE_BASED'}"
+                                                                        items="{mPageData>aLastLineItemTable}">
+                                                                        <columns>
+                                                                            <Column width="3rem">
+                                                                            </Column>
+                                                                            <Column width="3rem">
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Milestone Description" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Start Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="End Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text text="Amount" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Milestone Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Status" />
+                                                                            </Column>
+
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Number" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="SignUp Doc" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Remark" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Description" />
+                                                                            </Column>
+                                                                        </columns>
+                                                                        <items>
+                                                                            <ColumnListItem>
+                                                                                <customData>
+                                                                                    <core:CustomData
+                                                                                        key="bgColor"
+                                                                                        value="green"
+                                                                                        writeToDom="true" />
+                                                                                </customData>
+                                                                                <cells>
+                                                                                    <Text></Text>
+                                                                                    <Button
+                                                                                        icon="sap-icon://delete"
+                                                                                        press="onPOTableRowLI_3DeletePress($event ,'d_o2c_so_schedule')"
+                                                                                        enabled="{= ${mPageData>/isManuallyAddedItem} &amp;&amp; ${mPageData>isPoRowEditable}}"></Button>
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_description}"
+                                                                                        valueStateText="{mPageData>VST_description}"
+                                                                                        required="true"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        maxLength="40"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>description}" />
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_startDate}"
+                                                                                        valueStateText="{mPageData>VST_startDate}"
+                                                                                        required="true"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isManuallyAddedItem} &amp;&amp;  ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit}}"
+                                                                                        value="{mPageData>startDate}" />
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_endDate}"
+                                                                                        valueStateText="{mPageData>VST_endDate}"
+                                                                                        required="true"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{=  ${mPageData>/isManuallyAddedItem} &amp;&amp;  ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit}}"
+                                                                                        value="{mPageData>endDate}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_amount}"
+                                                                                        valueStateText="{mPageData>VST_amount}"
+                                                                                        required="true"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Number"
+                                                                                        editable="{= ${mPageData>/isManuallyAddedItem} &amp;&amp;  ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit} &amp;&amp; ${mPageData>invoiceStatus} !== 'Invoiced' &amp;&amp; ${mPageData>invoiceStatus} !== 'Paid' }"
+                                                                                        value="{mPageData>amount}" />
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_billdate}"
+                                                                                        valueStateText="{mPageData>VST_billdate}"
+                                                                                        required="true"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>billdate}" />
+                                                                                    <Select
+                                                                                        forceSelection="false"
+                                                                                        editable="{mPageData>/isEditInvoiceStatus}"
+                                                                                        selectedKey="{mPageData>invoiceStatus}"
+                                                                                        change="onScheduleInvChange">
+                                                                                        <items>
+                                                                                            <core:Item
+                                                                                                key="NotRequired"
+                                                                                                text="Invoice Not Reqired" />
+                                                                                            <core:Item
+                                                                                                key="InvCan"
+                                                                                                text="Invoice Cancelled" />
+                                                                                            <core:Item
+                                                                                                key="Invoiced"
+                                                                                                text="Invoiced" />
+                                                                                            <core:Item
+                                                                                                key="OnHold"
+                                                                                                text="On Hold" />
+                                                                                            <core:Item
+                                                                                                key="Pending"
+                                                                                                text="Pending" />
+                                                                                            <core:Item
+                                                                                                key="Paid"
+                                                                                                text="Payment Received" />
+                                                                                            <core:Item
+                                                                                                key="InvReq"
+                                                                                                text="Ready" />
+                                                                                        </items>
+                                                                                    </Select>
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_invoice_date}"
+                                                                                        valueStateText="{mPageData>VST_invoice_date}"
+                                                                                        required="false"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit}}"
+                                                                                        value="{mPageData>invoice_date}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_invoice_number}"
+                                                                                        valueStateText="{mPageData>VST_invoice_number}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit}}"
+                                                                                        value="{mPageData>invoice_number}" />
+                                                                                    <Link
+                                                                                        enabled="{= ${mPageData>signupDocDownloaded} !== '' }"
+                                                                                        text="{mPageData>attachSignUpDocFileName}"
+                                                                                        press="onDownloadSignupDoc" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_remark}"
+                                                                                        valueStateText="{mPageData>VST_remark}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit} &amp;&amp; ${mPageData>invoiceStatus} !== 'Invoiced' &amp;&amp; ${mPageData>invoiceStatus} !== 'Paid' }"
+                                                                                        value="{mPageData>remark}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_invoice_description}"
+                                                                                        valueStateText="{mPageData>VST_invoice_description}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit} &amp;&amp; ${mPageData>invoiceStatus} !== 'Invoiced' &amp;&amp; ${mPageData>invoiceStatus} !== 'Paid' }"
+                                                                                        value="{mPageData>invoice_description}" />
+                                                                                </cells>
+                                                                            </ColumnListItem>
+                                                                        </items>
+                                                                    </Table>
+                                                                    <Table
+                                                                        visible="{= ${mPageData>aLastLineItemTableIdentity} === 'TABLE_VOLUME_BASED'}"
+                                                                        items="{mPageData>aLastLineItemTable}">
+                                                                        <columns>
+                                                                            <Column width="3rem">
+                                                                            </Column>
+                                                                            <Column width="3rem">
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Milestone Description" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Quantity" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text text="Amount" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Start Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="End Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Milestone Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Status" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Date" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Number" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="SignUp Doc" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Remark" />
+                                                                            </Column>
+                                                                            <Column>
+                                                                                <Text
+                                                                                    text="Invoice Description" />
+                                                                            </Column>
+                                                                        </columns>
+                                                                        <items>
+                                                                            <ColumnListItem>
+                                                                                <customData>
+                                                                                    <core:CustomData
+                                                                                        key="bgColor"
+                                                                                        value="green"
+                                                                                        writeToDom="true" />
+                                                                                </customData>
+                                                                                <cells>
+                                                                                    <Text></Text>
+                                                                                    <Button
+                                                                                        enabled="{mPageData>/isNewPoAddRow}"
+                                                                                        icon="sap-icon://delete"
+                                                                                        press="onPOTableRowLI_3DeletePress($event ,'d_o2c_volume_based')"></Button>
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_description}"
+                                                                                        valueStateText="{mPageData>VST_description}"
+                                                                                        required="true"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        maxLength="40"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>description}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_Quantity}"
+                                                                                        valueStateText="{mPageData>VST_Quantity}"
+                                                                                        required="true"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Number"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>Quantity}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_amount}"
+                                                                                        valueStateText="{mPageData>VST_amount}"
+                                                                                        required="true"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Number"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable} &amp;&amp; ${mPageData>invoiceStatus} !== 'Invoiced' &amp;&amp; ${mPageData>invoiceStatus} !== 'Paid'}"
+                                                                                        change="onVolTableAmountChange"
+                                                                                        value="{mPageData>amount}" />
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_startDate}"
+                                                                                        valueStateText="{mPageData>VST_startDate}"
+                                                                                        required="true"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>startDate}" />
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_endDate}"
+                                                                                        valueStateText="{mPageData>VST_endDate}"
+                                                                                        required="true"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>endDate}" />
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_milestoneDate}"
+                                                                                        valueStateText="{mPageData>VST_milestoneDate}"
+                                                                                        required="true"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable}}"
+                                                                                        value="{mPageData>milestoneDate}" />
+                                                                                    <Select
+                                                                                        forceSelection="false"
+                                                                                        editable="{mPageData>/isEditInvoiceStatus}"
+                                                                                        selectedKey="{mPageData>invoiceStatus}">
+                                                                                        <items>
+                                                                                            <core:Item
+                                                                                                key="NotRequired"
+                                                                                                text="Invoice Not Reqired" />
+                                                                                            <core:Item
+                                                                                                key="InvCan"
+                                                                                                text="Invoice Cancelled" />
+                                                                                            <core:Item
+                                                                                                key="Invoiced"
+                                                                                                text="Invoiced" />
+                                                                                            <core:Item
+                                                                                                key="OnHold"
+                                                                                                text="On Hold" />
+                                                                                            <core:Item
+                                                                                                key="Pending"
+                                                                                                text="Pending" />
+                                                                                            <core:Item
+                                                                                                key="Paid"
+                                                                                                text="Payment Received" />
+                                                                                            <core:Item
+                                                                                                key="InvReq"
+                                                                                                text="Ready" />
+                                                                                        </items>
+                                                                                    </Select>
+                                                                                    <DatePicker
+                                                                                        valueState="{mPageData>VS_invoice_date}"
+                                                                                        valueStateText="{mPageData>VST_invoice_date}"
+                                                                                        required="false"
+                                                                                        change="fnDateInputResetValueState"
+                                                                                        editable="{= ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit}}"
+                                                                                        value="{mPageData>invoice_date}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_invoice_number}"
+                                                                                        valueStateText="{mPageData>VST_invoice_number}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isEditBasicDetails} &amp;&amp; ${mPageData>/isMilestoneInvoiceEdit}}"
+                                                                                        value="{mPageData>invoice_number}" />
+                                                                                    <Link
+                                                                                        enabled="{= ${mPageData>signupDocDownloaded} !== '' }"
+                                                                                        text="{mPageData>attachSignUpDocFileName}"
+                                                                                        press="onDownloadSignupDoc" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_remark}"
+                                                                                        valueStateText="{mPageData>VST_remark}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable} &amp;&amp; ${mPageData>invoiceStatus} !== 'Invoiced' &amp;&amp; ${mPageData>invoiceStatus} !== 'Paid'}"
+                                                                                        value="{mPageData>remark}" />
+                                                                                    <Input
+                                                                                        valueState="{mPageData>VS_invoice_description}"
+                                                                                        valueStateText="{mPageData>VST_invoice_description}"
+                                                                                        required="false"
+                                                                                        liveChange="fnInputBoxResetValueState"
+                                                                                        type="Text"
+                                                                                        editable="{= ${mPageData>/isNewPoAddRow} &amp;&amp; ${mPageData>isPoRowEditable} &amp;&amp; ${mPageData>invoiceStatus} !== 'Invoiced' &amp;&amp; ${mPageData>invoiceStatus} !== 'Paid'}"
+                                                                                        value="{mPageData>invoice_description}" />
+                                                                                </cells>
+                                                                            </ColumnListItem>
+                                                                        </items>
+                                                                    </Table>
+                                                                </FlexBox>
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+
+                            <Toolbar>
+                                <Text text="Gross Total: {mPageData>/poSumOfGross}"></Text>
+                                <ToolbarSpacer />
+                                <Text text="Bugeted PDs Total: {mPageData>/poSumOfpDs}"></Text>
+                                <ToolbarSpacer />
+                                <Text text="Project PDs Total: {mPageData>/poSumOfProjectPDs}"></Text>
+                                <ToolbarSpacer />
+                                <ToolbarSpacer />
+                            </Toolbar>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Profit Center"
+                visible="{= ${mPageData>/tabsVisibility/tab8}}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <FlexBox>
+                                <FlexBox width="90%">
+                                    <Title titleStyle="H4" text="Profit Center" />
+                                </FlexBox>
+                                <Button enabled="{mPageData>/isEditBasicDetails}"
+                                    text="Add Profit Center" press="onProfitCentreAddRow"
+                                    class="sapUiSmallMarginLeft"></Button>
+                            </FlexBox>
+                            <ScrollContainer>
+                                <Table width="1300px" class="noPadding"
+                                    items="{mPageData>/profitCenterTable}">
+                                    <columns>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column width="10rem">
+                                            <Text text="Profit Center" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Percentage" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Budgeted PD" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Project PD" />
+                                        </Column>
+                                        <Column width="11rem">
+                                            <Text text="Project Lead" />
+                                        </Column>
+                                        <Column width="11rem">
+                                            <Text text="Manager" />
+                                        </Column>
+                                        <Column width="11rem">
+                                            <Text text="Team Head" />
+                                        </Column>
+                                        <Column hAlign="Center">
+                                            <Text text="Primary PC" />
+                                        </Column>
+                                        <Column hAlign="Center">
+                                            <Text text="Project Id" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <Button
+                                                enabled="{mPageData>/isEditBasicDetails}"
+                                                icon="sap-icon://delete"
+                                                press="onProfitCentreTableRowDeletePress"></Button>
+                                            <ComboBox
+                                                valueState="{mPageData>VS_profitCentre}"
+                                                valueStateText="{mPageData>VST_profitCentre}"
+                                                required="true"
+                                                editable="{mPageData>/isEditBasicDetails}"
+                                                selectedKey="{mPageData>profitCentre}"
+                                                showSecondaryValues="true"
+                                                items="{mPageData>/profitCenterList}"
+                                                change="onProfitCenterChange">
+                                                <core:ListItem key="{mPageData>profit_cntr_id}"
+                                                    text="{mPageData>profit_cntr_name}"
+                                                    additionalText="{mPageData>profit_cntr_id}" />
+                                                <layoutData>
+                                                    <l:GridData span="L2 M3 S6" />
+                                                </layoutData>
+                                            </ComboBox>
+                                            <Input
+                                                valueState="{mPageData>VS_percentage}"
+                                                valueStateText="{mPageData>VST_percentage}"
+                                                required="true"
+                                                liveChange="fnInputBoxResetValueState"
+                                                type="Number"
+                                                change="onChangeProfitCenterPercent"
+                                                editable="{mPageData>/isEditBasicDetails}"
+                                                value="{mPageData>percentage}"> </Input>
+                                            <Input
+                                                valueState="{mPageData>VS_pDs}"
+                                                valueStateText="{mPageData>VST_pDs}"
+                                                required="true"
+                                                liveChange="fnInputBoxResetValueState"
+                                                type="Number"
+                                                change="onChangeProfitCenterPD"
+                                                editable="{mPageData>/isEditBasicDetails}"
+                                                value="{mPageData>pDs}"> </Input>
+                                            <Input
+                                                valueState="{mPageData>VS_projectPDs}"
+                                                valueStateText="{mPageData>VST_projectPDs}"
+                                                required="true"
+                                                liveChange="fnInputBoxResetValueState"
+                                                type="Number"
+                                                change="onChangeProfitCenterBudgetedPD"
+                                                editable="false"
+                                                value="{mPageData>projectPDs}"> </Input>
+                                            <ComboBox
+                                                valueState="{mPageData>VS_projectLead}"
+                                                valueStateText="{mPageData>VST_projectLead}"
+                                                required="true"
+                                                editable="{mPageData>/isEditBasicDetails}"
+                                                selectedKey="{mPageData>projectLead}"
+                                                change="fnComboBoxResetValueState"
+                                                showSecondaryValues="true"
+                                                items="{mPageData>/preSalesAndResponsibleList}">
+                                                <core:ListItem key="{mPageData>emp_id}"
+                                                    text="{mPageData>emp_name}"
+                                                    additionalText="{mPageData>emp_id}" />
+                                                <layoutData>
+                                                    <l:GridData span="L2 M3 S6" />
+                                                </layoutData>
+                                            </ComboBox>
+                                            <ComboBox
+                                                valueState="{mPageData>VS_manager}"
+                                                valueStateText="{mPageData>VST_manager}"
+                                                required="true"
+                                                editable="{mPageData>/isEditBasicDetails}"
+                                                selectedKey="{mPageData>manager}"
+                                                change="fnComboBoxResetValueState"
+                                                showSecondaryValues="true"
+                                                items="{mPageData>/preSalesAndResponsibleList}">
+                                                <core:ListItem key="{mPageData>emp_id}"
+                                                    text="{mPageData>emp_name}"
+                                                    additionalText="{mPageData>emp_id}" />
+                                                <layoutData>
+                                                    <l:GridData span="L2 M3 S6" />
+                                                </layoutData>
+                                            </ComboBox>
+                                            <ComboBox
+                                                valueState="{mPageData>VS_teamHeadSelected}"
+                                                valueStateText="{mPageData>VST_teamHeadSelected}"
+                                                required="true"
+                                                editable="false"
+                                                selectedKey="{mPageData>teamHeadSelected}"
+                                                change="fnComboBoxResetValueState"
+                                                showSecondaryValues="true"
+                                                items="{mPageData>/profitCenterList}">
+                                                <core:ListItem key="{mPageData>team_head}"
+                                                    text="{mPageData>team_head_name}"
+                                                    additionalText="{mPageData>team_head}" />
+                                                <layoutData>
+                                                    <l:GridData span="L2 M3 S6" />
+                                                </layoutData>
+                                            </ComboBox>
+                                            <RadioButtonGroup
+                                                select="onProfitCenterRadioBtnPress">
+                                                <RadioButton
+                                                    editable="{mPageData>/isEditBasicDetails}"
+                                                    selected="{mPageData>primaryPc}" />
+                                                <layoutData>
+                                                    <l:GridData span="L2 M3 S6" />
+                                                </layoutData>
+                                            </RadioButtonGroup>
+                                            <Link
+                                                enabled="{= ${mPageData>projectIdClickable}}"
+                                                text="{mPageData>projectID}"
+                                                press="onPressProfitCenterProjId" />
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Functional Area"
+                visible="{= ${mPageData>/tabsVisibility/tab9}}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <FlexBox>
+                                <FlexBox width="90%">
+                                    <Title titleStyle="H4" text="Functional Area" />
+                                </FlexBox>
+                                <Button enabled="{mPageData>/isEditBasicDetails}"
+                                    text="Add Functional Area" press="onFunctionalAreaAddRow"
+                                    class="sapUiSmallMarginLeft"></Button>
+                            </FlexBox>
+
+                            <Table items="{mPageData>/functionalAreaTable}">
+                                <columns>
+                                    <Column width="3rem">
+                                    </Column>
+                                    <Column>
+                                        <Text text="Functional Area" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Percentage" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Budgeted PD" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <Button
+                                            enabled="{mPageData>/isEditBasicDetails}"
+                                            icon="sap-icon://delete"
+                                            press="onFunctionalAreaTableRowDeletePress"></Button>
+                                        <ComboBox
+                                            valueState="{mPageData>VS_functionalAreaSelected}"
+                                            valueStateText="{mPageData>VST_functionalAreaSelected}"
+                                            required="true"
+                                            editable="{mPageData>/isEditBasicDetails}"
+                                            selectedKey="{mPageData>functionalAreaSelected}"
+                                            showSecondaryValues="true"
+                                            items="{mPageData>/functionalAreaList}"
+                                            change="fnComboBoxResetValueState">
+                                            <core:ListItem key="{mPageData>functional_area}"
+                                                text="{mPageData>name}"
+                                                additionalText="{mPageData>functional_area}" />
+                                            <layoutData>
+                                                <l:GridData span="L2 M3 S6" />
+                                            </layoutData>
+                                        </ComboBox>
+                                        <Input
+                                            valueState="{mPageData>VS_percentage}"
+                                            valueStateText="{mPageData>VST_percentage}"
+                                            required="true"
+                                            liveChange="fnInputBoxResetValueState"
+                                            type="Number"
+                                            change="onChangeFuncAreaPercent"
+                                            editable="{mPageData>/isEditBasicDetails}"
+                                            value="{mPageData>percentage}"> </Input>
+                                        <Input
+                                            valueState="{mPageData>VS_pDs}"
+                                            valueStateText="{mPageData>VST_pDs}"
+                                            required="true"
+                                            liveChange="fnInputBoxResetValueState"
+                                            type="Number"
+                                            change="onChangeFuncAreaPD"
+                                            editable="{mPageData>/isEditBasicDetails}"
+                                            value="{mPageData>pDs}"> </Input>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Comments &amp; Flow"
+                visible="{= ${mPageData>/tabsVisibility/tab10}}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <FlexBox>
+                                <FlexBox width="100%">
+                                    <Title titleStyle="H4" text="Comments &amp; Flow" />
+                                </FlexBox>
+                            </FlexBox>
+
+                            <TextArea
+                                maxLength="200"
+                                valueState="{mPageData>/VS_commentText}"
+                                valueStateText="{mPageData>/VST_commentText}"
+                                liveChange="onCommentTextChange"
+                                value="{mPageData>/commentText}"
+                                editable="{mPageData>/isEditComment}"
+                                height=""
+                                width="100%">
+                            </TextArea>
+
+                            <Toolbar>
+                                <ToolbarSpacer />
+                                <Text text="{mPageData>/commentTextLength} / 200 Characters"></Text>
+                            </Toolbar>
+
+                            <Table
+                                items="{mPageData>/commentsAndFlowTable}"
+                                growing="true"
+                                growingThreshold="10"
+                                growingScrollToLoad="false">
+                                <columns>
+                                    <Column>
+                                        <Text text="Action" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Date" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Time" />
+                                    </Column>
+                                    <Column>
+                                        <Text text="Action By" />
+                                    </Column>
+                                    <Column demandPopin="true" minScreenWidth="5000px"
+                                        popinDisplay="Inline">
+                                        <Text text="Comment" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <Input editable="false"
+                                            value="{mPageData>action}"> </Input>
+                                        <Input editable="false"
+                                            value="{mPageData>date}"> </Input>
+                                        <Input editable="false"
+                                            value="{mPageData>time}"> </Input>
+                                        <Input editable="false"
+                                            value="{mPageData>actionBy}"> </Input>
+                                        <Text
+                                            text="{mPageData>Comment}"> </Text>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+
+
+</core:FragmentDefinition>

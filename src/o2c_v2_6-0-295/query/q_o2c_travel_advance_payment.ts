@@ -1,0 +1,2 @@
+import {q_o2c_travel_advance_payment as q_o2c_travel_advance_payment_gen} from "o2c_v2/query_gen/q_o2c_travel_advance_payment"
+export class q_o2c_travel_advance_payment extends q_o2c_travel_advance_payment_gen{}

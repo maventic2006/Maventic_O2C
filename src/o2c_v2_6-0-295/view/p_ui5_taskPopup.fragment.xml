@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover id="taskPop" placement="Auto" showHeader="false">
+	<VBox>
+			<Label text="Task : {mDataModel>/nameForThisTask}"></Label>
+			<Label text="Assigned Hour : {mDataModel>/plannedHourForThisTask}"></Label>
+			<Label text="From Date : {mDataModel>/taskStartDate}"></Label>
+			<Label text="To Date   : {mDataModel>/taskEndDate}"></Label>
+			<Label text="Project Id   : {mDataModel>/thisProjectID}"></Label>
+			<Label text="Project Name   : {mDataModel>/thisProjectName}"></Label>
+			<Label text="Project Manager   : {mDataModel>/thisProjectManagerName}"></Label>
+			<Label text="Status    :{= ${mDataModel>/statusForThisTask} === '' ? 'Not Submitted' : ${mDataModel>/statusForThisTask}}" class="sapUiSmallMargin"></Label>
+	</VBox>		
+	</Popover>
+</core:FragmentDefinition>

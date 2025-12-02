@@ -1,0 +1,120 @@
+.mainBox{
+    border: black;
+    border-width: thick;
+    border-radius: 5%;
+}
+
+.personalDetail {
+    background: #6e7788;
+    width: 30%;
+    color: white;
+    /* padding-left: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* flex-flow: wrap;
+    gap: 1rem; */
+
+}
+
+.personalDetailBox {
+    margin: 1rem;
+    
+}
+
+.empDetail{
+    display: flex;
+    flex-flow: wrap;
+    gap: 1rem;
+    padding-top: 0.5rem;
+}
+
+.personalDetail span.sapMLabelTextWrapper {
+    color: white;
+}
+
+.empName span.sapMLabelTextWrapper {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.profilePic {
+    height: -webkit-fill-available;
+    width: 9rem;
+}
+
+.profilePic span.sapFAvatarBorder{
+    border: transparent;
+}
+
+.leftHeader {
+    height: 11rem;
+}
+
+.orgDetail{
+    width: 40%;
+}
+
+.orgName{
+    font-size: xx-large;
+}
+
+.orgName span.sapMLabelTextWrapper{
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.labelText{
+    font-weight: bold;
+}
+
+.orgData{
+    display: flex;
+    align-items: flex-start;
+}
+
+.experienceDetail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+
+.expIcon{
+    font-size : 1.5rem;
+}
+
+.skilltxt{
+    color: #1fafe4;
+}
+
+.listItem{
+    border: 1px solid ;
+    border-radius: 5px;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+.orgItem{
+    display: flex;
+    flex-flow: wrap;
+    gap: 1rem;
+    padding: 0.3rem;
+}
+
+.sticky{
+	padding-left: 62em;
+}
+
+.download{
+    display: block;
+    margin-left: 1rem;
+    margin-right: 0;
+    width: fit-content;
+}

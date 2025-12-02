@@ -1,0 +1,1085 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:unified="sap.ui.unified">
+
+    <uxap:ObjectPageLayout height="85vh" showAnchorBarPopover="false" upperCaseAnchorBar="false"
+        showTitleInHeaderContent="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:actions>
+                    <Button text="Submit" type="Emphasized" press="fnSubmitData"
+                        visible="{= ${mPageData>/projectStatus} !== 'Completed' &amp;&amp; ${mPageData>/submitButtonEnabled}}" />
+                    <Button text="Start Project" press="onPressBtnStartProject"
+                        visible="{= ${mPageData>/projectStatus} === 'Created'}" />
+                    <Button text="Hold" press="onPressBtnHold"
+                        visible="{= ${mPageData>/projectStatus} !== 'Completed' &amp;&amp; ${mPageData>/projectStatus} !== 'Created' &amp;&amp;  ${mPageData>/projectStatus} !== 'Hold'}" />
+                    <Button text="Resume" press="onPressBtnResume"
+                        visible="{= ${mPageData>/projectStatus} === 'Hold'}" />
+                    <Button text="Mark as Closed" type="Accept" press="onPressMarkedAsClose"
+                        visible="{= ${mPageData>/orderTypeSelected} === 'PS' || (${mPageData>/projectStatus} === 'Completed' &amp;&amp; ${mPageData>/soStatus} !== 'Closed') }" />
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <uxap:sections>
+            <uxap:ObjectPageSection showTitle="false" title="Header Details">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <Title class="sapUiTinyMarginTop" titleStyle="H4" text="Header Details" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Company">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/company}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Business Area">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/businessAreaSelected}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Order Type">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/orderTypeSelected}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Project ID">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/projectId}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="SO ID">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Link
+                                    text="{mPageData>/soIds}"
+                                    press="onSoIdLinkPress">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Link>
+                                <Label design="Bold" text="Project Status">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/projectStatus}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+                            </f:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Project Details">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <Title class="sapUiTinyMarginTop" titleStyle="H4" text="Project Details" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Project Name">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/projectName}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Office Calendar">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/officeCalender}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Duration in weeks">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/durationInWeeks}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Project Start Date">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <DatePicker value="{mPageData>/projectStartDate}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </DatePicker>
+
+                                <Label design="Bold" text="Project End Date">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <DatePicker value="{mPageData>/projectEndDate}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </DatePicker>
+
+                                <Label design="Bold" text="Project Health">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <GenericTag
+                                    visible="{= ${mPageData>/plannedPDs} >= ${mPageData>/bookedPDs}}"
+                                    text="Good" status="Success">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </GenericTag>
+                                <GenericTag
+                                    visible="{= ${mPageData>/bookedPDs} > ${mPageData>/plannedPDs} }"
+                                    text="PDs Exceeded" status="Error">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </GenericTag>
+
+                            </f:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Customer Details">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <Title class="sapUiTinyMarginTop" titleStyle="H4"
+                                text="Customer Details" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Customer">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/billToCustomer}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Bill to address">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/billToAddress}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="GSTIN">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/gstin}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Currency">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/currency}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="CR Rate(W/O TAX)">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/crRateWOTax}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Parent PO">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/parentPO}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+                            </f:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Project PDs">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <Title class="sapUiTinyMarginTop" titleStyle="H4" text="Project PDs" />
+
+                            <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                <Label design="Bold" text="Total Project PDs">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/totProjPDs}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Management Reserve">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/managementReserve}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Contingency Reserve">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/contingencyReserve}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Available PDs">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/availablePDs1}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Project PDs">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/availablePDs}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Planned PDs">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/plannedPDs}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+
+                                <Label design="Bold" text="Booked PDs">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Label>
+                                <Input value="{mPageData>/bookedPDs}" editable="false">
+                                    <layoutData>
+                                        <l:GridData span="L2 M3 S6" />
+                                    </layoutData>
+                                </Input>
+                            </f:SimpleForm>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Billing Milestone">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <HBox justifyContent="SpaceBetween" width="99%"
+                                class="sapUiSmallMarginTop">
+                                <Title titleStyle="H4" text="Billing Milestone" />
+                                <Button text="Add Billing Milestone" type="Emphasized"
+                                    icon="sap-icon://create-form" press="onPressAddBillMilestoneBtn"
+                                    enabled="false"></Button>
+                            </HBox>
+
+                            <ScrollContainer>
+                                <Table width="2200px" items="{mPageData>/tableBillingMilestone}"
+                                    growing="true"
+                                    growingThreshold="10" growingScrollToLoad="false">
+                                    <columns>
+                                        <Column>
+                                            <Text text="PO No." />
+                                        </Column>
+                                        <Column>
+                                            <Text text="PO Date" />
+                                        </Column>
+                                        <Column width="12rem">
+                                            <Text text="Milestone Name" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Start Date" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="End Date" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Actual End Date" />
+                                        </Column>
+                                        <Column width="12rem">
+                                            <Text text="Invoice Status" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Billing Amount" />
+                                        </Column>
+                                        <Column width="16rem">
+                                            <Text text="Upload Timesheet" />
+                                        </Column>
+                                        <Column width="16rem">
+                                            <Text text="Sign-Up Doc" />
+                                        </Column>
+                                        <Column hAlign="Center"></Column>
+                                        <Column>
+                                            <Text text="Remark" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Invoice Number" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Invoice Date" />
+                                        </Column>
+                                        <!-- <Column>
+                                            <Text text="Attach Copy" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Proposal Copy" />
+                                        </Column> -->
+                                        <!-- <Column>
+                                            <Text text="Billing Amount" />
+                                        </Column> -->
+                                        <!-- <Column>
+                                            <Text text="CR Rate" />
+                                        </Column> -->
+                                        <Column>
+                                            <Text text="Budgeted PD" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <Input editable="false" value="{mPageData>poNumber}"></Input>
+                                            <DatePicker editable="false" value="{mPageData>poDate}"></DatePicker>
+                                            <Input editable="false"
+                                                value="{mPageData>milestoneName}"></Input>
+                                            <DatePicker editable="false"
+                                                value="{mPageData>startDate}"></DatePicker>
+                                            <DatePicker editable="false" value="{mPageData>endDate}"></DatePicker>
+                                            <DatePicker editable="false"
+                                                value="{mPageData>actualEndDateVisible}"></DatePicker>
+                                            <Select
+                                                forceSelection="false"
+                                                editable="false"
+                                                selectedKey="{mPageData>invoiceStatus}">
+                                                <items>
+                                                    <core:Item
+                                                        key="InvCan"
+                                                        text="Invoice Cancelled" />
+                                                    <core:Item
+                                                        key="Invoiced"
+                                                        text="Invoiced" />
+                                                    <core:Item
+                                                        key="OnHold"
+                                                        text="On Hold" />
+                                                    <core:Item
+                                                        key="Pending"
+                                                        text="Pending" />
+                                                    <core:Item
+                                                        key="Paid"
+                                                        text="Payment Received" />
+                                                    <core:Item
+                                                        key="InvReq"
+                                                        text="Invoice Requested" />
+                                                </items>
+                                            </Select>
+                                            <Input editable="false" value="{mPageData>Amount}"></Input>
+                                            <HBox visible="{=${mPageData>billing_type} === 'TNM'}">
+                                                <unified:FileUploader
+                                                    valueState="{mPageData>VS_attachTimesheetUpload}"
+                                                    valueStateText="Upload SignUP Doc."
+                                                    enabled="{= ${mPageData>/isPageEditable}}"
+                                                    value="{mPageData>attachTimesheetUploadFileName}"
+                                                    change="onUploadTimeSheet"
+                                                    buttonOnly="false"
+                                                    iconOnly="true"
+                                                    icon="sap-icon://upload"> </unified:FileUploader>
+                                                <Button
+                                                    enabled="{= ${mPageData>timesheetUploadDownloaded} !== '' &amp;&amp;  ${mPageData>attachTimesheetUpload} === '' }"
+                                                    icon="sap-icon://download"
+                                                    press="onDownloadTimesheetUpload"></Button>
+                                            </HBox>
+                                            <HBox>
+                                                <unified:FileUploader
+                                                    valueState="{mPageData>VS_attachSignUpDoc}"
+                                                    valueStateText="Upload SignUP Doc."
+                                                    enabled="{= ${mPageData>/isPageEditable}}"
+                                                    value="{mPageData>attachSignUpDocFileName}"
+                                                    change="onUploadSignupDoc"
+                                                    buttonOnly="false"
+                                                    iconOnly="true"
+                                                    icon="sap-icon://upload"> </unified:FileUploader>
+                                                <Button
+                                                    enabled="{= ${mPageData>signupDocDownloaded} !== '' &amp;&amp;  ${mPageData>attachSignUpDoc} === '' }"
+                                                    icon="sap-icon://download"
+                                                    press="onDownloadSignupDoc"></Button>
+                                            </HBox>
+                                            <Button text="Request Invoice"
+                                                press="onPressRequestInvoice"
+                                                enabled="{= ${mPageData>/isRequestInvoiceButtonShow} &amp;&amp; ${mPageData>invoiceStatus} === 'Pending'}"
+                                                type="Attention"
+                                                icon="sap-icon://document-text"></Button>
+                                            <Input editable="true"
+                                                valueState="{mPageData>VS_remark}"
+                                                valueStateText="Remark Is Mandatory"
+                                                liveChange="fnInputBoxResetValueState"
+                                                value="{mPageData>remark}"></Input>
+                                            <Input editable="false" value="{mPageData>invoiceNo}"></Input>
+                                            <DatePicker editable="false"
+                                                value="{mPageData>invoiceDate}"></DatePicker>
+                                            <!-- <Link
+                                                visible="{= ${mPageData>attachCopyDownloaded} !== '' }"
+                                                text="{mPageData>attachCopyFileName}"
+                                                press="onViewAttachCopy" />
+                                            <Link
+                                                visible="{= ${mPageData>proposalCopyDownloaded} !== '' }"
+                                                text="{mPageData>proposalCopyFileName}"
+                                                press="onViewProposalCopy" /> -->
+                                            <!-- <Input editable="false"
+                                            value="{mPageData>Amount}"></Input> -->
+                                            <!-- <Input editable="false"
+                                            value="{mPageData>crRate}"></Input> -->
+                                            <Input editable="false" value="{mPageData>budgetedPDs}"></Input>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Project Milestone">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <HBox justifyContent="SpaceBetween" width="99%"
+                                class="sapUiSmallMarginTop">
+                                <Title titleStyle="H4" text="Project Milestone" />
+                                <Button enabled="{= ${mPageData>/isPageEditable}}"
+                                    text="Add Project Milestone" type="Emphasized"
+                                    icon="sap-icon://create-form" press="onPressAdProjMilestoneBtn"></Button>
+                            </HBox>
+
+                            <ScrollContainer>
+                                <Table items="{mPageData>/tableProjectMilestone}" growing="true"
+                                    growingThreshold="10" growingScrollToLoad="false">
+                                    <columns>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column>
+                                            <Text text="PO No." />
+                                        </Column>
+                                        <Column>
+                                            <Text text="PO Date" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Milestone Name" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Start Date" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="End Date" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Actual End Date" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Status" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <Button type="Reject" icon="sap-icon://delete"
+                                                enabled="{= ${mPageData>/isPageEditable}}"
+                                                press="fnDeleteRowFromProjMilestoneTable"></Button>
+                                            <ComboBox
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                selectedKey="{mPageData>poNumber}"
+                                                items="{mPageData>/listPoInformation}"
+                                                change="onProjectMilestonePOChange">
+                                                <core:ListItem
+                                                    key="{mPageData>poNumber}"
+                                                    text="{mPageData>poNumber}" />
+                                            </ComboBox>
+                                            <DatePicker
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                value="{mPageData>poDate}"></DatePicker>
+                                            <Input
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                value="{mPageData>milestoneName}"></Input>
+                                            <DatePicker
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                change="onChangeProjMilestoneStartDate"
+                                                value="{mPageData>startDate}"></DatePicker>
+                                            <DatePicker
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                change="onChangeProjMilestoneEndDate"
+                                                value="{mPageData>endDate}"></DatePicker>
+                                            <DatePicker
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                value="{mPageData>actualEndDate}"></DatePicker>
+                                            <ComboBox
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                selectedKey="{mPageData>status}">
+                                                <core:ListItem key="Open" text="Open" />
+                                                <core:ListItem key="WIP" text="WIP" />
+                                                <core:ListItem key="Hold" text="Hold" />
+                                                <core:ListItem key="Closed" text="Closed" />
+                                            </ComboBox>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Resource Planning">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <HBox justifyContent="SpaceBetween" width="99%"
+                                class="sapUiSmallMarginTop">
+                                <Title titleStyle="H4" text="Resource Planning" />
+                                <HBox>
+                                    <Button enabled="{= ${mPageData>/isPageEditable}}"
+                                        type="Success" text="Save" class="sapUiTinyMarginEnd"
+                                        icon="sap-icon://save" press="onPressResourceSaveBtn"></Button>
+                                    <Button enabled="{= ${mPageData>/isPageEditable}}"
+                                        type="Emphasized" text="Add Resource"
+                                        icon="sap-icon://add-employee" press="onPressResourceBtn"></Button>
+                                </HBox>
+                            </HBox>
+
+                            <ScrollContainer>
+                                <Table width="2300px" class="noPadding"
+                                    items="{mPageData>/tableResourcePlanning}">
+                                    <columns>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column>
+                                            <Text text="MMID" />
+                                        </Column>
+                                        <Column width="14rem">
+                                            <Text text="Name" width="100%" />
+                                        </Column>
+                                        <Column width="9rem">
+                                            <Text text="Role" />
+                                        </Column>
+                                        <Column width="10rem">
+                                            <Text text="Skills" />
+                                        </Column>
+                                        <Column width="12rem">
+                                            <Text text="Line Manager" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Start Date" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="End Date" />
+                                        </Column>
+                                        <Column width="8rem">
+                                            <Text text="Occupation %" />
+                                        </Column>
+                                        <Column width="8rem">
+                                            <Text text="Planned PDs" />
+                                        </Column>
+                                        <Column width="8rem">
+                                            <Text text="Consumed PDs" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Approval Status" />
+                                        </Column>
+                                        <Column width="12rem">
+                                            <Text text="Shadow Of" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Remark" />
+                                        </Column>
+                                        <Column hAlign="Center" width="8rem">
+                                            <Text text="Is Onsite" />
+                                        </Column>
+                                        <Column hAlign="Center" width="8rem">
+                                            <Text text="Task Id" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <Button type="Reject" icon="sap-icon://delete"
+                                                enabled="{= ${mPageData>/isPageEditable}}"
+                                                press="fnDeleteRowFromResPlainningTable"></Button>
+                                            <ComboBox
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                selectedKey="{mPageData>mmid}"
+                                                showSecondaryValues="true"
+                                                items="{mPageData>/aEmployeeList}"
+                                                change="onChangeResourceMMMID">
+                                                <core:ListItem
+                                                    key="{mPageData>emp_id}"
+                                                    text="{mPageData>emp_id}"
+                                                    additionalText="{mPageData>emp_name}" />
+                                            </ComboBox>
+                                            <ComboBox
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                selectedKey="{mPageData>mmid}"
+                                                showSecondaryValues="true"
+                                                items="{mPageData>/aEmployeeList}"
+                                                change="onChangeResourceMMMID">
+                                                <core:ListItem
+                                                    key="{mPageData>emp_id}"
+                                                    text="{mPageData>emp_name}"
+                                                    additionalText="{mPageData>emp_id}" />
+                                            </ComboBox>
+                                            <Input
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                value="{mPageData>role}"></Input>
+                                            <ComboBox
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                selectedKey="{mPageData>skill}"
+                                                showSecondaryValues="false"
+                                                items="{mPageData>/listOfSkills}"
+                                                change="onChangeResourceSkill">
+                                                <core:ListItem
+                                                    key="{mPageData>skill_id}"
+                                                    text="{mPageData>skill_Name}"
+                                                />
+                                            </ComboBox>
+                                            <Input
+                                                editable="false"
+                                                value="{mPageData>lineManagerName}"></Input>
+                                            <DatePicker
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                change="onResourcePlanStartDateChange"
+                                                value="{mPageData>startDate}"></DatePicker>
+                                            <DatePicker
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                value="{mPageData>endDate}"
+                                                change="onResourcePlandEndDateChange"></DatePicker>
+                                            <Input
+                                                change="onResourcePlandOccupationPerc"
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                value="{mPageData>occupationPercentage}"
+                                                type="Number"></Input>
+                                            <Input
+                                                editable="false"
+                                                value="{mPageData>plannedPds}"
+                                                type="Number"></Input>
+                                            <Input
+                                                editable="false"
+                                                value="{mPageData>consumedPDs}"
+                                                type="Number"></Input>
+                                            <ComboBox
+                                                editable="false"
+                                                selectedKey="{mPageData>approvalStatus}">
+                                                <core:ListItem key="Pending" text="Pending" />
+                                                <core:ListItem key="Approved" text="Approved" />
+                                                <core:ListItem key="Rejected" text="Rejected" />
+                                            </ComboBox>
+                                            <ComboBox
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                selectedKey="{mPageData>shadowOf}"
+                                                showSecondaryValues="true"
+                                                items="{mPageData>/aEmployeeList}">
+                                                <core:ListItem
+                                                    key="{mPageData>emp_id}"
+                                                    text="{mPageData>emp_name}"
+                                                    additionalText="{mPageData>emp_id}" />
+                                            </ComboBox>
+                                            <Input
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable} &amp;&amp; ${mPageData>/isRemarkEditable}}"
+                                                value="{mPageData>remark}"></Input>
+                                            <CheckBox
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable}}"
+                                                selected="{mPageData>isOnsite}"></CheckBox>
+                                            <Input
+                                                editable="false"
+                                                value="{mPageData>taskID}"></Input>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Monthly Planning">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <HBox justifyContent="SpaceBetween" width="99%"
+                                class="sapUiSmallMarginTop">
+                                <Title titleStyle="H4" text="Monthly Planning" />
+                                <Button enabled="{= ${mPageData>/isPageEditable}}" type="Success"
+                                    text="Save"
+                                    icon="sap-icon://save" press="onPressMonthlyPlanSaveBtn"></Button>
+                            </HBox>
+
+                            <ScrollContainer>
+                                <Table class="noPadding" items="{mPageData>/tableMonthlyPlanning}"
+                                    growing="true" growingThreshold="10" growingScrollToLoad="false">
+                                    <columns>
+                                        <Column width="16rem">
+                                            <Text text="Month" />
+                                        </Column>
+                                        <Column width="8rem">
+                                            <Text text="Planned Efforts" />
+                                        </Column>
+                                        <Column width="6rem" hAlign="Center">
+                                        </Column>
+                                        <Column width="8rem">
+                                            <Text text="Consumed Efforts" />
+                                        </Column>
+                                        <Column>
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <Input value="{mPageData>month}" editable="false"></Input>
+                                            <Input value="{mPageData>plannedEfforts}"
+                                                editable="{= ${mPageData>isRowEditable} &amp;&amp; ${mPageData>isEditInProgress}}"></Input>
+                                            <Button
+                                                enabled="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>isRowEditable} &amp;&amp; ${mPageData>isEditInProgress} === false}"
+                                                icon="sap-icon://edit"
+                                                press="onPressMonthlyPanRowEdit"></Button>
+                                            <Input value="{mPageData>consumedEfforts}"
+                                                editable="false"></Input>
+                                            <Text></Text>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Project Stakeholders">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <HBox justifyContent="SpaceBetween" width="99%"
+                                class="sapUiSmallMarginTop">
+                                <Title titleStyle="H4" text="Project Stakeholders" />
+                                <Button type="Emphasized" text="Add Stakeholders"
+                                    enabled="{= ${mPageData>/isPageEditable}}"
+                                    icon="sap-icon://add-contact" press="onPressStakeholderButton"></Button>
+                            </HBox>
+
+                            <ScrollContainer>
+                                <Table items="{mPageData>/tableProjectStakeholders}" growing="true"
+                                    growingThreshold="10" growingScrollToLoad="false">
+                                    <columns>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column width="16rem">
+                                            <Text text="Name" />
+                                        </Column>
+                                        <Column>
+                                            <Text text="Role" />
+                                        </Column>
+                                        <Column hAlign="Center" width="9rem">
+                                            <Text text="Status mail" />
+                                        </Column>
+                                        <Column hAlign="Center" width="9rem">
+                                            <Text text="Status call" />
+                                        </Column>
+                                        <Column hAlign="Center" width="23rem">
+                                            <Text text="Signatory" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <Button type="Reject" icon="sap-icon://delete"
+                                                enabled="{= ${mPageData>/isPageEditable}}"
+                                                press="fnDeleteRowFromProjStakeholderTable"></Button>
+                                            <Input
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                value="{mPageData>name}"></Input>
+                                            <Input
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                value="{mPageData>role}"></Input>
+                                            <Switch
+                                                enabled="{= ${mPageData>/isPageEditable}}"
+                                                state="{mPageData>statusMail}"
+                                                customTextOn="Yes" customTextOff="No"></Switch>
+                                            <Switch
+                                                enabled="{= ${mPageData>/isPageEditable}}"
+                                                state="{mPageData>StatusCall}"
+                                                customTextOn="Yes" customTextOff="No"></Switch>
+                                            <MultiComboBox
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                selectedKeys="{mPageData>signatory}"
+                                                items="{mPageData>/listSignatory}">
+                                                <core:Item
+                                                    key="{mPageData>signatoryValue}"
+                                                    text="{mPageData>signatoryValue}" />
+                                            </MultiComboBox>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="Project Documents">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <VBox>
+                            <HBox justifyContent="SpaceBetween" width="99%"
+                                class="sapUiSmallMarginTop">
+                                <Title titleStyle="H4" text="Project Documents" />
+                                <Button type="Emphasized" text="Add Documents"
+                                    enabled="{= ${mPageData>/isPageEditable}}"
+                                    icon="sap-icon://add-document" press="onPressAddDocumentBtn"></Button>
+                            </HBox>
+
+                            <ScrollContainer>
+                                <Table items="{mPageData>/tableProjectDocument}" growing="true"
+                                    growingThreshold="10" growingScrollToLoad="false">
+                                    <columns>
+                                        <Column width="3rem">
+                                        </Column>
+                                        <Column width="13rem">
+                                            <Text text="Attachment name" />
+                                        </Column>
+                                        <Column hAlign="Center" width="8rem">
+                                            <Text text="Is mandatory" />
+                                        </Column>
+                                        <Column hAlign="Center" width="18rem">
+                                            <Text text="Attachment" />
+                                        </Column>
+                                        <Column width="13rem">
+                                            <Text text="Milestone" />
+                                        </Column>
+                                        <Column width="13rem">
+                                            <Text text="Other" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <Button type="Reject" icon="sap-icon://delete"
+                                                enabled="{= ${mPageData>/isPageEditable}}"
+                                                press="fnDeleteRowFromProjDocTable"></Button>
+                                            <Input
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                value="{mPageData>attachmentName}"></Input>
+                                            <CheckBox
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                selected="{mPageData>isMandatory}"></CheckBox>
+                                            <HBox>
+                                                <unified:FileUploader
+                                                    enabled="{= ${mPageData>/isPageEditable}}"
+                                                    value="{mPageData>attachmentFileName}"
+                                                    change="onAttachmentUpload"
+                                                    buttonOnly="false"
+                                                    iconOnly="true"
+                                                    icon="sap-icon://upload"> </unified:FileUploader>
+                                                <Button
+                                                    enabled="{= ${mPageData>attachmentDownloaded} !== '' &amp;&amp;  ${mPageData>attachment} === '' }"
+                                                    icon="sap-icon://download"
+                                                    press="onDownloadAttachment"></Button>
+                                            </HBox>
+                                            <ComboBox
+                                                editable="{= ${mPageData>/isPageEditable}}"
+                                                selectedKey="{mPageData>milestone}"
+                                                items="{mPageData>/listMilestoneNames}">
+                                                <core:ListItem
+                                                    key="{mPageData>name}"
+                                                    text="{mPageData>name}" />
+                                            </ComboBox>
+                                            <Input
+                                                editable="{= ${mPageData>/isPageEditable} &amp;&amp; ${mPageData>milestone} === 'Other' }"
+                                                value="{mPageData>milestoneOther}"></Input>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection showTitle="false" title="MR and CR Consumption"
+                visible="{= ${mPageData>/managementReserve} > 0 &amp;&amp; ${mPageData>/contingencyReserve} > 0 &amp;&amp; (${mPageData>/bookedPDs} > ${mPageData>/availablePDs}) }">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection showTitle="false">
+                        <VBox>
+                            <HBox justifyContent="SpaceBetween" width="99%"
+                                class="sapUiSmallMarginTop">
+                                <Title titleStyle="H4"
+                                    text="Management And Contingency Reserve Consumption" />
+                                <Button type="Emphasized" text="Add Consumption"
+                                    enabled="{= ${mPageData>/isPageEditable}}"
+                                    icon="sap-icon://add-document" press="onPressAddConsumptionBtn"></Button>
+                            </HBox>
+
+                            <ScrollContainer>
+                                <Table items="{mPageData>/mrAndCrTable}" growing="true"
+                                    growingThreshold="10" growingScrollToLoad="false">
+                                    <columns>
+                                        <Column width="6rem">
+                                            <Text text="Management Reserve" />
+                                        </Column>
+                                        <Column width="6rem">
+                                            <Text text="Contingency Reserve" />
+                                        </Column>
+                                        <Column width="6rem">
+                                            <Text text="Date" />
+                                        </Column>
+                                        <Column width="6rem">
+                                            <Text text="Time" />
+                                        </Column>
+                                        <Column width="7rem">
+                                            <Text text="Action By" />
+                                        </Column>
+                                        <Column width="6rem">
+                                            <Text text="Status" />
+                                        </Column>
+                                        <Column width="7rem">
+                                            <Text text="Remark" />
+                                        </Column>
+                                        <Column hAlign="Center" width="2rem">
+                                            <Text text="" />
+                                        </Column>
+                                        <Column hAlign="Center" width="3rem">
+                                            <Text text="" />
+                                        </Column>
+                                        <Column demandPopin="true" minScreenWidth="5000px"
+                                            popinDisplay="Inline">
+                                            <Text text="Reason" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <Input editable="false"
+                                                value="{mPageData>managementReserve}"> </Input>
+                                            <Input editable="false"
+                                                value="{mPageData>contingencyReserve}"> </Input>
+                                            <Input editable="false"
+                                                value="{mPageData>date}"> </Input>
+                                            <Input editable="false"
+                                                value="{mPageData>time}"> </Input>
+                                            <Input editable="false"
+                                                value="{mPageData>actionBy}"> </Input>
+                                            <Input editable="false"
+                                                value="{mPageData>status}"> </Input>
+                                            <Input
+                                                editable="{= ${mPageData>status} === 'Pending' &amp;&amp; ${mPageData>/loginUserRole} ===
+                                                'TEAM_HEAD'}"
+                                                value="{mPageData>remark}"> </Input>
+                                            <Button tooltip="Approve" type="Accept"
+                                                icon="sap-icon://thumb-up"
+                                                press="onPressMrCrApprove"
+                                                enabled="{= ${mPageData>status} === 'Pending' &amp;&amp; ${mPageData>/loginUserRole} ===
+                                               'TEAM_HEAD'}"></Button>
+                                            <Button tooltip="Reject" type="Reject"
+                                                icon="sap-icon://thumb-down"
+                                                press="onPressMrCrReject"
+                                                enabled="{= ${mPageData>status} === 'Pending' &amp;&amp; ${mPageData>/loginUserRole} ===
+                                                'TEAM_HEAD'}"></Button>
+                                            <Text text="{mPageData>reason}"> </Text>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                        </VBox>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+
+</core:FragmentDefinition>

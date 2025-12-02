@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog showHeader="false">
+        <HBox height="20rem" width="28rem">
+            <VBox width="10rem" height="100%" alignItems="Center" justifyContent="Center">
+                <Text visible="{= ${/processingEmotionIndex} === 0}" class="classEmojiText"
+                    text="🤔"> </Text>
+                <Text visible="{= ${/processingEmotionIndex} === 1}" class="classEmojiText"
+                    text="🙂"> </Text>
+                <Text visible="{= ${/processingEmotionIndex} === 2}" class="classEmojiText"
+                    text="😊"> </Text>
+                <Text visible="{= ${/processingEmotionIndex} === 3}" class="classEmojiText"
+                    text="🤗"> </Text>
+
+                <core:HTML
+                    content="&lt;span class='customLoadingBar sapUiTinyMarginTop'&gt;&lt;/span&gt;" />
+            </VBox>
+            <VBox width="">
+                <List
+                    headerText="Fetching"
+                    items="{path: '/aProcessingDetails'}">
+                    <CustomListItem>
+                        <HBox alignItems="Center" class="customMinimumMarginTopBottom">
+                            <FlexBox class="sapUiTinyMarginEnd">
+                                <core:Icon src="sap-icon://lateness" color="#dec14b" size="1rem"
+                                    visible="{= ${isProcessing} === true}" />
+                                <core:Icon src="sap-icon://sys-enter" color="green" size="1rem"
+                                    visible="{= ${isProcessing} === false}" />
+                            </FlexBox>
+
+                            <Text text="{processingMessage}"></Text>
+                        </HBox>
+                    </CustomListItem>
+                </List>
+            </VBox>
+        </HBox>
+    </Dialog>
+</core:FragmentDefinition>

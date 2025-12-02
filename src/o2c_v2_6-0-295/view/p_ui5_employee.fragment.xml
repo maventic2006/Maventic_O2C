@@ -1,0 +1,158 @@
+<core:FragmentDefinition
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:tnt="sap.tnt"
+>
+    <VBox>
+
+        <!-- Fuzzy Search -->
+        <HBox>
+        <Button text="" icon="sap-icon://excel-attachment" class="download" press=".onExcelDownload" visible="{=${mDataModel>/user_role} === 'FINANCE' || ${mDataModel>/user_role} === 'HR' || ${mDataModel>/user_role} === 'LEGAL'}"/>
+        <Input placeholder="Search" submit="onFuzzyEmpSearch" class="sticky"/>
+        </HBox>
+        <List
+            class="lastFiveStmntList sapUiMediumMarginBottom list"
+            id="flist"
+            width="98%"
+            items="{mDataModel>/allEmployee}"
+        >
+            <CustomListItem class="listItem sapUiSmallMarginBottom">
+                <VBox class="mainBox">
+                    <HBox class="leftHeader">
+                        <Avatar
+                            src="{mDataModel>pic}"
+                            displaySize="XL"
+                            initials="{mDataModel>pic}"
+                            showBorder="false"
+                            displayShape="Square"
+                            backgroundColor="Random"
+                            class="profilePic"
+                        />
+                        <VBox class="personalDetail">
+                            <VBox class="personalDetailBox">
+                                <Label
+                                    text="{mDataModel>name}"
+                                    class="empName"
+                                />
+                                <HBox class="empDetail">
+                                    <core:Icon
+                                        class="statusIcon"
+                                        src="sap-icon://business-card"
+                                    />
+                                    <Label
+                                        text="{mDataModel>emp_id}"
+                                        class="custId"
+                                    />
+                                </HBox>
+                                <HBox class="empDetail">
+                                    <core:Icon src="sap-icon://email" />
+                                    <Label text="{mDataModel>mail}" />
+                                </HBox>
+                                <HBox class="empDetail">
+                                    <core:Icon src="sap-icon://call" />
+                                    <Label text="{mDataModel>phone_no}" />
+                                </HBox>
+                                <HBox class="empDetail">
+                                    <core:Icon src="sap-icon://manager" />
+                                    <Label
+                                        text="{mDataModel>line_mgr_name} - {mDataModel>line_manager}"
+                                    />
+                                </HBox>
+                            </VBox>
+                        </VBox>
+                        <!-- For right side Organisaiton detail -->
+                        <VBox class="orgDetail">
+                            <VBox class="personalDetailBox">
+                                <HBox class="empDetail orgName sapUiSmallMarginBottom">
+                                    <core:Icon src="sap-icon://building" />
+                                    <Label text="Organisation" />
+                                </HBox>
+                                <HBox class="orgItem">
+                                    <Label
+                                        text="Company Code:"
+                                        class="labelText"
+                                    />
+                                    <HBox class="orgData">
+                                        <Label
+                                            text="{mDataModel>company_code}"
+                                        />
+                                    </HBox>
+                                </HBox>
+                                <HBox class="orgItem">
+                                    <Label
+                                        text="Profit Centre:"
+                                        class="labelText"
+                                    />
+                                    <HBox class="orgData">
+                                        <Label
+                                            text="{mDataModel>profit_centre}"
+                                        />
+                                    </HBox>
+                                </HBox>
+                                <HBox class="orgItem">
+                                    <Label
+                                        text="Business Area:"
+                                        class="labelText"
+                                    />
+                                    <HBox class="orgData">
+                                        <Label
+                                            text="{mDataModel>business_area}"
+                                        />
+                                    </HBox>
+                                </HBox>
+                            </VBox>
+                        </VBox>
+
+                        <!-- Experience Details -->
+                        <VBox class="experienceDetail">
+                            <core:Icon src="sap-icon://end-user-experience-monitoring" class="expIcon labelText"/>
+                            <Label text="{mDataModel>experience}" class="labelText"/>
+                            <Label text="{= ${mDataModel>visible} === true ? 'Hide Skills' : 'Expand Skills'}" class="labelText skilltxt"/>
+                            <core:Icon src="{= ${mDataModel>visible} === true ? 'sap-icon://navigation-up-arrow' : 'sap-icon://navigation-down-arrow'}" class="expIcon skilltxt" press="skillDetail"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Skills Details -->
+                    <Table
+                        items="{mDataModel>skills}"
+                        fixedLayout="false"
+                        visible="{mDataModel>visible}"
+                        class="sapUiSmallMarginTop"
+                    >
+                        <columns>
+                            <Column>
+                                <Text text="Skill Type" />
+                            </Column>
+                            <Column>
+                                <Text text="Skill Level" />
+                            </Column>
+                            <Column>
+                                <Text text="Special Mentions" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text
+                                        text="{mDataModel>skill_type}"
+                                    />
+                                    <Text
+                                        text="{mDataModel>skill_level}"
+                                    />
+                                    <Text
+                                        text="{mDataModel>specail_mention}"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </CustomListItem>
+        </List>
+    </VBox>
+</core:FragmentDefinition>

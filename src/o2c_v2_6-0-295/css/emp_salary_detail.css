@@ -1,0 +1,165 @@
+.employeeDataSectionColor {
+   background: #ecf0f1
+}
+.employeeDataSectionColor:hover {
+   background-color: #c1cad1; /* Darker Blue on hover */
+}
+.fixedSection{
+  position:fixed;
+  width:24%;
+}
+/* .titleSectionColor>header{
+   background: rgba(255,236,242,255)
+} */
+td[data-headerDatakey="headerDataValue"]>div>div>span>span{
+   font-weight: bold;
+   font-size: 15px;
+   /*color: #f88; /* Example: changing the text color */
+   /*background-color: #f7f7f7; /* Example: background color */
+   /*padding-left: 24px; /* Example: adding padding */
+   text-align: left; /* Example: aligning the text */  
+ }
+ td[data-headerDatakey="headerDataValue"]{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-headerDatakey="headerDataValue"]:hover{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+
+
+ td[data-compDataAmtKey="compDataAmtValue"]>div>div>span>span{
+   font-weight: bold;
+   font-size: 15px;
+   /*color: #f88; /* Example: changing the text color */
+   /*background-color: #f7f7f7; /* Example: background color */
+   /*padding-left: 24px; /* Example: adding padding */
+   text-align: left; /* Example: aligning the text */  
+ }
+ td[data-compDataAmtKey="compDataAmtValue"]{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-compDataAmtKey="compDataAmtValue"]:hover{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+
+
+ td[data-bonusDataAreasKey="bonusDataAreasValue"]>div>div>span>span{
+   font-weight: bold;
+   font-size: 15px;
+   /*color: #f88; /* Example: changing the text color */
+   /*background-color: #f7f7f7; /* Example: background color */
+   /*padding-left: 24px; /* Example: adding padding */
+   text-align: left; /* Example: aligning the text */  
+ }
+ td[data-bonusDataAreasKey="bonusDataAreasValue"]{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-bonusDataAreasKey="bonusDataAreasValue"]:hover{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+
+
+ td[data-bonusDataAmtKey="bonusDataAmtValue"]>div>div>span>span{
+   font-weight: bold;
+   font-size: 15px;
+   /*color: #f88; /* Example: changing the text color */
+   /*background-color: #f7f7f7; /* Example: background color */
+   /*padding-left: 24px; /* Example: adding padding */
+   text-align: left; /* Example: aligning the text */  
+ }
+ td[data-bonusDataAmtKey="bonusDataAmtValue"]{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-bonusDataAmtKey="bonusDataAmtValue"]:hover{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+
+
+ td[data-contriDataAreasKey="contriDataAreasValue"]>div>div>span>span{
+   font-weight: bold;
+   font-size: 15px;
+   /*color: #f88; /* Example: changing the text color */
+   /*background-color: #f7f7f7; /* Example: background color */
+   /*padding-left: 24px; /* Example: adding padding */
+   text-align: left; /* Example: aligning the text */  
+ }
+ td[data-contriDataAreasKey="contriDataAreasValue"]{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-contriDataAreasKey="contriDataAreasValue"]:hover{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+
+
+ td[data-contriDataAmtKey="contriDataAmtValue"]>div>div>span>span{
+   font-weight: bold;
+   font-size: 15px;
+   /*color: #f88; /* Example: changing the text color */
+   /*background-color: #f7f7f7; /* Example: background color */
+   /*padding-left: 24px; /* Example: adding padding */
+   text-align: left; /* Example: aligning the text */  
+ }
+ td[data-contriDataAmtKey="contriDataAmtValue"]{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-contriDataAmtKey="contriDataAmtValue"]:hover{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+
+ td[data-deductDataAreasKey="deductDataAreasValue"]>div>div>span>span{
+   font-weight: bold;
+   font-size: 15px;
+   /*color: #f88; /* Example: changing the text color */
+   /*background-color: #f7f7f7; /* Example: background color */
+   /*padding-left: 24px; /* Example: adding padding */
+   text-align: left; /* Example: aligning the text */  
+ }
+ td[data-deductDataAreasKey="deductDataAreasValue"]{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-deductDataAreasKey="deductDataAreasValue"]:hover{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+
+ td[data-deductDataAmtKey="deductDataAmtValue"]>div>div>span>span{
+   font-weight: bold;
+   font-size: 15px;
+   /*color: #f88; /* Example: changing the text color */
+   /*background-color: #f7f7f7; /* Example: background color */
+   /*padding-left: 24px; /* Example: adding padding */
+   text-align: left; /* Example: aligning the text */  
+ }
+ td[data-deductDataAmtKey="deductDataAmtValue"]{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-deductDataAmtKey="deductDataAmtValue"]:hover{
+   background-color: #ecf0f1; /* Example: background color */
+ }
+ td[data-retirementAreasKey="retirementAreasValue"]>div>div>span>span{
+  font-weight: bold;
+  font-size: 15px;
+  /*color: #f88; /* Example: changing the text color */
+  /*background-color: #f7f7f7; /* Example: background color */
+  /*padding-left: 24px; /* Example: adding padding */
+  text-align: left; /* Example: aligning the text */  
+}
+td[data-retirementAreasKey="retirementAreasValue"]{
+  background-color: #ecf0f1; /* Example: background color */
+}
+td[data-retirementAreasKey="retirementAreasValue"]:hover{
+  background-color: #ecf0f1; /* Example: background color */
+}
+td[data-retirementAmtKey="retirementAmtValue"]>div>div>span>span{
+  font-weight: bold;
+  font-size: 15px;
+  /*color: #f88; /* Example: changing the text color */
+  /*background-color: #f7f7f7; /* Example: background color */
+  /*padding-left: 24px; /* Example: adding padding */
+  text-align: left; /* Example: aligning the text */  
+}
+td[data-retirementAmtKey="retirementAmtValue"]{
+  background-color: #ecf0f1; /* Example: background color */
+}
+td[data-retirementAmtKey="retirementAmtValue"]:hover{
+  background-color: #ecf0f1; /* Example: background color */
+}

@@ -1,0 +1,84 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core">
+
+    <Dialog title="Add New Contact">
+        <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+            <Label design="Bold" text="Title">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Select required="true" selectedKey="{/title}">
+                <items>
+                    <core:Item key="Mr." text="Mr." />
+                    <core:Item key="Mrs." text="Mrs." />
+                </items>
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Select>
+
+            <Label design="Bold" text="Name">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input required="true" value="{/name}">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+
+            <Label design="Bold" text="Country">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input required="true" value="{/country}"> 
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+
+            <Label design="Bold" text="Email Id">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input required="true" value="{/email}">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+            <Label design="Bold" text="Contact Number">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input required="true" value="{/mobileNo}">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+            <Label design="Bold" text="LinkedIn URL">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Label>
+            <Input value="{/linkedinUrl}">
+                <layoutData>
+                    <l:GridData span="L2 M3 S6" />
+                </layoutData>
+            </Input>
+        </f:SimpleForm>
+        <buttons>
+            <Button text="Cancel" press="onPopupDialogCloseBtnPress" />
+            <Button text="Create" press="onContactCreateButtonPress" type="Accept" />
+        </buttons>
+    </Dialog>
+
+
+</core:FragmentDefinition>

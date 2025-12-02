@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "rootDirs": [
+      "src/procify_core_6-0-4/*"
+    ]
+  },
+  "include": [
+    "./**/*.ts",
+    "../../src/procify_core_6-0-4/**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "../../closedmodules"
+    }
+  ]
+}

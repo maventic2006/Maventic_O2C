@@ -1,0 +1,7 @@
+{
+    "files.readonlyInclude": {
+        "src/l2d_core_1/**": true,
+        "src/l2d_mobile_1/**": true,
+        "src/releasedVersions/**": true
+    }
+}

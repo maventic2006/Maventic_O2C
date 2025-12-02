@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover id="po" placement="Auto" showHeader="false">
+			<VBox alignContent="Center" justifyContent="Center">
+				<Input value="{mLocalModel>/workRemark}" change="onRemarkChange" editable="false"></Input>
+			</VBox>
+	</Popover>
+</core:FragmentDefinition>

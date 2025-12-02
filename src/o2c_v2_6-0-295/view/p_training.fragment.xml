@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:tnt="sap.tnt"
+>
+    <VBox>
+    <Label text="Nasim"/>
+    <Tree
+            id="tree"
+            includeItemInSelection="true"
+            mode="SingleSelect"
+            items="{/treeData}">
+            <StandardTreeItem
+                title="{name}"
+                icon="{icon}" />
+        </Tree>
+        
+        <ComboBox
+            id="comboBox"
+            items="{/comboBoxData}">
+            <core:Item
+                key="{key}"
+                text="{text}" />
+        </ComboBox>
+        <ComboBox id="empComboBox" items="{mDataModel>/first}" selectedKey="{mDataModel>/employeeName} ( {mDataModel>/employeeId} )" change="firstChange" visible="{mDataModel>/empComboboxVisivle}" class = "sapUiLargeMarginRight">
+			<core:Item key="{mDataModel>employee_id}" text="{mDataModel>full_name} ( {mDataModel>employee_id} )"/>
+		</ComboBox>
+        <ComboBox id="empComboBoxSec" items="{mDataModel>/second}" selectedKey="{mDataModel>/employeeName} ( {mDataModel>/employeeId} )" change="secondChange" visible="{mDataModel>/empComboboxVisivle}" class = "sapUiLargeMarginRight">
+			<core:Item key="{mDataModel>employee_id}" text="{mDataModel>full_name} ( {mDataModel>employee_id} )"/>
+		</ComboBox>
+        <ComboBox id="empComboBoxThird" items="{mDataModel>/third}" selectedKey="{mDataModel>/employeeName} ( {mDataModel>/employeeId} )" change="secondChange" visible="{mDataModel>/empComboboxVisivle}" class = "sapUiLargeMarginRight">
+			<core:Item key="{mDataModel>employee_id}" text="{mDataModel>full_name} ( {mDataModel>employee_id} )"/>
+		</ComboBox>
+</VBox>
+</core:FragmentDefinition>

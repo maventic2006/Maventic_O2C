@@ -1,0 +1,2 @@
+import {q_pa_projectdetail_transient as q_pa_projectdetail_transient_gen} from "o2c_v2/query_gen/q_pa_projectdetail_transient"
+export class q_pa_projectdetail_transient extends q_pa_projectdetail_transient_gen{}

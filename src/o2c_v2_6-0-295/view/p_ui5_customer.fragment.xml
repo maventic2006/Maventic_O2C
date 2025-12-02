@@ -1,0 +1,158 @@
+<core:FragmentDefinition
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:tnt="sap.tnt"
+>
+    <VBox>
+        <!-- <HBox class="sticky" width="100%"> -->
+        <!-- <ComboBox id="empComboBox" items="{mDataModel>/allCustomer}" selectionChange=".onCustomerChange" placeholder="Company" >
+            <core:Item
+                key="{mDataModel>customer_name}"
+                text="{mDataModel>customer_name}"
+            />
+        </ComboBox> -->
+        <!-- <ComboBox items="{mDataModel>/salesUnique}" placeholder="Sales Responsible" selectionChange=".onSalesChange"> -->
+        <!-- <core:Item
+                key="{mDataModel>sales_responsible}"
+                text="{mDataModel>sales_responsible}"
+            />
+        </ComboBox>
+        <ComboBox items="{mDataModel>/industryName}" placeholder="Industry" selectionChange=".onIndustryChange" class="ComboBox">
+            <core:Item key="{mDataModel>industry_id}" text="{mDataModel>industry_name}" />
+		</ComboBox>
+        <ComboBox items="{mDataModel>/countryUnique}" placeholder="Country" selectionChange=".onCountryChange" class="ComboBox">
+            <core:Item key="{mDataModel>country_code}" text="{mDataModel>country_code}" />
+		</ComboBox> -->
+
+        <!-- Fuzzy Search -->
+        <!-- <HBox>
+        <Button text="" icon="sap-icon://excel-attachment" class="download" press=".onExcelDownload"/> -->
+      
+        <Input placeholder="Search" liveChange="onFuzzyCustSearch" class="sticky"/>
+        <!-- </HBox> -->
+
+        <!-- <Input placeholder="City" liveChange=".onCityChange"/>
+        <Input placeholder="Pincode" liveChange=".onPincodeChange"/>
+        <Input placeholder="State" liveChange=".onStateChange"/>
+    </HBox> -->
+        <List
+            class="lastFiveStmntList sapUiMediumMarginBottom list"
+            id="flist"
+            width="100%"
+            items="{mDataModel>/customerDetail}"
+        >
+            <CustomListItem class="listItemMargin">
+                <VBox
+                    height="100%"
+                    width="100%"
+                    class="mainItemContainer"
+                >
+                    <HBox
+                        class="listItemHeader"
+                        height="100%"
+                    >
+                        <VBox>
+                            <HBox class="leftHeader">
+                                <Avatar
+                                    src=""
+                                    initials="{mDataModel>img}"
+                                    displaySize="S"
+                                    showBorder="true"
+                                    backgroundColor="Random"
+                                />
+                                <!-- <Image src="https://logowik.com/content/uploads/images/kansai-nerolac-paints-limited7357.jpg" class="iconImg"/> -->
+                                <VBox>
+                                    <Label
+                                        text="{mDataModel>customer_name}"
+                                        class="customerName"
+                                    />
+                                    <Label
+                                        text="{mDataModel>customer_id}"
+                                        class="custId"
+                                    />
+                                </VBox>
+                                <!--<core:Icon src="sap-icon://lateness"/>-->
+                                <!-- src="{= ${mDataModel>s_status} === 'Approved' ? 'sap-icon://accept' : 'sap-icon://lateness'}" -->
+                                <core:Icon
+                                    class="statusIcon"
+                                    color="{=${mDataModel>status} === 'Approved' ? '#00FF00' : ${mDataModel>status} === 'Save as Draft' ? 'blue' : 'orange'}"
+                                    src="{=${mDataModel>status} === 'Approved' ? 'sap-icon://accept' : ${mDataModel>status} === 'Save as Draft' ? 'sap-icon://document' : 'sap-icon://lateness'}"
+                                />
+                            </HBox>
+                        </VBox>
+                    </HBox>
+                    <HBox class="rightHeader">
+                        <core:Icon src="sap-icon://person-placeholder" />
+                        <Label
+                            text="{mDataModel>sales} | {mDataModel>sales_name}"
+                            class="responsiblePerson"
+                        />
+                    </HBox>
+                    <HBox>
+                        <VBox class="leftBottom">
+                            <!-- <layoutData>
+		                                <FlexItemData growFactor="10" />
+		                        	    </layoutData> -->
+                            <Text
+                                class="addressText addressTexSize"
+                                text="Address"
+                            />
+                            <Text
+                                class="addressText"
+                                text="{mDataModel>address1}"
+                            />
+                            <Text
+                                class="addressText"
+                                text="{mDataModel>address2}"
+                            />
+                        </VBox>
+
+                        <VBox
+                            class="rightBottom"
+                            justifyContent="SpaceAround"
+                        >
+                            <!--<HBox >-->
+                            <!--	<Text class="rightBottomText" text="State   "/>-->
+                            <!--	<Text text="{mDataModel>state}"/>-->
+                            <!--</HBox>-->
+                            <!--<HBox >-->
+                            <!--	<Text class="rightBottomText" text="City  "/>-->
+                            <!--	<Text text="{mDataModel>city}"/>-->
+                            <!--</HBox>-->
+                            <!--<HBox >-->
+                            <!--	<Text class="rightBottomText" text="Pin Code"/>-->
+                            <!--	<Text text="{mDataModel>pinCode}"/>-->
+                            <!--</HBox>-->
+                            <HBox>
+                                <VBox>
+                                    <Text
+                                        class="rightBottomText"
+                                        text="State"
+                                    />
+                                    <Text
+                                        class="rightBottomText"
+                                        text="City  "
+                                    />
+                                    <Text
+                                        class="rightBottomText"
+                                        text="Pin Code"
+                                    />
+                                </VBox>
+                                <VBox>
+                                    <Text text="{mDataModel>state}" />
+                                    <Text text="{mDataModel>city}" />
+                                    <Text text="{mDataModel>pin}" />
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </CustomListItem>
+        </List>
+    </VBox>
+</core:FragmentDefinition>
